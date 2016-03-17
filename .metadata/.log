@@ -1,0 +1,12 @@
+!SESSION 2016-03-17 13:38:56.478 -----------------------------------------------
+eclipse.buildId=debbuild
+java.version=1.7.0_80
+java.vendor=Oracle Corporation
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Command-line arguments:  -os linux -ws gtk -arch x86_64
+
+!ENTRY JavaCC 1 0 2016-03-17 13:42:55.685
+!MESSAGE File L/SJaP/src/SJaP.jj created
+
+!ENTRY JavaCC 1 0 2016-03-17 13:42:55.707
+!MESSAGE Initializing JavaCC project preferences
