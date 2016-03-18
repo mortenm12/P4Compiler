@@ -9,19 +9,79 @@ public interface SJaPParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int PLUS = 5;
+  int PLUS = 7;
   /** RegularExpression Id. */
-  int MINUS = 6;
+  int MINUS = 8;
   /** RegularExpression Id. */
-  int MULTIPLY = 7;
+  int MULTIPLY = 9;
   /** RegularExpression Id. */
-  int DIVIDE = 8;
+  int DIVIDE = 10;
   /** RegularExpression Id. */
-  int MODULO = 9;
+  int MODULO = 11;
   /** RegularExpression Id. */
-  int CONSTANT = 10;
+  int TIL = 12;
   /** RegularExpression Id. */
-  int DIGIT = 11;
+  int FRA = 13;
+  /** RegularExpression Id. */
+  int HVIS = 14;
+  /** RegularExpression Id. */
+  int ELLERS = 15;
+  /** RegularExpression Id. */
+  int SOM = 16;
+  /** RegularExpression Id. */
+  int AF = 17;
+  /** RegularExpression Id. */
+  int FUNKTION = 18;
+  /** RegularExpression Id. */
+  int TAL = 19;
+  /** RegularExpression Id. */
+  int TEKST = 20;
+  /** RegularExpression Id. */
+  int UDSAGN = 21;
+  /** RegularExpression Id. */
+  int SALANGE = 22;
+  /** RegularExpression Id. */
+  int GENTAG = 23;
+  /** RegularExpression Id. */
+  int OG = 24;
+  /** RegularExpression Id. */
+  int ELLER = 25;
+  /** RegularExpression Id. */
+  int PRINT = 26;
+  /** RegularExpression Id. */
+  int INPUT = 27;
+  /** RegularExpression Id. */
+  int OPENFILE = 28;
+  /** RegularExpression Id. */
+  int CLOSEFILE = 29;
+  /** RegularExpression Id. */
+  int START = 30;
+  /** RegularExpression Id. */
+  int RETURNER = 31;
+  /** RegularExpression Id. */
+  int SANDT = 32;
+  /** RegularExpression Id. */
+  int FALSK = 33;
+  /** RegularExpression Id. */
+  int CONSTANT = 34;
+  /** RegularExpression Id. */
+  int NUM = 35;
+  /** RegularExpression Id. */
+  int STRING = 36;
+  /** RegularExpression Id. */
+  int ID = 37;
+  /** RegularExpression Id. */
+  int BOOL = 38;
+  /** RegularExpression Id. */
+  int DIGIT = 39;
+  /** RegularExpression Id. */
+  int DIGIT1 = 40;
+  /** RegularExpression Id. */
+  int LETTER = 41;
+  /** RegularExpression Id. */
+  int CHAR = 42;
+  /** RegularExpression Id. */
+  int EOL = 43;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -33,13 +93,45 @@ public interface SJaPParserConstants {
     "\"\\r\"",
     "\"\\t\"",
     "\"\\n\"",
+    "<token of kind 5>",
+    "<token of kind 6>",
     "\"+\"",
     "\"-\"",
     "\"*\"",
     "\"/\"",
     "\"%\"",
+    "\"til\"",
+    "\"fra\"",
+    "\"hvis\"",
+    "\"ellers\"",
+    "\"som\"",
+    "\"af\"",
+    "\"funktion\"",
+    "\"tal\"",
+    "\"tekst\"",
+    "\"udsag\"",
+    "\"s\\u00e5l\\u00e6nge\"",
+    "\"gentag\"",
+    "\"og\"",
+    "\"eller\"",
+    "\"print\"",
+    "\"input\"",
+    "\"\\u00e5benfil\"",
+    "\"lukfil\"",
+    "\"start\"",
+    "\"returner\"",
+    "\"sandt\"",
+    "\"falsk\"",
     "<CONSTANT>",
+    "<NUM>",
+    "<STRING>",
+    "<ID>",
+    "<BOOL>",
     "<DIGIT>",
+    "<DIGIT1>",
+    "<LETTER>",
+    "<CHAR>",
+    "<EOL>",
     "\";\"",
     "\"(\"",
     "\")\"",

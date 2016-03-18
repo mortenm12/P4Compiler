@@ -33,8 +33,8 @@ public class SJaPParser{  public static void main(String args []) throws Parse
 | < BOOL : ("sandt"| "falsk")>| < #DIGIT : [ "0"-"9" ] >
 | < #DIGIT1: [ "1"-"9"] >
 | < #LETTER : [ "a"-"z","A"-"Z","æ","ø","å","Æ","Ø","Å"]>
-| < #CHAR : [ "!","@","#","£","¤","$","%","&","\\","/","=","?","+","`","|","^","~","*",",",".","_",":",";","<",">","½","-","¨","§","¾","´"]>
-| < EOL: (["\n","\t","\r"])>
+| < #CHAR : [ "!","@","#"/*,"£"*/,"¤","$","%","&","\\","/","=","?","+","´","`","|","^","¨","~","’","*",",",".","_",":",";","<",">","§","½","€","-"]>
+| < EOL: ["\n","\t","\r"]>
 
 }int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >
     | < MODULO >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}

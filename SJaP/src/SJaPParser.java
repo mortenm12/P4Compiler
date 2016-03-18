@@ -40,13 +40,13 @@ public class SJaPParser implements SJaPParserConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case MINUS:
     case CONSTANT:
-    case 13:
+    case 45:
       sum();
-      jj_consume_token(12);
+      jj_consume_token(44);
     {if (true) return 0;}
       break;
-    case 12:
-      jj_consume_token(12);
+    case 44:
+      jj_consume_token(44);
     {if (true) return 1;}
       break;
     default:
@@ -126,7 +126,7 @@ public class SJaPParser implements SJaPParserConstants {
       element();
       break;
     case CONSTANT:
-    case 13:
+    case 45:
       element();
       break;
     default:
@@ -141,10 +141,10 @@ public class SJaPParser implements SJaPParserConstants {
     case CONSTANT:
       jj_consume_token(CONSTANT);
       break;
-    case 13:
-      jj_consume_token(13);
+    case 45:
+      jj_consume_token(45);
       sum();
-      jj_consume_token(14);
+      jj_consume_token(46);
       break;
     default:
       jj_la1[6] = jj_gen;
@@ -165,11 +165,16 @@ public class SJaPParser implements SJaPParserConstants {
   static private int jj_gen;
   static final private int[] jj_la1 = new int[7];
   static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
   static {
       jj_la1_init_0();
+      jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x3440,0x60,0x60,0x380,0x380,0x2440,0x2400,};
+      jj_la1_0 = new int[] {0x100,0x180,0x180,0xe00,0xe00,0x100,0x0,};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {0x3004,0x0,0x0,0x0,0x0,0x2004,0x2004,};
    }
 
   /** Constructor with InputStream. */
@@ -307,7 +312,7 @@ public class SJaPParser implements SJaPParserConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[15];
+    boolean[] la1tokens = new boolean[47];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -318,10 +323,13 @@ public class SJaPParser implements SJaPParserConstants {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
             la1tokens[j] = true;
           }
+          if ((jj_la1_1[i] & (1<<j)) != 0) {
+            la1tokens[32+j] = true;
+          }
         }
       }
     }
-    for (int i = 0; i < 15; i++) {
+    for (int i = 0; i < 47; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
