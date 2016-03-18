@@ -36,98 +36,173 @@ public class SJaPParser implements SJaPParserConstants {
     }
   }
 
-  static final public int one_line() throws ParseException {
+/*int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >
+    | < MODULO >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}*/
+  static final public void start() throws ParseException {
+    dcl_metoder();
+    jj_consume_token(START);
+    jj_consume_token(47);
+    linjer();
+    jj_consume_token(48);
+  }
+
+  static final public void linjer() throws ParseException {
+    label_1:
+    while (true) {
+      linje();
+      jj_consume_token(EOL);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case HVIS:
+      case SALANGE:
+      case GENTAG:
+      case RETURNER:
+      case TILFOJ:
+      case LENGDEN:
+      case NUM:
+      case STRING:
+      case ID:
+      case BOOL:
+        ;
+        break;
+      default:
+        jj_la1[0] = jj_gen;
+        break label_1;
+      }
+    }
+  }
+
+  static final public void linje() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case MINUS:
-    case CONSTANT:
-    case 45:
-      sum();
-      jj_consume_token(44);
-    {if (true) return 0;}
+    case LENGDEN:
+    case NUM:
+    case STRING:
+    case ID:
+    case BOOL:
+      vars();
       break;
-    case 44:
-      jj_consume_token(44);
-    {if (true) return 1;}
+      metode();
+      break;
+    case HVIS:
+      if_statment();
+      break;
+    case SALANGE:
+      while_lokke();
+      break;
+    case GENTAG:
+      for_lokke();
+      break;
+    case RETURNER:
+      jj_consume_token(RETURNER);
+      operation();
+      break;
+    case TILFOJ:
+      dcl_var();
       break;
     default:
-      jj_la1[0] = jj_gen;
+      jj_la1[1] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
-    throw new Error("Missing return statement in function");
   }
 
-  static final public void sum() throws ParseException {
-    term();
-    label_1:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case PLUS:
-      case MINUS:
-        ;
-        break;
-      default:
-        jj_la1[1] = jj_gen;
-        break label_1;
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case PLUS:
-        jj_consume_token(PLUS);
-        break;
-      case MINUS:
-        jj_consume_token(MINUS);
-        break;
-      default:
-        jj_la1[2] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-      term();
-    }
-  }
-
-  static final public void term() throws ParseException {
-    unary();
-    label_2:
-    while (true) {
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case MULTIPLY:
-      case DIVIDE:
-      case MODULO:
-        ;
-        break;
-      default:
-        jj_la1[3] = jj_gen;
-        break label_2;
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case MULTIPLY:
-        jj_consume_token(MULTIPLY);
-        break;
-      case DIVIDE:
-        jj_consume_token(DIVIDE);
-        break;
-      case MODULO:
-        jj_consume_token(MODULO);
-        break;
-      default:
-        jj_la1[4] = jj_gen;
-        jj_consume_token(-1);
-        throw new ParseException();
-      }
-      unary();
-    }
-  }
-
-  static final public void unary() throws ParseException {
+  static final public void dcl_var() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case MINUS:
-      jj_consume_token(MINUS);
-      element();
+    case ID:
+      jj_consume_token(ID);
+      jj_consume_token(SOM);
+      type();
       break;
-    case CONSTANT:
-    case 45:
-      element();
+      jj_consume_token(ID);
+      jj_consume_token(49);
+      variabel();
+      break;
+      jj_consume_token(ID);
+      jj_consume_token(SOM);
+      type();
+      jj_consume_token(49);
+      operation();
+      break;
+      jj_consume_token(ID);
+      jj_consume_token(50);
+      operation();
+      jj_consume_token(51);
+      jj_consume_token(49);
+      operation();
+      break;
+    case TILFOJ:
+      jj_consume_token(TILFOJ);
+      operation();
+      jj_consume_token(TIL);
+      jj_consume_token(ID);
+      break;
+    default:
+      jj_la1[2] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void vars() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NUM:
+    case STRING:
+    case BOOL:
+      variabel();
+      break;
+    case ID:
+      jj_consume_token(ID);
+      break;
+    case LENGDEN:
+      jj_consume_token(LENGDEN);
+      jj_consume_token(AF);
+      jj_consume_token(ID);
+      break;
+      jj_consume_token(ID);
+      jj_consume_token(FRA);
+      operation();
+      jj_consume_token(TIL);
+      operation();
+      break;
+    default:
+      jj_la1[3] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void variabel() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case NUM:
+      jj_consume_token(NUM);
+      break;
+    case STRING:
+      jj_consume_token(STRING);
+      break;
+    case BOOL:
+      jj_consume_token(BOOL);
+      break;
+    default:
+      jj_la1[4] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void type() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case TAL:
+      jj_consume_token(TAL);
+      break;
+    case TEKST:
+      jj_consume_token(TEKST);
+      break;
+    case UDSAGN:
+      jj_consume_token(UDSAGN);
+      break;
+    case LISTE:
+      jj_consume_token(LISTE);
+      jj_consume_token(AF);
+      type();
       break;
     default:
       jj_la1[5] = jj_gen;
@@ -136,20 +211,239 @@ public class SJaPParser implements SJaPParserConstants {
     }
   }
 
-  static final public void element() throws ParseException {
+  static final public void dcl_metoder() throws ParseException {
+    label_2:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FUNKTION:
+        ;
+        break;
+      default:
+        jj_la1[6] = jj_gen;
+        break label_2;
+      }
+      dcl_metode();
+    }
+  }
+
+  static final public void dcl_metode() throws ParseException {
+    jj_consume_token(FUNKTION);
+    jj_consume_token(ID);
+    jj_consume_token(SOM);
+    type();
+    jj_consume_token(52);
+    list_of_vars();
+    jj_consume_token(53);
+    jj_consume_token(47);
+    linjer();
+    jj_consume_token(48);
+  }
+
+  static final public void metode() throws ParseException {
+    jj_consume_token(ID);
+    jj_consume_token(52);
+    list_of_vars();
+    jj_consume_token(53);
+  }
+
+  static final public void operation() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case CONSTANT:
-      jj_consume_token(CONSTANT);
+    case LENGDEN:
+    case NUM:
+    case STRING:
+    case ID:
+    case BOOL:
+    case 52:
+      term();
+      jj_consume_token(PLUS);
+      operation();
       break;
-    case 45:
-      jj_consume_token(45);
-      sum();
-      jj_consume_token(46);
+      term();
+      jj_consume_token(MINUS);
+      operation();
+      break;
+      term();
       break;
     default:
-      jj_la1[6] = jj_gen;
+      jj_la1[7] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
+    }
+  }
+
+  static final public void term() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LENGDEN:
+    case NUM:
+    case STRING:
+    case ID:
+    case BOOL:
+      vars();
+      jj_consume_token(MULTIPLY);
+      term();
+      break;
+      vars();
+      jj_consume_token(DIVIDE);
+      term();
+      break;
+      vars();
+      jj_consume_token(MODULO);
+      term();
+      break;
+    case 52:
+      jj_consume_token(52);
+      operation();
+      jj_consume_token(53);
+      break;
+      vars();
+      break;
+    default:
+      jj_la1[8] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void if_statment() throws ParseException {
+    jj_consume_token(HVIS);
+    stats();
+    jj_consume_token(47);
+    linjer();
+    jj_consume_token(48);
+    ellers_statment();
+  }
+
+  static final public void ellers_statment() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case ELLERS:
+      jj_consume_token(ELLERS);
+      jj_consume_token(47);
+      linjer();
+      jj_consume_token(48);
+      break;
+      jj_consume_token(ELLERS);
+      if_statment();
+      break;
+    default:
+      jj_la1[9] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void while_lokke() throws ParseException {
+    jj_consume_token(SALANGE);
+    stats();
+    jj_consume_token(GENTAG);
+    jj_consume_token(47);
+    linjer();
+    jj_consume_token(48);
+  }
+
+  static final public void for_lokke() throws ParseException {
+    jj_consume_token(GENTAG);
+    operation();
+    jj_consume_token(TIL);
+    operation();
+    jj_consume_token(47);
+    linjer();
+    jj_consume_token(48);
+  }
+
+  static final public void stats() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LENGDEN:
+    case NUM:
+    case STRING:
+    case ID:
+    case BOOL:
+    case 52:
+      stat();
+      jj_consume_token(OG);
+      stat();
+      break;
+      stat();
+      jj_consume_token(ELLER);
+      stat();
+      break;
+      stat();
+      break;
+    default:
+      jj_la1[10] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void stat() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case LENGDEN:
+    case NUM:
+    case STRING:
+    case ID:
+    case BOOL:
+    case 52:
+      operation();
+      sammenlign();
+      operation();
+      break;
+      jj_consume_token(52);
+      stats();
+      jj_consume_token(53);
+      break;
+      vars();
+      break;
+    default:
+      jj_la1[11] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void sammenlign() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case 54:
+      jj_consume_token(54);
+      break;
+    case 55:
+      jj_consume_token(55);
+      break;
+    case 56:
+      jj_consume_token(56);
+      break;
+    case 57:
+      jj_consume_token(57);
+      break;
+    case 58:
+      jj_consume_token(58);
+      break;
+    case 59:
+      jj_consume_token(59);
+      break;
+    default:
+      jj_la1[12] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+  }
+
+  static final public void list_of_vars() throws ParseException {
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LENGDEN:
+      case NUM:
+      case STRING:
+      case ID:
+      case BOOL:
+      case 52:
+        ;
+        break;
+      default:
+        jj_la1[13] = jj_gen;
+        break label_3;
+      }
+      operation();
     }
   }
 
@@ -163,7 +457,7 @@ public class SJaPParser implements SJaPParserConstants {
   static public Token jj_nt;
   static private int jj_ntk;
   static private int jj_gen;
-  static final private int[] jj_la1 = new int[7];
+  static final private int[] jj_la1 = new int[14];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static {
@@ -171,10 +465,10 @@ public class SJaPParser implements SJaPParserConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x100,0x180,0x180,0xe00,0xe00,0x100,0x0,};
+      jj_la1_0 = new int[] {0x80c04000,0x80c04000,0x0,0x0,0x0,0x380000,0x40000,0x0,0x0,0x8000,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x3004,0x0,0x0,0x0,0x0,0x2004,0x2004,};
+      jj_la1_1 = new int[] {0x3cc,0x3cc,0x104,0x3c8,0x2c0,0x10,0x0,0x1003c8,0x1003c8,0x0,0x1003c8,0x1003c8,0xfc00000,0x1003c8,};
    }
 
   /** Constructor with InputStream. */
@@ -195,7 +489,7 @@ public class SJaPParser implements SJaPParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -209,7 +503,7 @@ public class SJaPParser implements SJaPParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -226,7 +520,7 @@ public class SJaPParser implements SJaPParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -236,7 +530,7 @@ public class SJaPParser implements SJaPParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -252,7 +546,7 @@ public class SJaPParser implements SJaPParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -261,7 +555,7 @@ public class SJaPParser implements SJaPParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 7; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 14; i++) jj_la1[i] = -1;
   }
 
   static private Token jj_consume_token(int kind) throws ParseException {
@@ -312,12 +606,12 @@ public class SJaPParser implements SJaPParserConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[47];
+    boolean[] la1tokens = new boolean[60];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 14; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -329,7 +623,7 @@ public class SJaPParser implements SJaPParserConstants {
         }
       }
     }
-    for (int i = 0; i < 47; i++) {
+    for (int i = 0; i < 60; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

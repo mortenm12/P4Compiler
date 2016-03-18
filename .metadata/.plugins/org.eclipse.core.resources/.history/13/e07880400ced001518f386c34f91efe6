@@ -54,7 +54,7 @@ void linje() : {}
 {
   (vars()
 | metode()
-| if_statment()
+| if_stament()
 | while_lokke()
 | for_lokke()
 | < RETURNER > operation()
@@ -106,78 +106,61 @@ void dcl_metoder() : {}
 
 void dcl_metode() : {}
 {
-  (< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}")
+  
 }
 
 void metode() : {}
 {
-  (< ID > "(" list_of_vars()")")
+  
 }
 
 void operation() : {}
 {
-  (term() "+" operation()
-| term() "-" operation()
-| term()  )
+  
 }
 
 void term() : {}
 {
-  (    vars() "*" term()
-| vars() "/" term()
-| vars() "%" term()
-| "(" operation() ")"
-| vars()
-  )
+  
 }
 
 void if_statment() : {}
 {
-  (< HVIS > stats() "{" linjer() "}" ellers_statment()  )
+  
 }
 
 void ellers_statment() : {}
 {
-  (< ELLERS > "{" linjer() "}"
-| < ELLERS > if_statment()  )
+  
 }
 
 void while_lokke() : {}
 {
-  (< SALANGE > stats() < GENTAG > "{" linjer() "}"  )
+  
 }
 
 void for_lokke() : {}
 {
-  (< GENTAG > operation() < TIL > operation() "{" linjer() "}"  )
+  
 }
 
 void stats() : {}
 {
-  (stat() < OG > stat()
-| stat() < ELLER > stat()
-| stat()  )
+  
 }
 
 void stat() : {}
 {
-  (operation() sammenlign() operation()
-| "(" stats() ")"
-| vars()  )
+  
 }
 
 void sammenlign() : {}
 {
-  (">"
-| "<"
-| ">="
-| "<="
-| "=="
-| "!="  )
+  
 }
 
 void list_of_vars() : {}
 {
-  (operation())*
+  
 }
 

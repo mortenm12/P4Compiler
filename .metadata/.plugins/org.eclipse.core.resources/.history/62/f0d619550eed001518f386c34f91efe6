@@ -54,7 +54,7 @@ void linje() : {}
 {
   (vars()
 | metode()
-| if_statment()
+| if_stament()
 | while_lokke()
 | for_lokke()
 | < RETURNER > operation()
@@ -133,7 +133,7 @@ void term() : {}
 
 void if_statment() : {}
 {
-  (< HVIS > stats() "{" linjer() "}" ellers_statment()  )
+  (< HVIS > stats() "{" linjer() "}" ellers_starment()  )
 }
 
 void ellers_statment() : {}
@@ -144,7 +144,7 @@ void ellers_statment() : {}
 
 void while_lokke() : {}
 {
-  (< SALANGE > stats() < GENTAG > "{" linjer() "}"  )
+  (< SALENGE > stats() < GENTAG > "{" linjer() "}"  )
 }
 
 void for_lokke() : {}

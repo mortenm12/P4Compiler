@@ -26,7 +26,10 @@ public class SJaPParser{  public static void main(String args []) throws Parse
 | < START : "start">
 | < RETURNER : "returner">
 | < SANDT : "sandt">
-| < FALSK : "falsk">}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
+| < FALSK : "falsk">
+| < TILFOJ : "tilføj" >
+| < LENGDEN : "længden" >
+| < LISTE : "liste" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
 | < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
 | < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
 | < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
@@ -36,5 +39,145 @@ public class SJaPParser{  public static void main(String args []) throws Parse
 | < #CHAR : [ "!","@","#","£","¤","$","%","&","\\","/","=","?","+","`","|","^","~","*",",",".","_",":",";","<",">","½","-","¨","§","¾","´"]>
 | < EOL: (["\n","\t","\r"])>
 
-}int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >
-    | < MODULO >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}
+}/*int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >
+    | < MODULO >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}*/
+
+void start () : {}
+{
+  (    dcl_metoder() < START > "{" linjer()"}")}
+
+void linjer () : {}
+{
+  (linje() < EOL >)+}
+
+void linje() : {}
+{
+  (vars()
+| metode()
+| if_statment()
+| while_lokke()
+| for_lokke()
+| < RETURNER > operation()
+| dcl_var()  )
+}
+
+void dcl_var() : {}
+{
+  (
+    < ID > <SOM > type()
+  | < ID > "=" variabel()
+  | < ID > <SOM > type() "=" operation()
+  | < ID > "[" operation() "]" "=" operation()
+  | < TILFOJ > operation() < TIL > <ID >  )
+
+  //declerer variablerne i symbol tabellen
+}
+
+void vars() : {}
+{
+  (    variabel()
+  | < ID >
+  | < LENGDEN > < AF > < ID >
+  | < ID > < FRA > operation() < TIL > operation()
+  )
+}
+
+void variabel() : {}
+{
+  (
+    < NUM >
+  | < STRING >
+  | < BOOL >  )
+}
+
+void type() : {}
+{
+  (
+    < TAL >
+  | < TEKST >
+  | < UDSAGN >
+  | < LISTE > < AF > type()  )
+}
+
+void dcl_metoder() : {}
+{
+  (dcl_metode()  )*
+}
+
+void dcl_metode() : {}
+{
+  (< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}")
+}
+
+void metode() : {}
+{
+  (< ID > "(" list_of_vars()")")
+}
+
+void operation() : {}
+{
+  (term() "+" operation()
+| term() "-" operation()
+| term()  )
+}
+
+void term() : {}
+{
+  (    vars() "*" term()
+| vars() "/" term()
+| vars() "%" term()
+| "(" operation() ")"
+| vars()
+  )
+}
+
+void if_statment() : {}
+{
+  (< HVIS > stats() "{" linjer() "}" ellers_statment()  )
+}
+
+void ellers_statment() : {}
+{
+  (< ELLERS > "{" linjer() "}"
+| < ELLERS > if_statment()  )
+}
+
+void while_lokke() : {}
+{
+  (< SALANGE > stats() < GENTAG > "{" linjer() "}"  )
+}
+
+void for_lokke() : {}
+{
+  (< GENTAG > operation() < TIL > operation() "{" linjer() "}"  )
+}
+
+void stats() : {}
+{
+  (stat() < OG > stat()
+| stat() < ELLER > stat()
+| stat()  )
+}
+
+void stat() : {}
+{
+  (operation() sammenlign() operation()
+| "(" stats() ")"
+| vars()  )
+}
+
+void sammenlign() : {}
+{
+  (">"
+| "<"
+| ">="
+| "<="
+| "=="
+| "!="  )
+}
+
+void list_of_vars() : {}
+{
+  (operation())*
+}
+

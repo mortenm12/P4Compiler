@@ -28,8 +28,7 @@ public class SJaPParser{  public static void main(String args []) throws Parse
 | < SANDT : "sandt">
 | < FALSK : "falsk">
 | < TILFOJ : "tilføj" >
-| < LENGDEN : "længden" >
-| < LISTE : "liste" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
+| < LENGDEN : "længden" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
 | < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
 | < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
 | < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
@@ -44,17 +43,17 @@ public class SJaPParser{  public static void main(String args []) throws Parse
 
 void start () : {}
 {
-  (    dcl_metoder() < START > "{" linjer()"}")}
+  (    linje()< EOL >)+}
 
-void linjer () : {}
+/*void linjer () : {}
 {
-  (linje() < EOL >)+}
+  }*/
 
 void linje() : {}
 {
   (vars()
 | metode()
-| if_statment()
+| if_stament()
 | while_lokke()
 | for_lokke()
 | < RETURNER > operation()
@@ -92,92 +91,71 @@ void variabel() : {}
 
 void type() : {}
 {
-  (
-    < TAL >
-  | < TEKST >
-  | < UDSAGN >
-  | < LISTE > < AF > type()  )
+  
 }
 
 void dcl_metoder() : {}
 {
-  (dcl_metode()  )*
+  
 }
 
 void dcl_metode() : {}
 {
-  (< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}")
+  
 }
 
 void metode() : {}
 {
-  (< ID > "(" list_of_vars()")")
+  
 }
 
 void operation() : {}
 {
-  (term() "+" operation()
-| term() "-" operation()
-| term()  )
+  
 }
 
 void term() : {}
 {
-  (    vars() "*" term()
-| vars() "/" term()
-| vars() "%" term()
-| "(" operation() ")"
-| vars()
-  )
+  
 }
 
 void if_statment() : {}
 {
-  (< HVIS > stats() "{" linjer() "}" ellers_statment()  )
+  
 }
 
 void ellers_statment() : {}
 {
-  (< ELLERS > "{" linjer() "}"
-| < ELLERS > if_statment()  )
+  
 }
 
 void while_lokke() : {}
 {
-  (< SALANGE > stats() < GENTAG > "{" linjer() "}"  )
+  
 }
 
 void for_lokke() : {}
 {
-  (< GENTAG > operation() < TIL > operation() "{" linjer() "}"  )
+  
 }
 
 void stats() : {}
 {
-  (stat() < OG > stat()
-| stat() < ELLER > stat()
-| stat()  )
+  
 }
 
 void stat() : {}
 {
-  (operation() sammenlign() operation()
-| "(" stats() ")"
-| vars()  )
+  
 }
 
 void sammenlign() : {}
 {
-  (">"
-| "<"
-| ">="
-| "<="
-| "=="
-| "!="  )
+  
 }
 
 void list_of_vars() : {}
 {
-  (operation())*
+  
 }
 
