@@ -52,10 +52,8 @@ void linjer () : {}
 
 void linje() : {}
 {
-  (LOOKAHEAD(vars()
-  )
-  vars()
-| LOOKAHEAD(metode()) metode()
+  (vars()
+| metode()
 | if_statment()
 | while_lokke()
 | for_lokke()
@@ -65,10 +63,11 @@ void linje() : {}
 
 void dcl_var() : {}
 {
-  ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
-  | LOOKAHEAD(< ID > "=") < ID > "=" variabel()
-  | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
-  | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
+  (
+    < ID > <SOM > type()
+  | < ID > "=" variabel()
+  | < ID > <SOM > type() "=" operation()
+  | < ID > "[" operation() "]" "=" operation()
   | < TILFOJ > operation() < TIL > <ID >  )
 
   //declerer variablerne i symbol tabellen
@@ -77,9 +76,9 @@ void dcl_var() : {}
 void vars() : {}
 {
   (    variabel()
-  | LOOKAHEAD(< ID >)< ID >
+  | < ID >
   | < LENGDEN > < AF > < ID >
-  | LOOKAHEAD(< ID > < FRA >) < ID > < FRA > operation() < TIL > operation()
+  | < ID > < FRA > operation() < TIL > operation()
   )
 }
 
@@ -117,16 +116,16 @@ void metode() : {}
 
 void operation() : {}
 {
-  (LOOKAHEAD("+") term() "+" operation()
-| LOOKAHEAD("-") term() "-" operation()
+  (term() "+" operation()
+| term() "-" operation()
 | term()  )
 }
 
 void term() : {}
 {
-  (LOOKAHEAD("*") vars() "*" term()
-| LOOKAHEAD("/")vars() "/" term()
-| LOOKAHEAD("%")vars() "%" term()
+  (    vars() "*" term()
+| vars() "/" term()
+| vars() "%" term()
 | "(" operation() ")"
 | vars()
   )
@@ -139,7 +138,7 @@ void if_statment() : {}
 
 void ellers_statment() : {}
 {
-  ( LOOKAHEAD("{")< ELLERS > "{" linjer() "}"
+  (< ELLERS > "{" linjer() "}"
 | < ELLERS > if_statment()  )
 }
 
@@ -155,14 +154,14 @@ void for_lokke() : {}
 
 void stats() : {}
 {
-  (LOOKAHEAD(< OG >) stat() < OG > stat()
-| LOOKAHEAD(< ELLER >) stat() < ELLER > stat()
+  (stat() < OG > stat()
+| stat() < ELLER > stat()
 | stat()  )
 }
 
 void stat() : {}
 {
-  (LOOKAHEAD(operation()) operation() sammenlign() operation()
+  (operation() sammenlign() operation()
 | "(" stats() ")"
 | vars()  )
 }

@@ -126,7 +126,7 @@ void term() : {}
 {
   (LOOKAHEAD("*") vars() "*" term()
 | LOOKAHEAD("/")vars() "/" term()
-| LOOKAHEAD("%")vars() "%" term()
+| vars() "%" term()
 | "(" operation() ")"
 | vars()
   )
@@ -139,7 +139,7 @@ void if_statment() : {}
 
 void ellers_statment() : {}
 {
-  ( LOOKAHEAD("{")< ELLERS > "{" linjer() "}"
+  (< ELLERS > "{" linjer() "}"
 | < ELLERS > if_statment()  )
 }
 
@@ -155,14 +155,14 @@ void for_lokke() : {}
 
 void stats() : {}
 {
-  (LOOKAHEAD(< OG >) stat() < OG > stat()
-| LOOKAHEAD(< ELLER >) stat() < ELLER > stat()
+  (stat() < OG > stat()
+| stat() < ELLER > stat()
 | stat()  )
 }
 
 void stat() : {}
 {
-  (LOOKAHEAD(operation()) operation() sammenlign() operation()
+  (operation() sammenlign() operation()
 | "(" stats() ")"
 | vars()  )
 }

@@ -155,14 +155,14 @@ void for_lokke() : {}
 
 void stats() : {}
 {
-  (LOOKAHEAD(< OG >) stat() < OG > stat()
-| LOOKAHEAD(< ELLER >) stat() < ELLER > stat()
+  (stat() < OG > stat()
+| stat() < ELLER > stat()
 | stat()  )
 }
 
 void stat() : {}
 {
-  (LOOKAHEAD(operation()) operation() sammenlign() operation()
+  (operation() sammenlign() operation()
 | "(" stats() ")"
 | vars()  )
 }
