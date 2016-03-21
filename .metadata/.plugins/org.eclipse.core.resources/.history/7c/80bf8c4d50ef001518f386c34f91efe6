@@ -1,0 +1,7 @@
+package Typer;
+import Type;
+
+
+public class Udsagn extends Type{
+	public boolean typeVal;
+}

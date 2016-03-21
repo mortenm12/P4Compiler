@@ -1,0 +1,35 @@
+package Variabler;
+
+import java.util.List;
+
+
+public class scopeTree {
+	public String ScopeName;
+	private List<scopeTree> Nodes;
+	public HashSet HashTable;
+	
+	
+	public void add(String name){
+		scopeTree x = new scopeTree();
+		x.ScopeName = name;
+		
+		Nodes.add(x);
+	}
+	
+	public scopeTree searchScope(String name){
+		if(name == this.ScopeName){
+			return this;
+		}
+		else{
+			for(scopeTree n : Nodes){
+				scopeTree x = n.search(name);
+				if(x!=null)
+					return x;
+				
+			}
+			return null;
+		}
+	}
+	
+	public Type
+}

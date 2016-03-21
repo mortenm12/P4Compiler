@@ -1,0 +1,5 @@
+package Typer;
+
+public class Var {
+public String typeId;
+}
