@@ -31,8 +31,7 @@ public class SJaPParser{  public static void main(String args []) throws Parse
 | < FALSK : "falsk">
 | < TILFOJ : "tilføj" >
 | < LENGDEN : "længden" >
-| < LISTE : "liste" >
-| < SLET : "slet" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
+| < LISTE : "liste" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
 | < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
 | < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
 | < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
@@ -72,8 +71,7 @@ void dcl_var() : {}
   | LOOKAHEAD(< ID > "=") < ID > "=" variabel()
   | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
-  | < TILFOJ > operation() < TIL > <ID >
-  | < SLET > <ID > "[" vars() "]"  )
+  | < TILFOJ > operation() < TIL > <ID >  )
 
   //declerer variablerne i symbol tabellen
 }

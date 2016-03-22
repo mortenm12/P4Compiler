@@ -69,25 +69,27 @@ public interface SJaPParserConstants {
   /** RegularExpression Id. */
   int LISTE = 36;
   /** RegularExpression Id. */
-  int CONSTANT = 37;
+  int SLET = 37;
   /** RegularExpression Id. */
-  int NUM = 38;
+  int CONSTANT = 38;
   /** RegularExpression Id. */
-  int STRING = 39;
+  int NUM = 39;
   /** RegularExpression Id. */
-  int ID = 40;
+  int STRING = 40;
   /** RegularExpression Id. */
-  int BOOL = 41;
+  int ID = 41;
   /** RegularExpression Id. */
-  int DIGIT = 42;
+  int BOOL = 42;
   /** RegularExpression Id. */
-  int DIGIT1 = 43;
+  int DIGIT = 43;
   /** RegularExpression Id. */
-  int LETTER = 44;
+  int DIGIT1 = 44;
   /** RegularExpression Id. */
-  int CHAR = 45;
+  int LETTER = 45;
   /** RegularExpression Id. */
-  int EOL = 46;
+  int CHAR = 46;
+  /** RegularExpression Id. */
+  int EOL = 47;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -131,6 +133,7 @@ public interface SJaPParserConstants {
     "\"tilf\\u00f8j\"",
     "\"l\\u00e6ngden\"",
     "\"liste\"",
+    "\"slet\"",
     "<CONSTANT>",
     "<NUM>",
     "<STRING>",
