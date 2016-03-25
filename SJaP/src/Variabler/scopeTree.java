@@ -7,10 +7,10 @@ public class scopeTree {
 	public String ScopeName;
 	private List<scopeTree> Nodes;
 	public HashSet HashTable;
-	private scopeTree parent;
+	public scopeTree parent;
 	
 	
-	public void add(String name){
+	public void addScope(String name){
 		scopeTree x = new scopeTree();
 		x.ScopeName = name;
 		x.parent=this;

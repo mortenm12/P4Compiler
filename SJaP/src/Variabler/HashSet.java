@@ -1,6 +1,8 @@
 package Variabler;
 import java.util.Map;
 
+import Exceptions.existingVariableException;
+
 
 
 public class HashSet {
@@ -8,8 +10,11 @@ public class HashSet {
 	
 	
 	
-	public void add(Var var){
-		table.put(var.typeId, var);
+	public void add(Var var ) throws existingVariableException{
+		if(!check(var.typeId))
+			table.put(var.typeId, var);
+		else
+			throw new existingVariableException("Du kan ikke oprette to variabler med samme navn.");
 	}
 	
 	public Var get(String id){
@@ -18,6 +23,11 @@ public class HashSet {
 	
 	public boolean check(String id) {
 		return table.containsKey(id);
+	}
+	
+	public void changeVar(Var x) throws existingVariableException{
+		table.remove(x.typeId);
+		add(x);
 	}
 	
 }

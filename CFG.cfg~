@@ -1,0 +1,114 @@
+ID		= ^([a-zæøå_][a-zæøå0-9_]*)^(falsk|sandt|til|fra|hvis|ellers|som|af|funktion|tal|tekst|udsagn|sålænge|gentag|og|eller|print|input|åbenfil|lukfil|start|returner)$
+
+Num		= [\-]?[1-9][0-9]*(,[0-9]*[1-9])?
+
+String		= "(?=[a-zA-Z0-9!@#£¤$%&\/=?+´`|^¨~’*,._:;<>§¾½-]*)$"
+
+Bool		="sandt"|"falsk"
+
+EOL		= "LF"|"CR"|"LF CR"
+
+
+
+
+
+
+Start		:Decl_Metoder "start" "{" Linjer "}"
+
+Linjer		:Linje <EOL> Linjer
+		|
+
+Linje		:Vars
+		|Metode
+		|If_statment
+		|While_lokke
+		|For_Lokke
+		|"returner " Operation
+		|Dcl_Var
+		
+Dcl_Var		:<ID> " som " Type
+            	|<ID> "=" Variabel
+		|<ID> " som " Type "=" Operation
+		|<ID> "[" Operation "]" "=" Operation
+		|"tilføj " Operation " til " <ID> 
+		|"slet" <ID>"["Vars"]"
+    
+Vars		:Variabel
+		|<ID>
+		|"længden " "af" <ID>
+		|<ID> " fra " Operation " til " Operation	
+
+Variabel	:<Num>
+		|<String>
+		|<Bool>
+		
+
+Type		:"tal "
+		|"tekst "
+		|"udsagn "
+		|"liste " "af " Type
+
+Decl_Metoder	:Decl_Metode <EOL> Decl_Metoder
+		|
+
+Decl_Metode	:"funktion " <ID> "som " Type "(" ListOfVars ")" "{"Linjer "}"
+
+Metode		:<ID> "(" ListOfVars ")"
+
+Operation	:Term "+" Operation
+		|Term "-" Operation
+		|Term
+
+Term		:Vars "*" Term
+		|Vars "/" Term
+		|Vars "%" Term
+		|"(" Operation ")"
+		|Vars
+		
+
+If_statment	:"hvis " Stats "{" Linjer "}" Ellers_statment
+
+Ellers_statment	:"ellers" "{" Linjer "}"
+		|"ellers " If_statment
+		|
+		
+While_lokke	:"sålænge " Stats "gentag" "{" Linjer "}"
+
+For_Lokke	:"gentag " Operation "til " Operation "{" Linjer "}"
+
+Stats		:Stat " og " Stat
+		|Stat " eller " Stat
+		|Stat
+
+Stat		:Operation Sammenlign Operation
+		|"(" Stats ")"
+		|<Bool>
+
+Sammenlign	:">"
+		|"<"
+		|">="
+		|"<="
+		|"=="
+		|"!="
+		
+ListOfVars	:Operation ", " ListOfVars
+		|Operation
+
+
+
+/*
+Standard biblioteker
+I/O:		print(Operation)
+		input() //returnere en tekst streng 
+		
+Fil:		åbenFil("filNavn") //returnerer en liste af strenge
+ 		lukFil("filnavn")
+		skrivFile("filNavn")
+
+Tilfældigt	tilfældigtTal()
+		tilfældigTal(min, max)*/
+
+
+
+
+

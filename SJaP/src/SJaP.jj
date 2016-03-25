@@ -1,7 +1,14 @@
 /**
  * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
  */options{  static = true;}PARSER_BEGIN(SJaPParser)
-public class SJaPParser{  public static void main(String args []) throws ParseException  {    SJaPParser parser = new SJaPParser(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        /*switch (SJaPParser.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }*/
+import Variabler.scopeTree;
+
+
+public class SJaPParser{
+  public scopeTree scope = new scopeTree();
+  
+
+    public static void main(String args []) throws ParseException  {    SJaPParser parser = new SJaPParser(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        /*switch (SJaPParser.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }*/
 
         start();      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        SJaPParser.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(SJaPParser)SKIP :{  " "| "\r"| "\t"| "\n"
 |  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
@@ -58,7 +65,7 @@ void linje() : {}
   (LOOKAHEAD(vars()
   )
   vars()
-| LOOKAHEAD(metode()) metode()
+//| LOOKAHEAD(metode()) metode()
 | if_statment()
 | while_lokke()
 | for_lokke()
@@ -68,8 +75,7 @@ void linje() : {}
 
 void dcl_var() : {}
 {
-  ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
-  | LOOKAHEAD(< ID > "=") < ID > "=" variabel()
+  ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()  //{scope.hashtable.add(new var(ID,variable));}  | LOOKAHEAD(< ID > "=") < ID > "=" variabel()
   | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
   | < TILFOJ > operation() < TIL > <ID >
@@ -84,7 +90,10 @@ void vars() : {}
   | LOOKAHEAD(< ID >)< ID >
   | < LENGDEN > < AF > < ID >
   | LOOKAHEAD(< ID > < FRA >) < ID > < FRA > operation() < TIL > operation()
+  | metode()
   )
+
+  //søg og find i symbol tabelen
 }
 
 void variabel() : {}

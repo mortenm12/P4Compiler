@@ -1,40 +1,0 @@
-/**
- * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  static = true;}PARSER_BEGIN(SJaPParser)
-public class SJaPParser{  public static void main(String args []) throws ParseException  {    SJaPParser parser = new SJaPParser(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        switch (SJaPParser.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        SJaPParser.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(SJaPParser)SKIP :{  " "| "\r"| "\t"| "\n"
-|  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
-|  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">}TOKEN : /* OPERATORS */{  < PLUS : "+" >| < MINUS : "-" >| < MULTIPLY : "*" >| < DIVIDE : "/" >
-| < MODULO : "%" >
-| < TIL : "til">
-| < FRA: "fra">
-| < HVIS : "hvis">
-| < ELLERS : "ellers">
-| < SOM : "som">
-| < AF : "af">
-| < FUNKTION : "funktion">
-| < TAL : "tal">
-| < TEKST : "tekst">
-| < UDSAGN : "udsag">
-| < SALANGE : "sålænge">
-| < GENTAG : "gentag">
-| < OG : "og">
-| < ELLER : "eller">
-| < PRINT : "print">
-| < INPUT : "input">
-| < OPENFILE : "åbenfil">
-| < CLOSEFILE : "lukfil">
-| < START : "start">
-| < RETURNER : "returner">
-| < SANDT : "sandt">
-| < FALSK : "falsk">}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
-| < NUM : ("-")?(< DIGIT1>< DIGIT>)*(","(< DIGIT>)*< DIGIT1>)?>
-| < STRING : (< LETTER >|< CHAR >|< DIGIT >)* >
-| < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
-| < BOOL : (< SANDT>| < FALSK>)>| < #DIGIT : [ "0"-"9" ] >
-| < #DIGIT1: [ "1"-"9"] >
-| < #LETTER : [ "a"-"z","A"-"Z","æ","ø","å","Æ","Ø","Å"]>
-| < #CHAR : [ "!","@","#","£","¤","$","%","&","\\","/","=","?","+","´","`","|","^","¨","~","’","*",",",".","_",":",";","<",">","§","¾","½","€","-"]>
-| < EOL: ["\n","\t","\r"]>
-
-}int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >
-    | < MODULO >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}
