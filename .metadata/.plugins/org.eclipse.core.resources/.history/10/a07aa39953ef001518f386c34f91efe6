@@ -1,6 +1,0 @@
-package Variabler;
-
-public class Snippet {
-	public String typeId;
-}
-

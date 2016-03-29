@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="13" version="2.0">
+<workbench progressCount="15" version="2.0">
 <workbenchAdvisor/>
 <window height="721" maximized="true" width="1018" x="311" y="134">
 <fastViewData fastViewLocation="1024"/>
@@ -18,10 +18,10 @@
 <coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
-<coolItem id="JavaCC_Toolbar" itemType="typeToolBarContribution" x="40" y="30"/>
+<coolItem id="JavaCC_Toolbar" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="sf.eclipse.javacc.editors.JJEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
+<coolItem id="sf.eclipse.javacc.editors.JJEditor" itemType="typePlaceholder" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -33,22 +33,17 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
 <part id="1"/>
-<part id="2"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="sf.eclipse.javacc.editors.JJEditor" name="SJaP.jj" partName="SJaP.jj" path="/home/caktus/Git/P4/SJaP/src/SJaP.jj" title="SJaP.jj" tooltip="SJaP/src/SJaP.jj" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/SJaP.jj"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3380" selectionTopPixel="3315"/>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="existingVariableException.java" partName="existingVariableException.java" path="/home/caktus/Git/P4/SJaP/src/Exceptions/existingVariableException.java" title="existingVariableException.java" tooltip="SJaP/src/Exceptions/existingVariableException.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/Exceptions/existingVariableException.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
 </editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="scopeTree.java" partName="scopeTree.java" path="/home/caktus/Git/P4/SJaP/src/Variabler/scopeTree.java" title="scopeTree.java" tooltip="SJaP/src/Variabler/scopeTree.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/Variabler/scopeTree.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="184" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HashSet.java" partName="HashSet.java" path="/home/caktus/Git/P4/SJaP/src/Variabler/HashSet.java" title="HashSet.java" tooltip="SJaP/src/Variabler/HashSet.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/Variabler/HashSet.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="428" selectionTopPixel="0"/>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParser.java" partName="SJaPParser.java" path="/home/caktus/Git/P4/SJaP/src/SJaPParser.java" title="SJaPParser.java" tooltip="SJaP/src/SJaPParser.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/SJaPParser.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="1255"/>
 </editor>
 </editors>
 <views>
@@ -63,11 +58,6 @@
 </view>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Errors (1 item)"/>
-<category IMemento.internal.id="Errors"/>
-<category IMemento.internal.id="Warnings"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="261" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -80,7 +70,7 @@
 <viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
-<viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
+<viewState group_libraries="1" layout="2" linkWithEditor="1" rootMode="1" workingSetName="">
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
@@ -134,7 +124,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="sf.eclipse.javacc.editors.JJEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -170,44 +160,31 @@
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <view id="org.eclipse.ui.views.TaskList"/>
 <fastViewBars/>
-<layout>
-<mainWindow>
-<info folder="true" part="topLeft">
-<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">
-<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
+<layout>&#x0A;<mainWindow>&#x0A;<info folder="true" part="topLeft">&#x0A;<folder activePageID="org.eclipse.ui.navigator.ProjectExplorer" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.navigator.ProjectExplorer" label="Project Explorer"/>
 <page content="org.eclipse.ui.views.BookmarkView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.team.ccvs.ui.RepositoriesView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
-<info folder="true" part="org.eclipse.ui.internal.ViewStack@28b15989" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="topLeft">
-<folder appearance="2" expanded="2">
-<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@28b15989" ratio="0.7495049" ratioLeft="757" ratioRight="253" relationship="2" relative="topLeft">&#x0A;<folder appearance="2" expanded="2">&#x0A;<page content="org.eclipse.help.ui.HelpView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
 <page content="org.eclipse.ui.cheatsheets.views.CheatSheetView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info part="org.eclipse.gef.ui.palette_view" ratio="0.25940594" ratioLeft="262" ratioRight="748" relationship="2" relative="topLeft"/>
-<info folder="true" part="bottomRight" ratio="0.6596386" ratioLeft="438" ratioRight="226" relationship="4" relative="org.eclipse.gef.ui.palette_view">
-<folder activePageID="org.eclipse.ui.views.TaskList" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
+<info folder="true" part="bottomRight" ratio="0.6596386" ratioLeft="438" ratioRight="226" relationship="4" relative="org.eclipse.gef.ui.palette_view">&#x0A;<folder activePageID="org.eclipse.ui.views.TaskList" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.TaskList" label="Tasks"/>
 <page content="org.eclipse.team.ui.GenericHistoryView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.1590909" ratioLeft="119" ratioRight="629" relationship="2" relative="org.eclipse.gef.ui.palette_view"/>
-<info folder="true" part="bottomLeft" ratio="0.5" ratioLeft="332" ratioRight="332" relationship="4" relative="topLeft">
-<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
-<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
+<info folder="true" part="bottomLeft" ratio="0.5" ratioLeft="332" ratioRight="332" relationship="4" relative="topLeft">&#x0A;<folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">&#x0A;<page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ant.ui.views.AntView" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">&#x0A;<part id="0"/>
 </presentation>
 </folder>
 </info>
@@ -269,9 +246,9 @@
 <view id="org.eclipse.ui.views.ProblemView"/>
 <view id="org.eclipse.jdt.ui.JavadocView"/>
 <view id="org.eclipse.jdt.ui.SourceView"/>
+<view id="sf.eclipse.javacc.Console"/>
 <view id="org.eclipse.search.ui.views.SearchView"/>
 <view id="org.eclipse.ui.console.ConsoleView"/>
-<view id="sf.eclipse.javacc.Console"/>
 <view id="org.eclipse.ui.views.ContentOutline"/>
 <fastViewBars/>
 <layout>
@@ -296,7 +273,7 @@
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
-<info part="org.eclipse.ui.editorss" ratio="0.2744186" ratioLeft="354" ratioRight="936" relationship="2" relative="left"/>
+<info part="org.eclipse.ui.editorss" ratio="0.13488372" ratioLeft="174" ratioRight="1116" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.75" ratioLeft="501" ratioRight="167" relationship="4" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.console.ConsoleView" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="Problems"/>
@@ -317,7 +294,7 @@
 </presentation>
 </folder>
 </info>
-<info folder="true" part="right" ratio="0.74398625" ratioLeft="866" ratioRight="298" relationship="2" relative="org.eclipse.ui.editorss">
+<info folder="true" part="right" ratio="0.7996406" ratioLeft="890" ratioRight="223" relationship="2" relative="org.eclipse.ui.editorss">
 <folder activePageID="org.eclipse.ui.views.ContentOutline" appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="Outline"/>
 <page content="org.eclipse.ui.texteditor.TemplatesView" label="LabelNotFound"/>
@@ -334,162 +311,14 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/SJaP.jj"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParser.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Variabler/scopeTree.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Variabler/HashSet.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Exceptions/existingVariableException.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Exceptions/xyException.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParser.java"/>
 </editors>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="753" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="753" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="753" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="753" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="753" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="753" y="0"/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="723" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="723" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="723" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="723" y="0"/>
-</item>
-<item historyLabel="SJaPParser.java" index="1">
-<position info="not_deleted" x="22702" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position/>
-</item>
-<item historyLabel="scopeTree.java" index="2">
-<position info="not_deleted" x="184" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="820" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3301" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3301" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3306" y="7"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3425" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3425" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3423" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3421" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3420" y="0"/>
-</item>
-<item historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3380" y="0"/>
-</item>
-<item historyLabel="HashSet.java" index="3">
+<item historyLabel="existingVariableException.java" index="0">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="HashSet.java" index="3">
-<position info="not_deleted" x="603" y="0"/>
-</item>
-<item historyLabel="HashSet.java" index="3">
-<position info="not_deleted" x="588" y="0"/>
-</item>
-<item historyLabel="HashSet.java" index="3">
-<position info="not_deleted" x="600" y="0"/>
-</item>
-<item historyLabel="HashSet.java" index="3">
-<position info="not_deleted" x="366" y="0"/>
-</item>
-<item historyLabel="existingVariableException.java" index="4">
-<position info="not_deleted" x="78" y="0"/>
-</item>
-<item historyLabel="xyException.java" index="5">
+<item active="true" historyLabel="SJaPParser.java" index="1">
 <position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="existingVariableException.java" index="4">
-<position info="not_deleted" x="151" y="0"/>
-</item>
-<item historyLabel="xyException.java" index="5">
-<position info="not_deleted" x="67" y="56"/>
-</item>
-<item historyLabel="existingVariableException.java" index="4">
-<position info="not_deleted" x="113" y="0"/>
-</item>
-<item historyLabel="xyException.java" index="5">
-<position info="not_deleted" x="67" y="56"/>
-</item>
-<item historyLabel="HashSet.java" index="3">
-<position info="not_deleted" x="428" y="0"/>
-</item>
-<item active="true" historyLabel="SJaP.jj" index="0">
-<position info="not_deleted" x="3380" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -497,13 +326,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="left"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="bottom"/>
-<trimItem IMemento.internal.id="right"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -515,20 +337,20 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="xyException.java" tooltip="SJaP/src/Exceptions/xyException.java">
-<persistable path="/SJaP/src/Exceptions/xyException.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParser.java" tooltip="SJaP/src/SJaPParser.java">
+<persistable path="/SJaP/src/SJaPParser.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="existingVariableException.java" tooltip="SJaP/src/Exceptions/existingVariableException.java">
 <persistable path="/SJaP/src/Exceptions/existingVariableException.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="xyException.java" tooltip="SJaP/src/Exceptions/xyException.java">
+<persistable path="/SJaP/src/Exceptions/xyException.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="HashSet.java" tooltip="SJaP/src/Variabler/HashSet.java">
 <persistable path="/SJaP/src/Variabler/HashSet.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="scopeTree.java" tooltip="SJaP/src/Variabler/scopeTree.java">
 <persistable path="/SJaP/src/Variabler/scopeTree.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParser.java" tooltip="SJaP/src/SJaPParser.java">
-<persistable path="/SJaP/src/SJaPParser.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Lister.java" tooltip="SJaP/src/Variabler/Lister.java">
 <persistable path="/SJaP/src/Variabler/Lister.java"/>

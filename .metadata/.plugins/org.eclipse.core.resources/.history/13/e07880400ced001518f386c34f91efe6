@@ -1,166 +1,0 @@
-/**
- * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
- */options{  static = true;}PARSER_BEGIN(SJaPParser)
-public class SJaPParser{  public static void main(String args []) throws ParseException  {    SJaPParser parser = new SJaPParser(System.in);    while (true)    {      System.out.println("Reading from standard input...");      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");      try      {        switch (SJaPParser.one_line())        {          case 0 :           System.out.println("OK.");          break;          case 1 :           System.out.println("Goodbye.");          break;          default :           break;        }      }      catch (Exception e)      {        System.out.println("NOK.");        System.out.println(e.getMessage());        SJaPParser.ReInit(System.in);      }      catch (Error e)      {        System.out.println("Oops.");        System.out.println(e.getMessage());        break;      }    }  }}PARSER_END(SJaPParser)SKIP :{  " "| "\r"| "\t"| "\n"
-|  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
-|  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">}TOKEN : /* OPERATORS */{  < PLUS : "+" >| < MINUS : "-" >| < MULTIPLY : "*" >| < DIVIDE : "/" >
-| < MODULO : "%" >
-| < TIL : "til">
-| < FRA: "fra">
-| < HVIS : "hvis">
-| < ELLERS : "ellers">
-| < SOM : "som">
-| < AF : "af">
-| < FUNKTION : "funktion">
-| < TAL : "tal">
-| < TEKST : "tekst">
-| < UDSAGN : "udsag">
-| < SALANGE : "sålænge">
-| < GENTAG : "gentag">
-| < OG : "og">
-| < ELLER : "eller">
-| < PRINT : "print">
-| < INPUT : "input">
-| < OPENFILE : "åbenfil">
-| < CLOSEFILE : "lukfil">
-| < START : "start">
-| < RETURNER : "returner">
-| < SANDT : "sandt">
-| < FALSK : "falsk">
-| < TILFOJ : "tilføj" >
-| < LENGDEN : "længden" >
-| < LISTE : "liste" >}TOKEN :{  < CONSTANT : (< DIGIT >)+ >
-| < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
-| < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
-| < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
-| < BOOL : ("sandt"| "falsk")>| < #DIGIT : [ "0"-"9" ] >
-| < #DIGIT1: [ "1"-"9"] >
-| < #LETTER : [ "a"-"z","A"-"Z","æ","ø","å","Æ","Ø","Å"]>
-| < #CHAR : [ "!","@","#","£","¤","$","%","&","\\","/","=","?","+","`","|","^","~","*",",",".","_",":",";","<",">","½","-","¨","§","¾","´"]>
-| < EOL: (["\n","\t","\r"])>
-
-}/*int one_line() :{}{  sum() ";"  {    return 0;  }| ";"  {    return 1;  }}void sum() :{}{  term()  (    (      < PLUS >    | < MINUS >    )    term()  )*}void term() :{}{  unary()  (    (      < MULTIPLY >    | < DIVIDE >
-    | < MODULO >    )    unary()  )*}void unary() :{}{  < MINUS > element()| element()}void element() :{}{  < CONSTANT >| "(" sum() ")"}*/
-
-void start () : {}
-{
-  (    dcl_metoder() < START > "{" linjer()"}")}
-
-void linjer () : {}
-{
-  (linje() < EOL >)+}
-
-void linje() : {}
-{
-  (vars()
-| metode()
-| if_stament()
-| while_lokke()
-| for_lokke()
-| < RETURNER > operation()
-| dcl_var()  )
-}
-
-void dcl_var() : {}
-{
-  (
-    < ID > <SOM > type()
-  | < ID > "=" variabel()
-  | < ID > <SOM > type() "=" operation()
-  | < ID > "[" operation() "]" "=" operation()
-  | < TILFOJ > operation() < TIL > <ID >  )
-
-  //declerer variablerne i symbol tabellen
-}
-
-void vars() : {}
-{
-  (    variabel()
-  | < ID >
-  | < LENGDEN > < AF > < ID >
-  | < ID > < FRA > operation() < TIL > operation()
-  )
-}
-
-void variabel() : {}
-{
-  (
-    < NUM >
-  | < STRING >
-  | < BOOL >  )
-}
-
-void type() : {}
-{
-  (
-    < TAL >
-  | < TEKST >
-  | < UDSAGN >
-  | < LISTE > < AF > type()  )
-}
-
-void dcl_metoder() : {}
-{
-  (dcl_metode()  )*
-}
-
-void dcl_metode() : {}
-{
-  
-}
-
-void metode() : {}
-{
-  
-}
-
-void operation() : {}
-{
-  
-}
-
-void term() : {}
-{
-  
-}
-
-void if_statment() : {}
-{
-  
-}
-
-void ellers_statment() : {}
-{
-  
-}
-
-void while_lokke() : {}
-{
-  
-}
-
-void for_lokke() : {}
-{
-  
-}
-
-void stats() : {}
-{
-  
-}
-
-void stat() : {}
-{
-  
-}
-
-void sammenlign() : {}
-{
-  
-}
-
-void list_of_vars() : {}
-{
-  
-}
-

@@ -1,6 +1,0 @@
-import Typer.Type;
-
-
-public class Tekst extends Type{
-	public String typeVal;
-}

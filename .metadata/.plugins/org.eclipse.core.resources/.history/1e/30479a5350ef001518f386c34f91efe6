@@ -1,6 +1,0 @@
-import Typer.Type;
-
-
-public class Tal extends Type{
-	public Double typeVal;
-}
