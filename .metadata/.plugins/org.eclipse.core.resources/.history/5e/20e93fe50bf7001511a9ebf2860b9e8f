@@ -247,7 +247,6 @@ void stat() #STAT : {}
   (LOOKAHEAD(operation()) operation() sammenlign() operation()
 | "(" stats() ")"
 | vars()
-| "!" stat()
   )
 }
 

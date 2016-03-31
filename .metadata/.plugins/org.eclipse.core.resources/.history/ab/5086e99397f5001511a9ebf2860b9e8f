@@ -247,18 +247,17 @@ void stat() #STAT : {}
   (LOOKAHEAD(operation()) operation() sammenlign() operation()
 | "(" stats() ")"
 | vars()
-| "!" stat()
   )
 }
 
 void sammenlign() #SAMMENLIGN : {}
 {
-  (">" // større end
-| "<" // mindre end
-| ">=" // større end eller lig med
-| "<=" // mindre end eller lig med
-| "==" // lig med
-| "!=" // ikke lig med
+  (">"
+| "<"
+| ">="
+| "<="
+| "=="
+| "!="
   )
 }
 
@@ -266,4 +265,5 @@ void list_of_vars() #LIST_OF_VARS : {}
 {
   (operation())*
 }
+
 

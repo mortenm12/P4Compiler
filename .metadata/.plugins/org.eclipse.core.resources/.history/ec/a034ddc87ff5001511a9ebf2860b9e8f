@@ -1,4 +1,6 @@
-
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */
 options
 {
   static = true;
@@ -6,12 +8,13 @@ options
 
 PARSER_BEGIN(SJaPParser)
 
+import Variabler.scopeTree;
 
 
 public class SJaPParser
 {
+  public scopeTree scope = new scopeTree();
   
- 
 
   
   public static void main(String args []) throws ParseException
@@ -149,12 +152,12 @@ void vars() #VARS : {}
 {
   (
     variabel()
-  | LOOKAHEAD(< ID >)< ID > 
+  | LOOKAHEAD(< ID >)< ID >
   | < LENGDEN > < AF > < ID >
   | LOOKAHEAD(< ID > < FRA >) < ID > < FRA > operation() < TIL > operation()
   | metode()
   )
-	
+
   //søg og find i symbol tabelen
 }
 
@@ -247,18 +250,17 @@ void stat() #STAT : {}
   (LOOKAHEAD(operation()) operation() sammenlign() operation()
 | "(" stats() ")"
 | vars()
-| "!" stat()
   )
 }
 
 void sammenlign() #SAMMENLIGN : {}
 {
-  (">" // større end
-| "<" // mindre end
-| ">=" // større end eller lig med
-| "<=" // mindre end eller lig med
-| "==" // lig med
-| "!=" // ikke lig med
+  (">"
+| "<"
+| ">="
+| "<="
+| "=="
+| "!="
   )
 }
 
@@ -266,4 +268,5 @@ void list_of_vars() #LIST_OF_VARS : {}
 {
   (operation())*
 }
+
 

@@ -19,7 +19,7 @@ Linjer		:Linje <EOL> Linjer
 		|
 
 Linje		:Vars
-		|Metode
+		//|Metode
 		|If_statment
 		|While_lokke
 		|For_Lokke
@@ -36,7 +36,8 @@ Dcl_Var		:<ID> " som " Type
 Vars		:Variabel
 		|<ID>
 		|"længden " "af" <ID>
-		|<ID> " fra " Operation " til " Operation	
+		|<ID> " fra " Operation " til " Operation
+		|Metode	
 
 Variabel	:<Num>
 		|<String>
