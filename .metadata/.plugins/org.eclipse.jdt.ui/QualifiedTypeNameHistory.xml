@@ -5,4 +5,6 @@
 <fullyQualifiedTypeName name="Exceptions.xyException"/>
 <fullyQualifiedTypeName name="Variabler.Var"/>
 <fullyQualifiedTypeName name="Exceptions.existingVariableException"/>
+<fullyQualifiedTypeName name="Variabler.scopeTree"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

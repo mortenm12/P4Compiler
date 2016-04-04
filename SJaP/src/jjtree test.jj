@@ -388,7 +388,8 @@ void dcl_metode()             : {/*@bgen(jjtree) DCL_METODE */
 {/*@bgen(jjtree) DCL_METODE */
   try {
 /*@egen*/
-  (< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}")/*@bgen(jjtree)*/
+  (LOOKAHEAD("som")< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}"
+| < FUNKTION > < ID > "("list_of_vars()")" "{"linjer()"}")/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);

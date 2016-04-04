@@ -184,7 +184,8 @@ void dcl_metoder() #DCL_METODER : {}
 
 void dcl_metode() #DCL_METODE : {}
 {
-  (< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}")
+  (LOOKAHEAD("som")< FUNKTION > < ID > < SOM > type()"("list_of_vars()")" "{"linjer()"}"
+| < FUNKTION > < ID > "("list_of_vars()")" "{"linjer()"}")
 }
 
 void metode() #METODE : {}
