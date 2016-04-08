@@ -110,7 +110,7 @@ TOKEN :
 void start () #START : {}
 {
   (
-    dcl_metoder() < START > "{" linjer()"}")
+    dcl_metoder() < START > "{" linjer()"}" dcl_metoder())
 }
 
 void linjer () #LINJER : {}
@@ -135,11 +135,11 @@ void dcl_var() #DCL_VAR : {}
 {
   ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
   //{scope.hashtable.add(new var(ID,variable));}
-  | LOOKAHEAD(< ID > "=") < ID > "=" variabel()
+  | LOOKAHEAD(< ID > "=") < ID > "=" operation()
   | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
   | < TILFOJ > operation() < TIL > <ID >
-  | < SLET > <ID > "[" vars() "]"
+  | < SLET > <ID > "[" operation() "]"
   )
 
   //declerer variablerne i symbol tabellen

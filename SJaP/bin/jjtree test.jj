@@ -120,7 +120,7 @@ void start ()        : {/*@bgen(jjtree) START */
   try {
 /*@egen*/
   (
-    dcl_metoder() < START > "{" linjer()"}")/*@bgen(jjtree)*/
+    dcl_metoder() < START > "{" linjer()"}" dcl_metoder())/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -223,11 +223,11 @@ void dcl_var()          : {/*@bgen(jjtree) DCL_VAR */
 /*@egen*/
   ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
   //{scope.hashtable.add(new var(ID,variable));}
-  | LOOKAHEAD(< ID > "=") < ID > "=" variabel()
+  | LOOKAHEAD(< ID > "=") < ID > "=" operation()
   | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
   | < TILFOJ > operation() < TIL > <ID >
-  | < SLET > <ID > "[" vars() "]"
+  | < SLET > <ID > "[" operation() "]"
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {

@@ -42,6 +42,7 @@ public class SJaPParser/*@bgen(jjtree)*/implements SJaPParserTreeConstants, SJaP
       jj_consume_token(48);
       linjer();
       jj_consume_token(49);
+      dcl_metoder();
     } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -181,7 +182,7 @@ public class SJaPParser/*@bgen(jjtree)*/implements SJaPParserTreeConstants, SJaP
       } else if (jj_2_3(2147483647)) {
         jj_consume_token(ID);
         jj_consume_token(50);
-        variabel();
+        operation();
       } else if (jj_2_4(2147483647)) {
         jj_consume_token(ID);
         jj_consume_token(SOM);
@@ -207,7 +208,7 @@ public class SJaPParser/*@bgen(jjtree)*/implements SJaPParserTreeConstants, SJaP
           jj_consume_token(SLET);
           jj_consume_token(ID);
           jj_consume_token(51);
-          vars();
+          operation();
           jj_consume_token(52);
           break;
         default:

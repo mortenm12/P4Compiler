@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="19" version="2.0">
+<workbench progressCount="22" version="2.0">
 <workbenchAdvisor/>
-<window height="721" maximized="true" width="1018" x="311" y="134">
+<window height="664" maximized="true" width="1012" x="1586" y="-4">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.ui.console.ConsoleView"/>
 </fastViewData>
@@ -17,13 +17,13 @@
 <coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="40" y="30"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
 <coolItem id="JavaCC_Toolbar" itemType="typeToolBarContribution" x="40" y="30"/>
 <coolItem id="group.editor" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.jdt.ui.CompilationUnitEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
-<coolItem id="sf.eclipse.javacc.editors.JJEditor" itemType="typePlaceholder" x="-1" y="-1"/>
+<coolItem id="sf.eclipse.javacc.editors.JJEditor" itemType="typeToolBarContribution" x="-1" y="-1"/>
 <coolItem id="group.help" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.help" itemType="typeToolBarContribution" x="-1" y="-1"/>
 </coolbarLayout>
@@ -34,13 +34,18 @@
 <folder appearance="1" expanded="2">
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
 <part id="0"/>
+<part id="1"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="inter.java" partName="inter.java" path="/home/caktus/Git/P4/interpritorSjap/src/inter.java" title="inter.java" tooltip="interpritorSjap/src/inter.java" workbook="DefaultEditorWorkbook">
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="inter.java" partName="inter.java" path="/home/caktus/Git/P4/interpritorSjap/src/inter.java" title="inter.java" tooltip="interpritorSjap/src/inter.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/interpritorSjap/src/inter.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="61" selectionTopPixel="0"/>
+</editor>
+<editor activePart="true" focus="true" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jjt" partName="jjtree test.jjt" path="/home/caktus/Git/P4/SJaP/src/jjtree test.jjt" title="jjtree test.jjt" tooltip="SJaP/src/jjtree test.jjt" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/jjtree test.jjt"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3571" selectionTopPixel="3726"/>
 </editor>
 </editors>
 <views>
@@ -57,7 +62,6 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Warnings (37 items)"/>
-<category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="290" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -125,7 +129,7 @@
 <viewState/>
 </view>
 </views>
-<perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
+<perspectives activePart="org.eclipse.jdt.ui.PackageExplorer" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
 <perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.ui.internal.ide.application.ResourcePerspective" id="org.eclipse.ui.resourcePerspective" label="Resource"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
@@ -315,7 +319,6 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/jjtree test.jjt"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/jjtree test.jj"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/TreeTraverse.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/JJTSJaPParserState.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParser.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Node.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/ParseException.java"/>
@@ -324,65 +327,39 @@
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParserConstants.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParserTokenManager.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/interpritorSjap/src/inter.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/jjtree test.jjt"/>
 </editors>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4627" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4650" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4509" y="0"/>
-</item>
-<item historyLabel="jjtree test.jj" index="1">
-<position info="not_deleted" x="0" y="0"/>
-</item>
 <item historyLabel="TreeTraverse.java" index="2">
 <position/>
 </item>
-<item historyLabel="jjtree test.jj" index="1">
+<item historyLabel="Node.java" index="4">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="JJTSJaPParserState.java" index="3">
-<position info="not_deleted" x="99" y="18"/>
-</item>
-<item historyLabel="TreeTraverse.java" index="2">
-<position/>
-</item>
-<item historyLabel="SJaPParser.java" index="4">
+<item historyLabel="ParseException.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="TreeTraverse.java" index="2">
-<position/>
-</item>
-<item historyLabel="Node.java" index="5">
+<item historyLabel="SimpleCharStream.java" index="6">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="ParseException.java" index="6">
+<item historyLabel="SimpleNode.java" index="7">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SimpleCharStream.java" index="7">
+<item historyLabel="SJaPParser.java" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SimpleNode.java" index="8">
+<item historyLabel="SJaPParserConstants.java" index="8">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParser.java" index="4">
+<item historyLabel="SJaPParserTokenManager.java" index="9">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParserConstants.java" index="9">
+<item historyLabel="SJaPParserConstants.java" index="8">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParserTokenManager.java" index="10">
+<item historyLabel="SJaPParser.java" index="3">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParserConstants.java" index="9">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="SJaPParser.java" index="4">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="SimpleNode.java" index="8">
+<item historyLabel="SimpleNode.java" index="7">
 <position info="not_deleted" x="0" y="0"/>
 </item>
 <item historyLabel="TreeTraverse.java" index="2">
@@ -412,68 +389,95 @@
 <item historyLabel="jjtree test.jjt" index="0">
 <position info="not_deleted" x="4454" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="324" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="321" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="167" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="318" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="181" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="261" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="217" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="261" y="0"/>
 </item>
-<item historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="76" y="0"/>
 </item>
-<item active="true" historyLabel="inter.java" index="11">
+<item historyLabel="inter.java" index="10">
 <position info="not_deleted" x="312" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position info="not_deleted" x="4793" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position info="not_deleted" x="3451" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position info="not_deleted" x="3375" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position info="not_deleted" x="3374" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="11">
+<position info="not_deleted" x="3373" y="0"/>
+</item>
+<item active="true" historyLabel="jjtree test.jjt" index="11">
+<position info="not_deleted" x="3571" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -481,13 +485,6 @@
 <workbenchWindowAdvisor/>
 <actionBarAdvisor/>
 <trimLayout>
-<trimArea IMemento.internal.id="16384">
-<trimItem IMemento.internal.id="left"/>
-</trimArea>
-<trimArea IMemento.internal.id="131072">
-<trimItem IMemento.internal.id="bottom"/>
-<trimItem IMemento.internal.id="right"/>
-</trimArea>
 <trimArea IMemento.internal.id="128">
 <trimItem IMemento.internal.id="org.eclipse.ui.internal.WorkbenchWindow.topBar"/>
 </trimArea>
@@ -499,6 +496,9 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jjt" tooltip="SJaP/src/jjtree test.jjt">
+<persistable path="/SJaP/src/jjtree test.jjt"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="inter.java" tooltip="interpritorSjap/src/inter.java">
 <persistable path="/interpritorSjap/src/inter.java"/>
 </file>
@@ -531,9 +531,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jj" tooltip="SJaP/src/jjtree test.jj">
 <persistable path="/SJaP/src/jjtree test.jj"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jjt" tooltip="SJaP/src/jjtree test.jjt">
-<persistable path="/SJaP/src/jjtree test.jjt"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TokenMgrError.java" tooltip="SJaP/src/TokenMgrError.java">
 <persistable path="/SJaP/src/TokenMgrError.java"/>
