@@ -2,7 +2,6 @@
 options
 {
   static = true;
-  VISITOR = true;
 }
 
 PARSER_BEGIN(SJaPParser)
@@ -11,16 +10,17 @@ PARSER_BEGIN(SJaPParser)
 
 public class SJaPParser
 {
-   
+  
+ 
+
+  
   public static void main(String args []) throws ParseException
   {
     SJaPParser parser = new SJaPParser(System.in);
-    
     while (true)
     {
       System.out.println("Reading from standard input...");
       System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
-      
       try
       {
         
@@ -107,37 +107,39 @@ TOKEN :
 
 
 
-void start () #START : {System.out.println("start");}
+void start () #START : {}
 {
   (
     dcl_metoder() < START > "{" linjer()"}" dcl_metoder())
 }
 
-void linjer () #LINJER : {System.out.println("linjer");}
+void linjer () #LINJER : {}
 {
-  (linje() ";")+
+  (linje() < EOL >)+
 }
 
-void linje() #LINJE : {System.out.println("linje");}
+void linje() #LINJE : {}
 {
- (LOOKAHEAD(dcl_var()) dcl_var()
-| LOOKAHEAD(vars()) vars()
+  (LOOKAHEAD(vars()
+  )
+  vars()
 | if_statment()
 | while_lokke()
 | for_lokke()
 | < RETURNER > operation()
-
+| dcl_var()
   )
 }
 
-void dcl_var() #DCL_VAR : {System.out.println("dekler var");}
+void dcl_var() #DCL_VAR : {}
 {
-  ( LOOKAHEAD(< ID > <SOM > type() ";") < ID > <SOM > type()
+  ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
+  //{scope.hashtable.add(new var(ID,variable));}
   | LOOKAHEAD(< ID > "=") < ID > "=" operation()
-  | LOOKAHEAD(< ID > <SOM > type() "=") < ID > <SOM > type() "=" operation()
+  | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
-  | LOOKAHEAD("tilføj") < TILFOJ > operation() < TIL > <ID >
-  | LOOKAHEAD("slet") < SLET > <ID > "[" operation() "]"
+  | < TILFOJ > operation() < TIL > <ID >
+  | < SLET > <ID > "[" operation() "]"
   )
 
   //declerer variablerne i symbol tabellen

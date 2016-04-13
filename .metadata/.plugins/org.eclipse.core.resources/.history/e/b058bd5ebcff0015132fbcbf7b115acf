@@ -2,7 +2,6 @@
 options
 {
   static = true;
-  VISITOR = true;
 }
 
 PARSER_BEGIN(SJaPParser)
@@ -15,12 +14,10 @@ public class SJaPParser
   public static void main(String args []) throws ParseException
   {
     SJaPParser parser = new SJaPParser(System.in);
-    
     while (true)
     {
       System.out.println("Reading from standard input...");
       System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
-      
       try
       {
         
@@ -132,9 +129,9 @@ void linje() #LINJE : {System.out.println("linje");}
 
 void dcl_var() #DCL_VAR : {System.out.println("dekler var");}
 {
-  ( LOOKAHEAD(< ID > <SOM > type() ";") < ID > <SOM > type()
+  ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
   | LOOKAHEAD(< ID > "=") < ID > "=" operation()
-  | LOOKAHEAD(< ID > <SOM > type() "=") < ID > <SOM > type() "=" operation()
+  | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
   | LOOKAHEAD("tilføj") < TILFOJ > operation() < TIL > <ID >
   | LOOKAHEAD("slet") < SLET > <ID > "[" operation() "]"

@@ -3,7 +3,6 @@
 options
 {
   static = true;
-                 
 }
 
 PARSER_BEGIN(SJaPParser)
@@ -15,16 +14,17 @@ public class SJaPParser/*@bgen(jjtree)*/implements SJaPParserTreeConstants/*@ege
   protected static JJTSJaPParserState jjtree = new JJTSJaPParserState();
 
 /*@egen*/
-   
+  
+ 
+
+  
   public static void main(String args []) throws ParseException
   {
     SJaPParser parser = new SJaPParser(System.in);
-    
     while (true)
     {
       System.out.println("Reading from standard input...");
       System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
-      
       try
       {
         
@@ -115,7 +115,7 @@ void start ()        : {/*@bgen(jjtree) START */
                         SimpleNode jjtn000 = new SimpleNode(JJTSTART);
                         boolean jjtc000 = true;
                         jjtree.openNodeScope(jjtn000);
-/*@egen*/System.out.println("start");}
+/*@egen*/System.out.println("hej verden");}
 {/*@bgen(jjtree) START */
   try {
 /*@egen*/
@@ -144,14 +144,14 @@ void start ()        : {/*@bgen(jjtree) START */
 }
 
 void linjer ()         : {/*@bgen(jjtree) LINJER */
-                          SimpleNode jjtn000 = new SimpleNode(JJTLINJER);
-                          boolean jjtc000 = true;
-                          jjtree.openNodeScope(jjtn000);
-/*@egen*/System.out.println("linjer");}
+  SimpleNode jjtn000 = new SimpleNode(JJTLINJER);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
 {/*@bgen(jjtree) LINJER */
   try {
 /*@egen*/
-  (linje() ";")+/*@bgen(jjtree)*/
+  (linje() < EOL >)+/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -175,57 +175,59 @@ void linjer ()         : {/*@bgen(jjtree) LINJER */
 }
 
 void linje()        : {/*@bgen(jjtree) LINJE */
-                       SimpleNode jjtn000 = new SimpleNode(JJTLINJE);
-                       boolean jjtc000 = true;
-                       jjtree.openNodeScope(jjtn000);
-/*@egen*/System.out.println("linje");}
+  SimpleNode jjtn000 = new SimpleNode(JJTLINJE);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
 {/*@bgen(jjtree) LINJE */
- try {
+  try {
 /*@egen*/
- (LOOKAHEAD(dcl_var()) dcl_var()
-| LOOKAHEAD(vars()) vars()
+  (LOOKAHEAD(vars()
+  )
+  vars()
 | if_statment()
 | while_lokke()
 | for_lokke()
 | < RETURNER > operation()
-
+| dcl_var()
   )/*@bgen(jjtree)*/
- } catch (Throwable jjte000) {
-   if (jjtc000) {
-     jjtree.clearNodeScope(jjtn000);
-     jjtc000 = false;
-   } else {
-     jjtree.popNode();
-   }
-   if (jjte000 instanceof RuntimeException) {
-     throw (RuntimeException)jjte000;
-   }
-   if (jjte000 instanceof ParseException) {
-     throw (ParseException)jjte000;
-   }
-   throw (Error)jjte000;
- } finally {
-   if (jjtc000) {
-     jjtree.closeNodeScope(jjtn000, true);
-   }
- }
+  } catch (Throwable jjte000) {
+    if (jjtc000) {
+      jjtree.clearNodeScope(jjtn000);
+      jjtc000 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte000 instanceof RuntimeException) {
+      throw (RuntimeException)jjte000;
+    }
+    if (jjte000 instanceof ParseException) {
+      throw (ParseException)jjte000;
+    }
+    throw (Error)jjte000;
+  } finally {
+    if (jjtc000) {
+      jjtree.closeNodeScope(jjtn000, true);
+    }
+  }
 /*@egen*/
 }
 
 void dcl_var()          : {/*@bgen(jjtree) DCL_VAR */
-                           SimpleNode jjtn000 = new SimpleNode(JJTDCL_VAR);
-                           boolean jjtc000 = true;
-                           jjtree.openNodeScope(jjtn000);
-/*@egen*/System.out.println("dekler var");}
+  SimpleNode jjtn000 = new SimpleNode(JJTDCL_VAR);
+  boolean jjtc000 = true;
+  jjtree.openNodeScope(jjtn000);
+/*@egen*/}
 {/*@bgen(jjtree) DCL_VAR */
   try {
 /*@egen*/
-  ( LOOKAHEAD(< ID > <SOM > type() ";") < ID > <SOM > type()
+  ( LOOKAHEAD(type() < EOL >) < ID > <SOM > type()
+  //{scope.hashtable.add(new var(ID,variable));}
   | LOOKAHEAD(< ID > "=") < ID > "=" operation()
-  | LOOKAHEAD(< ID > <SOM > type() "=") < ID > <SOM > type() "=" operation()
+  | LOOKAHEAD(type() "=") < ID > <SOM > type() "=" operation()
   | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
-  | LOOKAHEAD("tilf\u00f8j") < TILFOJ > operation() < TIL > <ID >
-  | LOOKAHEAD("slet") < SLET > <ID > "[" operation() "]"
+  | < TILFOJ > operation() < TIL > <ID >
+  | < SLET > <ID > "[" operation() "]"
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
