@@ -1,0 +1,16 @@
+package AST.Var_Dcl;
+
+import AST.Dcl_Var;
+import AST.IASTNode;
+
+public class Dcl extends Dcl_Var implements IASTNode{
+
+	
+	public String Type;
+
+	@Override
+	public void SymbolTableCode() {
+		// TODO Auto-generated method stub
+		
+	}
+}

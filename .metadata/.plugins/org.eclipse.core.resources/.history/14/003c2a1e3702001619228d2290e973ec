@@ -1,0 +1,14 @@
+package AST.Var_Dcl;
+
+import AST.Dcl_Var;
+import AST.IASTNode;
+
+public class Delete_From_List extends Dcl_Var implements IASTNode {
+
+	@Override
+	public String CodeGenration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -105,7 +105,8 @@ I/O:		print(Operation)
 		
 Fil:		åbenFil("filNavn") //returnerer en liste af strenge
  		lukFil("filnavn")
-		skrivFile("filNavn")
+		skrivFil("filNavn")
+		læsFil("filnavn")
 
 Tilfældigt	tilfældigtTal()
 		tilfældigTal(min, max)*/

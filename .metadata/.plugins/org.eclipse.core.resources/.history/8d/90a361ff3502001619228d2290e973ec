@@ -1,0 +1,16 @@
+package AST.Var_Dcl;
+
+import AST.Dcl_Var;
+import AST.IASTNode;
+
+public class Ass extends Dcl_Var implements IASTNode {
+	
+	public Operation operation;
+	
+	@Override
+	public String CodeGenration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

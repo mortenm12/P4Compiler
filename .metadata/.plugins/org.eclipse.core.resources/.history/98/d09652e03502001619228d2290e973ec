@@ -1,0 +1,13 @@
+package AST.Var_Dcl;
+
+import AST.IASTNode;
+
+public class Ass implements IASTNode {
+
+	@Override
+	public String CodeGenration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

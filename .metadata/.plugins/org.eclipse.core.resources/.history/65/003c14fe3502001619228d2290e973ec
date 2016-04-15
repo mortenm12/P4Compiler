@@ -1,0 +1,11 @@
+package AST;
+
+public class Dcl_Var implements IASTNode {
+
+	@Override
+	public String CodeGenration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
