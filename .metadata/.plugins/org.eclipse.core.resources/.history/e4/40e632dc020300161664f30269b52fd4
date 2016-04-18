@@ -1,0 +1,12 @@
+package AST;
+
+public class Dcl_Metode implements IASTNode {
+	Dcl_Metode metode;
+	Decl_Metoder NextMetode;
+	@Override
+	public String CodeGenration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
