@@ -1,0 +1,49 @@
+gentag løkke (når første værdi < anden værdi + anden værdi er konstant)
+
+//her sørge for den første værdi er på stakken
+//antager at anden værdi er konstant, hvis ikke så fjern dconst_x
+dconst_x //x er konstant
+//skal have 2 kopier af sammenligningsmaterialet på stakken
+//første set til sammenligningen
+//andet set til udregninger
+dup2_x2
+dup2_x2
+dcmpl
+iflt label //virker det sådan?
+//fjerner hvad den skal gå op til extra variabler
+pop2
+
+
+label:
+  dstore 1
+  dadd
+  {linjer}
+  dup2_x2
+  dup2_x2
+  dcmpl
+  iflt label
+
+Sammenligning
+  ==
+    dcmpg
+    ifeq
+
+while løkke(== + 2 variabler)
+
+
+//duplikere operationerne til stakken
+dup2_x2
+dup2_x2
+dcmpl
+ifeq label
+pop2
+pop2
+
+label:
+  {linjer}
+  {alle operationer på sammenligningen}
+  dup2_x2
+  dup2_x2
+  dcmpl
+  iflt label
+
