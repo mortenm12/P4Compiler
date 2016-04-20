@@ -1,49 +1,79 @@
-gentag løkke (når første værdi < anden værdi + anden værdi er konstant)
+Opstart
+først declare metode, og deklare kode stakken og dens locals(scope)
+eksempel: main metode
+.method public static main : ([Ljava/lang/String;)V
+  .code stack 1 locals 2
 
-//her sørge for den første værdi er på stakken
-//antager at anden værdi er konstant, hvis ikke så fjern dconst_x
-dconst_x //x er konstant
-//skal have 2 kopier af sammenligningsmaterialet på stakken
-//første set til sammenligningen
-//andet set til udregninger
+.method indikere det er en metode
+main er navnet
+([Ljava/lang/String;)V
+[ indikere array
+V indikere void
+
+.code indikere initialition stak of scope
+stack 1 locals 2 fortæller hvilken stack og hvilket scope den er i
+
+Almindelige variabler
+  
+dconst_x smider konstanten x på nuværende stack
+dstore_x smider første double på nuværende stack ind i plads x i nuværende array
+
+
+gentag løkke (når der er ingen operationer på værdierne inde i løkken)
+
+dload_//anden værdi
+dload_//første værdi
 dup2_x2
-dup2_x2
+dup2_x2 //så ikke behøve hente fra memory hver gang
 dcmpl
 iflt label //virker det sådan?
-//fjerner hvad den skal gå op til extra variabler
+//fjerner variablerne
+pop2
 pop2
 
-
 label:
-  dstore 1
+  //sætter værdien 1 til den første, duplikere den og gemmer den
+  dconst_1
   dadd
+  dup2  
+  dstore_//første værdi
   {linjer}
   dup2_x2
   dup2_x2
   dcmpl
   iflt label
 
-Sammenligning
-  ==
-    dcmpg
-    ifeq
+gentag løkke (når der er operationer på værdierne i løkken)
 
-while løkke(== + 2 variabler)
-
-
-//duplikere operationerne til stakken
-dup2_x2
-dup2_x2
+dload_//anden værdi
+dload_//første værdi
 dcmpl
-ifeq label
+iflt label //virker det sådan?
+//fjerner variablerne
 pop2
 pop2
 
 label:
   {linjer}
-  {alle operationer på sammenligningen}
-  dup2_x2
-  dup2_x2
+  dload_//anden værdi
+  dload_//første værdi
+  dconst_1
+  dadd
+  dup2
+  dstore_//første værdi
   dcmpl
   iflt label
 
+
+while løkke
+
+
+//laver en masse sammenligniner
+//værdien skal være nul for at den køre med ifeq
+ifeq label
+
+
+label:
+  {linjer}
+  //alle de samme sammenligniner
+  ifeq label
