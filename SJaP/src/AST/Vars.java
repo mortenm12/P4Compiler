@@ -2,7 +2,7 @@ package AST;
 import Variabler.Var;
 import Variabler.scopeTree;
 public class Vars implements IASTNode {
-
+	public Vars node;
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub
@@ -14,35 +14,35 @@ public class Vars implements IASTNode {
 		if (x!=null)
 			return x;
 		else
-			throw new Exception("Id'et " + ID + "fandtes ikke, husk og dekler en variable");
+			throw new Exception("Id'et " + ID + "fandtes ikke, husk og deklerer en variable");
 	}
 
-	
-	class var{
-		Variabel Value;
+
+	public class var extends Vars{
+		public Variabel Value;
 	}
 	
-	class Get_By_Id{
-		String ID;
+	public class Get_By_Id extends Vars{
+		public String ID;
 	}
 	
-	class List_Index{
-		String ID;
-		Operation Index;
+	public class List_Index extends Vars{
+		public String ID;
+		public Operation Index;
 	}
 	
-	class Lenght_of_List{
-		String ID;
+	public class Lenght_of_List extends Vars{
+		public String ID;
 	}
 	
-	class Sub_List{
-		String ID;
-		Operation From;
-		Operation To;
+	public class Sub_List extends Vars{
+		public String ID;
+		public Operation From;
+		public Operation To;
 	}
 	
-	class Meth{
-		Metode method;
+	public class Meth extends Vars{
+		public Metode method;
 	}
 
 }

@@ -1,8 +1,10 @@
 package AST;
 
+import java.util.List;
+
 public class Linjer implements IASTNode {
-	public Linje nyLinje;
-	public Linjer nyeLinjer;
+	public List<Linje> nyLinje;
+	
 	
 	@Override
 	public String CodeGenration() {

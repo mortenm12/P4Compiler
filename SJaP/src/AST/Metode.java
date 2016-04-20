@@ -2,8 +2,8 @@ package AST;
 
 public class Metode implements IASTNode {
 	
-	String ID;
-	ListOfVars ListVars;
+	public String ID;
+	public ListOfVars ListVars;
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub

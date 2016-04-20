@@ -1,8 +1,10 @@
 package AST;
 
+import java.util.List;
+
 public class ListOfVars implements IASTNode {
-	Operation op;
-	ListOfVars ListVars;
+	public List<Operation> op;
+	
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub

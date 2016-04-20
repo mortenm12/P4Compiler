@@ -1,8 +1,10 @@
 package AST;
 
+import java.util.List;
+
 public class Decl_Metoder implements IASTNode {
-	Dcl_Metode Metode;
-	Decl_Metoder NextMetode;
+	public List<Dcl_Metode> Metode;
+
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub

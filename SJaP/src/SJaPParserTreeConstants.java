@@ -13,8 +13,8 @@ public interface SJaPParserTreeConstants
   public int JJTMETODE = 9;
   public int JJTOPERATION = 10;
   public int JJTTERM = 11;
-  public int JJTIF_STATEMENT = 12;
-  public int JJTELLERS_STATEMENT = 13;
+  public int JJTIF_STATMENT = 12;
+  public int JJTELLERS_STATMENT = 13;
   public int JJTWHILE_LOKKE = 14;
   public int JJTFOR_LOKKE = 15;
   public int JJTSTATS = 16;
@@ -24,26 +24,26 @@ public interface SJaPParserTreeConstants
 
 
   public String[] jjtNodeName = {
-    "START",
-    "LINJER",
-    "LINJE",
-    "DCL_VAR",
-    "VARS",
-    "VARIABEL",
-    "TYPE",
-    "DCL_METODER",
-    "DCL_METODE",
-    "METODE",
-    "OPERATION",
-    "TERM",
-    "IF_STATEMENT",
-    "ELLERS_STATEMENT",
-    "WHILE_LOKKE",
-    "FOR_LOKKE",
-    "STATS",
-    "STAT",
-    "SAMMENLIGN",
-    "LIST_OF_VARS",
+    "start",
+    "linjer",
+    "linje",
+    "dcl_var",
+    "vars",
+    "variabel",
+    "type",
+    "dcl_metoder",
+    "dcl_metode",
+    "metode",
+    "operation",
+    "term",
+    "if_statment",
+    "ellers_statment",
+    "while_lokke",
+    "for_lokke",
+    "stats",
+    "stat",
+    "sammenlign",
+    "list_of_vars",
   };
 }
-/* JavaCC - OriginalChecksum=da334752365a4f119423da408f188a60 (do not edit this line) */
+/* JavaCC - OriginalChecksum=5f2d339767cdc65e83e38232d14f7a4d (do not edit this line) */

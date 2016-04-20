@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="22" version="2.0">
+<workbench progressCount="13" version="2.0">
 <workbenchAdvisor/>
 <window height="664" maximized="true" width="1012" x="1586" y="-4">
 <fastViewData fastViewLocation="1024">
@@ -17,7 +17,7 @@
 <coolItem id="org.eclipse.debug.ui.main.toolbar" itemType="typeToolBarContribution" x="40" y="30"/>
 <coolItem id="org.eclipse.jdt.ui.JavaElementCreationActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
 <coolItem id="org.eclipse.search.searchActionSet" itemType="typeToolBarContribution" x="88" y="30"/>
-<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="68" y="30"/>
+<coolItem id="org.eclipse.ui.edit.text.actionSet.presentation" itemType="typeToolBarContribution" x="124" y="30"/>
 <coolItem id="group.nav" itemType="typeGroupMarker"/>
 <coolItem id="org.eclipse.ui.workbench.navigate" itemType="typeToolBarContribution" x="232" y="30"/>
 <coolItem id="JavaCC_Toolbar" itemType="typeToolBarContribution" x="40" y="30"/>
@@ -39,13 +39,13 @@
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="inter.java" partName="inter.java" path="/home/caktus/Git/P4/interpritorSjap/src/inter.java" title="inter.java" tooltip="interpritorSjap/src/inter.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/interpritorSjap/src/inter.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="61" selectionTopPixel="0"/>
-</editor>
-<editor activePart="true" focus="true" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jjt" partName="jjtree test.jjt" path="/home/caktus/Git/P4/SJaP/src/jjtree test.jjt" title="jjtree test.jjt" tooltip="SJaP/src/jjtree test.jjt" workbook="DefaultEditorWorkbook">
+<editor id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jjt" partName="jjtree test.jjt" path="/home/caktus/Git/P4/SJaP/src/jjtree test.jjt" title="jjtree test.jjt" tooltip="SJaP/src/jjtree test.jjt" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/jjtree test.jjt"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="3571" selectionTopPixel="3726"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2257" selectionTopPixel="1768"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParser.java" partName="SJaPParser.java" path="/home/caktus/Git/P4/SJaP/src/SJaPParser.java" title="SJaPParser.java" tooltip="SJaP/src/SJaPParser.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/SJaP/src/SJaPParser.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="776"/>
 </editor>
 </editors>
 <views>
@@ -62,6 +62,8 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Warnings (37 items)"/>
+<category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="290" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
@@ -75,7 +77,7 @@
 <viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
-<viewState group_libraries="1" layout="2" linkWithEditor="1" rootMode="1" workingSetName="">
+<viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
 <customFilters userDefinedPatternsEnabled="false">
 <xmlDefinedFilters>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
@@ -316,168 +318,178 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/jjtree test.jjt"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/jjtree test.jj"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/TreeTraverse.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParser.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/If_Statement.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/Ellers_Statment.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/While_Lokke.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/For_Lokke.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/Stats.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/Stat.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/Sammenlign.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/AST/ListOfVars.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParserVisitor.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/JJTSJaPParserState.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Node.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/ParseException.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SimpleCharStream.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SimpleNode.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParserConstants.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParser.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParserTokenManager.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/interpritorSjap/src/inter.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParserTreeConstants.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/Token.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/SJaP.jj"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" path="/SJaP/src/jjtree test.jjt"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/SJaP/src/SJaPParser.java"/>
 </editors>
-<item historyLabel="TreeTraverse.java" index="2">
+<item historyLabel="Ellers_Statment.java" index="1">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="If_Statement.java" index="0">
+<position info="not_deleted" x="116" y="0"/>
+</item>
+<item historyLabel="Ellers_Statment.java" index="1">
+<position info="not_deleted" x="103" y="0"/>
+</item>
+<item historyLabel="While_Lokke.java" index="2">
 <position/>
 </item>
-<item historyLabel="Node.java" index="4">
+<item historyLabel="While_Lokke.java" index="2">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="ParseException.java" index="5">
+<item historyLabel="For_Lokke.java" index="3">
+<position info="not_deleted" x="108" y="0"/>
+</item>
+<item historyLabel="While_Lokke.java" index="2">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SimpleCharStream.java" index="6">
+<item historyLabel="Stats.java" index="4">
+<position info="not_deleted" x="67" y="0"/>
+</item>
+<item historyLabel="Stat.java" index="5">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SimpleNode.java" index="7">
+<item historyLabel="Stats.java" index="4">
+<position info="not_deleted" x="222" y="0"/>
+</item>
+<item historyLabel="Stat.java" index="5">
+<position info="not_deleted" x="227" y="0"/>
+</item>
+<item historyLabel="Sammenlign.java" index="6">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParser.java" index="3">
+<item historyLabel="Stat.java" index="5">
+<position info="not_deleted" x="325" y="0"/>
+</item>
+<item historyLabel="Sammenlign.java" index="6">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParserConstants.java" index="8">
+<item historyLabel="Sammenlign.java" index="6">
+<position info="not_deleted" x="268" y="0"/>
+</item>
+<item historyLabel="ListOfVars.java" index="7">
+<position info="not_deleted" x="96" y="0"/>
+</item>
+<item historyLabel="SJaPParserVisitor.java" index="8">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParserTokenManager.java" index="9">
+<item historyLabel="JJTSJaPParserState.java" index="9">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParserConstants.java" index="8">
+<item historyLabel="Node.java" index="10">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SJaPParser.java" index="3">
+<item historyLabel="ParseException.java" index="11">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="SimpleNode.java" index="7">
+<item historyLabel="SimpleCharStream.java" index="12">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="TreeTraverse.java" index="2">
-<position info="not_deleted" x="86" y="0"/>
-</item>
-<item historyLabel="TreeTraverse.java" index="2">
-<position info="not_deleted" x="126" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4509" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4454" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4449" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4454" y="0"/>
-</item>
-<item historyLabel="jjtree test.jj" index="1">
+<item historyLabel="SimpleNode.java" index="13">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="TreeTraverse.java" index="2">
-<position info="not_deleted" x="126" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="0">
-<position info="not_deleted" x="4454" y="0"/>
-</item>
-<item historyLabel="inter.java" index="10">
+<item historyLabel="SJaPParserConstants.java" index="14">
 <position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position/>
+<item historyLabel="SJaPParser.java" index="15">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="324" y="0"/>
+<item historyLabel="SJaPParserConstants.java" index="14">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position/>
+<item historyLabel="SJaPParserTokenManager.java" index="16">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="321" y="0"/>
+<item historyLabel="SJaPParserTreeConstants.java" index="17">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position/>
+<item historyLabel="SJaPParserVisitor.java" index="8">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="167" y="0"/>
+<item historyLabel="Token.java" index="18">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="318" y="0"/>
+<item historyLabel="SJaP.jj" index="19">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position/>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="0" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position/>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="75" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position/>
-</item>
-<item historyLabel="inter.java" index="10">
-<position/>
-</item>
-<item historyLabel="inter.java" index="10">
-<position/>
-</item>
-<item historyLabel="inter.java" index="10">
-<position/>
-</item>
-<item historyLabel="inter.java" index="10">
-<position/>
-</item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="181" y="0"/>
-</item>
-<item historyLabel="inter.java" index="10">
+<item historyLabel="jjtree test.jjt" index="20">
 <position info="not_deleted" x="261" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="217" y="0"/>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="2257" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="2235" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="2257" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="2208" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="2258" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
 <position info="not_deleted" x="261" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="75" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="75" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="188" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="144" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="188" y="0"/>
+</item>
+<item historyLabel="jjtree test.jjt" index="20">
 <position info="not_deleted" x="76" y="0"/>
 </item>
-<item historyLabel="inter.java" index="10">
-<position info="not_deleted" x="312" y="0"/>
+<item historyLabel="jjtree test.jjt" index="20">
+<position info="not_deleted" x="2257" y="0"/>
 </item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position info="not_deleted" x="4793" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position info="not_deleted" x="3451" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position info="not_deleted" x="3375" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position info="not_deleted" x="3374" y="0"/>
-</item>
-<item historyLabel="jjtree test.jjt" index="11">
-<position info="not_deleted" x="3373" y="0"/>
-</item>
-<item active="true" historyLabel="jjtree test.jjt" index="11">
-<position info="not_deleted" x="3571" y="0"/>
+<item active="true" historyLabel="SJaPParser.java" index="21">
+<position info="not_deleted" x="0" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -496,11 +508,20 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParser.java" tooltip="SJaP/src/SJaPParser.java">
+<persistable path="/SJaP/src/SJaPParser.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jjt" tooltip="SJaP/src/jjtree test.jjt">
 <persistable path="/SJaP/src/jjtree test.jjt"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="inter.java" tooltip="interpritorSjap/src/inter.java">
-<persistable path="/interpritorSjap/src/inter.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" name="SJaP.jj" tooltip="SJaP/src/SJaP.jj">
+<persistable path="/SJaP/src/SJaP.jj"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Token.java" tooltip="SJaP/src/Token.java">
+<persistable path="/SJaP/src/Token.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParserTreeConstants.java" tooltip="SJaP/src/SJaPParserTreeConstants.java">
+<persistable path="/SJaP/src/SJaPParserTreeConstants.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParserTokenManager.java" tooltip="SJaP/src/SJaPParserTokenManager.java">
 <persistable path="/SJaP/src/SJaPParserTokenManager.java"/>
@@ -520,26 +541,17 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Node.java" tooltip="SJaP/src/Node.java">
 <persistable path="/SJaP/src/Node.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParser.java" tooltip="SJaP/src/SJaPParser.java">
-<persistable path="/SJaP/src/SJaPParser.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="JJTSJaPParserState.java" tooltip="SJaP/src/JJTSJaPParserState.java">
 <persistable path="/SJaP/src/JJTSJaPParserState.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TreeTraverse.java" tooltip="SJaP/src/TreeTraverse.java">
-<persistable path="/SJaP/src/TreeTraverse.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParserVisitor.java" tooltip="SJaP/src/SJaPParserVisitor.java">
+<persistable path="/SJaP/src/SJaPParserVisitor.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="sf.eclipse.javacc.editors.JJEditor" name="jjtree test.jj" tooltip="SJaP/src/jjtree test.jj">
-<persistable path="/SJaP/src/jjtree test.jj"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ListOfVars.java" tooltip="SJaP/src/AST/ListOfVars.java">
+<persistable path="/SJaP/src/AST/ListOfVars.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="TokenMgrError.java" tooltip="SJaP/src/TokenMgrError.java">
-<persistable path="/SJaP/src/TokenMgrError.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Token.java" tooltip="SJaP/src/Token.java">
-<persistable path="/SJaP/src/Token.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="SJaPParserTreeConstants.java" tooltip="SJaP/src/SJaPParserTreeConstants.java">
-<persistable path="/SJaP/src/SJaPParserTreeConstants.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Sammenlign.java" tooltip="SJaP/src/AST/Sammenlign.java">
+<persistable path="/SJaP/src/AST/Sammenlign.java"/>
 </file>
 </mruList>
 </workbench>

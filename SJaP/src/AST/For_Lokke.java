@@ -2,9 +2,9 @@ package AST;
 
 public class For_Lokke implements IASTNode {
 	
-	Operation from;
-	Operation to;
-	Linjer linjer;
+	public Operation from;
+	public Operation to;
+	public Linjer linjer;
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub

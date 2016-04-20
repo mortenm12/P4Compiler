@@ -15,7 +15,7 @@ public class Dcl_Var implements IASTNode {
 	
 	class Dcl{
 		
-		String Type;
+		Type Type;
 	}
 	
 	class Ass{

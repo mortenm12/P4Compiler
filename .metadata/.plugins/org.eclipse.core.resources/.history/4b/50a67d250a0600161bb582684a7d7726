@@ -1,0 +1,287 @@
+
+options
+{
+  static = true;
+  VISITOR = true;
+}
+
+PARSER_BEGIN(SJaPParser)
+
+import AST.start;
+import AST.Linjer;
+import AST.Linje;
+import AST.Dcl_Var;
+import AST.Dcl_Metode;
+import AST.Decl_Metoder;
+import AST.Ellers_Statment;
+import AST.For_Lokke;
+import AST.If_Statement;
+import AST.ListOfVars;
+import AST.Metode;
+import AST.Operation;
+import AST.Returner;
+import AST.Sammenlign;
+import AST.Stat;
+import AST.Stats;
+import AST.Term;
+import AST.Type;
+import AST.Variabel;
+import AST.Vars;
+import AST.While_Lokke;
+
+public class SJaPParser
+{
+   
+   
+  public static void main(String args []) throws ParseException
+  {
+    
+    SJaPParser parser = new SJaPParser(System.in);
+    
+    while (true)
+    {
+      System.out.println("Reading from standard input...");
+      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+      
+      try
+      {
+        start AST = start();
+      }
+      catch (Exception e)
+      {
+        System.out.println("NOK.");
+        System.out.println(e.getMessage());
+        SJaPParser.ReInit(System.in);
+      }
+      catch (Error e)
+      {
+        System.out.println("Oops.");
+        System.out.println(e.getMessage());
+        break;
+      }
+    }
+  }
+}
+
+PARSER_END(SJaPParser)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+|  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
+|  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">
+}
+
+TOKEN : /* OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+| < MODULO : "%" >
+| < TIL : "til">
+| < FRA: "fra">
+| < HVIS : "hvis">
+| < ELLERS : "ellers">
+| < SOM : "som">
+| < AF : "af">
+| < FUNKTION : "funktion">
+| < TAL : "tal">
+| < TEKST : "tekst">
+| < UDSAGN : "udsag">
+| < SALANGE : "sålænge">
+| < GENTAG : "gentag">
+| < OG : "og">
+| < ELLER : "eller">
+| < PRINT : "print">
+| < INPUT : "input">
+| < OPENFILE : "åbenfil">
+| < CLOSEFILE : "lukfil">
+| < START : "start">
+| < RETURNER : "returner">
+| < SANDT : "sandt">
+| < FALSK : "falsk">
+| < TILFOJ : "tilføj" >
+| < LENGDEN : "længden" >
+| < LISTE : "liste" >
+| < SLET : "slet" >
+}
+
+TOKEN :
+{
+  < CONSTANT : (< DIGIT >)+ >
+| < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
+| < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
+| < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
+| < BOOL : ("sandt"| "falsk")>
+| < #DIGIT : [ "0"-"9" ] >
+| < #DIGIT1: [ "1"-"9"] >
+| < #LETTER : [ "a"-"z","A"-"Z","æ","ø","å","Æ","Ø","Å"]>
+| < #CHAR : [ "!","@","#","£","¤","$","%","&","\\","/","=","?","+","`","|","^","~","*",",",".","_",":",";","<",">","½","-","¨","§","¾","´"]>
+
+| < EOL: (["\n","\t","\r"])>
+
+}
+
+
+
+start start () : {start s= new start();}
+{
+  (
+    dcl_metoder() < START > "{" s.startLinjer=linjer()"}" dcl_metoder())
+}
+
+Linjer linjer ()  : {Linjer l = new Linjer();}
+{
+  ({ l.nyLinje.add(linje()); }";")+
+}
+
+Linje linje() : {Linje l = new Linje();}
+{
+ (LOOKAHEAD(dcl_var()) l.linjeIndhold=dcl_var()
+| LOOKAHEAD(vars()) l.linjeIndhold=vars()
+| l.linjeIndhold=if_statment()
+| l.linjeIndhold=while_lokke()
+| l.linjeIndhold=for_lokke()
+|< RETURNER > {l.linjeIndhold= new Returner(operation());} 
+
+  )
+}
+
+Dcl_Var dcl_var() : {Dcl_Var d;}
+{
+  ( LOOKAHEAD(< ID > <SOM > type() ";") < ID > <SOM > type()
+  | LOOKAHEAD(< ID > "=") < ID > "=" operation()
+  | LOOKAHEAD(< ID > <SOM > type() "=") < ID > <SOM > type() "=" operation()
+  | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
+  | LOOKAHEAD("tilføj") < TILFOJ > operation() < TIL > <ID >
+  | LOOKAHEAD("slet") < SLET > <ID > "[" operation() "]"
+  )
+
+}
+
+Vars vars() : {}
+{
+  (
+    variabel()
+  | LOOKAHEAD(< ID >)< ID > 
+  | < LENGDEN > < AF > < ID >
+  | LOOKAHEAD(< ID > < FRA >) < ID > < FRA > operation() < TIL > operation()
+  | metode()
+  )
+	
+  //søg og find i symbol tabelen
+}
+
+Variabel variabel() : {}
+{
+  (
+    < NUM >
+  | < STRING >
+  | < BOOL >
+  )
+}
+
+Type type() : {Type t= new Type(); Token s;}
+{
+  (
+    s=< TAL > {t._Type=s.toString();}
+  | s=< TEKST > {t._Type=s.toString();}
+  | s=< UDSAGN > {t._Type=s.toString();}
+  | s=< LISTE > {t._Type=s.toString();} < AF > t.NestedType=type()
+  )
+}
+
+Decl_Metoder dcl_metoder() : {Decl_Metoder d= new Decl_Metoder();}
+{
+  (dcl_metode())*
+}
+
+Dcl_Metode dcl_metode() : {Dcl_Metode d= new Dcl_Metode(); Token t;}
+{
+  (LOOKAHEAD("som")< FUNKTION > t=< ID > {d.Id=t.toString();} < SOM > d.ReturType=type()"("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}"
+| < FUNKTION > < ID > "("list_of_vars()")" "{"linjer()"}")
+}
+
+Metode metode() : {}
+{
+  (< ID > "(" list_of_vars()")")
+}
+
+Operation operation() : {}
+{
+  (LOOKAHEAD("+") term() "+" operation()
+| LOOKAHEAD("-") term() "-" operation()
+| term()
+  )
+}
+
+Term term() : {}
+{
+  (LOOKAHEAD("*") vars() "*" term()
+| LOOKAHEAD("/")vars() "/" term()
+| "(" operation() ")"
+| vars()
+  )
+}
+
+If_Statement if_statment() : {}
+{
+  (< HVIS > stats() "{" linjer() "}" ellers_statment()
+  )
+}
+
+Ellers_Statment ellers_statment() : {}
+{
+  ( LOOKAHEAD("{")< ELLERS > "{" linjer() "}"
+| < ELLERS > if_statment()
+  )
+}
+
+While_Lokke while_lokke() : {}
+{
+  (< SALANGE > stats() < GENTAG > "{" linjer() "}"
+  )
+}
+For_Lokke for_lokke() : {}
+{
+  (< GENTAG > operation() < TIL > operation() "{" linjer() "}"
+  )
+}
+
+Stats stats() : {}
+{
+  (LOOKAHEAD(< OG >) stat() < OG > stat()
+| LOOKAHEAD(< ELLER >) stat() < ELLER > stat()
+| stat()
+  )
+}
+
+Stat stat() : {}
+{
+  (LOOKAHEAD(operation()) operation() sammenlign() operation()
+| "(" stats() ")"
+| vars()
+| "!" stat()
+  )
+}
+
+Sammenlign sammenlign() : {}
+{
+  (">" // større end
+| "<" // mindre end
+| ">=" // større end eller lig med
+| "<=" // mindre end eller lig med
+| "==" // lig med
+| "!=" // ikke lig med
+  )
+}
+
+ListOfVars list_of_vars() : {}
+{
+  (operation())*
+}
+

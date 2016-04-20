@@ -1,21 +1,22 @@
 package AST;
 
 public class Variabel implements IASTNode {
-	Variabel Value;
+	public Variabel node;
+	
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	class Num{
-		double Value;
+	public class Num{
+		public double Value;
 	}
-	class Tekst{
-		String Value;
+	public class Tekst{
+		public String Value;
 	}
-	class Bool{
-		Boolean Value;
+	public class Bool{
+		public boolean Value;
 	}
 
 }
