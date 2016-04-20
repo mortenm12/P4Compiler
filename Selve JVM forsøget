@@ -1,0 +1,105 @@
+Opstart
+først declare metode, og deklare kode stakken og dens locals(scope)
+eksempel: main metode
+.method public static main : ([Ljava/lang/String;)V
+  .code stack 1 locals 2
+
+.method indikere det er en metode
+main er navnet
+([Ljava/lang/String;)V
+[ indikere array
+V indikere void
+
+.code indikere initialition stak of scope
+stack 1 locals 2 fortæller hvilken stack og hvilket scope den er i
+
+Almindelige variabler
+  
+dconst_x smider konstanten x på nuværende stack
+dstore_x smider første double på nuværende stack ind i plads x i nuværende array
+
+Sammenligninger
+dcmp<op>
+  hvis lig med hinanden så smider den nul
+  hvis den øverste værdi er større end den under, så smider den 1
+  hvis den nederste værdi er større end den over, så smider den -1
+<op> bestemmer hvordan den håndtere NaN (Not a Number)
+  dcmpg pusher 1 
+  dcmpl pusher -1
+  
+Metoder
+
+kig i opstart for hvordan deklare en metode
+
+retur typer
+  V = void
+  D = double //kvalificeret gæt
+
+
+if løkker
+
+ifeq<label> = hvis top stack lig 0
+ifne<label> = hvis top stack lig !0
+iflt<label> = hvis top stack < 0
+ifle<label> = top stack <= 0
+ifgt<label> = top stack > 0
+ifge<label> = top stack >= 0
+
+gentag løkke (når der er ingen operationer på værdierne inde i løkken)
+
+dload_//anden værdi
+dload_//første værdi
+dup2_x2
+dup2_x2 //så ikke behøve hente fra memory hver gang
+dcmpl
+iflt label //virker det sådan?
+//fjerner variablerne
+pop2
+pop2
+
+label:
+  //sætter værdien 1 til den første, duplikere den og gemmer den
+  dconst_1
+  dadd
+  dup2  
+  dstore_//første værdi
+  {linjer}
+  dup2_x2
+  dup2_x2
+  dcmpl
+  iflt label
+
+gentag løkke (når der er operationer på værdierne i løkken)
+
+dload_//anden værdi
+dload_//første værdi
+dcmpl
+iflt label //virker det sådan?
+//fjerner variablerne
+pop2
+pop2
+
+label:
+  {linjer}
+  dload_//anden værdi
+  dload_//første værdi
+  dconst_1
+  dadd
+  dup2
+  dstore_//første værdi
+  dcmpl
+  iflt label
+
+
+while løkke
+
+
+//laver en masse sammenligniner
+//værdien skal være nul for at den køre med ifeq
+ifeq label
+
+
+label:
+  {linjer}
+  //alle de samme sammenligniner
+  ifeq label
