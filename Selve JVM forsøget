@@ -1,24 +1,106 @@
 Opstart
+skal starte med klasse deklaration
+.class public super main
+  main er navnet
+  super betyder den ikke nedarver fra andre
+
+skal slutte dem med
+.sourcefile 'navn.java'
+.end class
+
+
+alle klasser skal muligvis have en init metode:
+.method public <init> : ()V
+  .code stack 1 locals 1
+    aload_0 //ved ikke om er nødvendigt, men var i eksempel
+    invokespecial Method java/lang/object <init> ()V //siger den skal bruge pakken java/lang/object ???
+    return
+  .end code
+.end method
+
+
 først declare metode, og deklare kode stakken og dens locals(scope)
 eksempel: main metode
 .method public static main : ([Ljava/lang/String;)V
   .code stack 1 locals 2
 
+  .end code
+.end method
+
 .method indikere det er en metode
 main er navnet
 ([Ljava/lang/String;)V
 [ indikere array
+  java/lang/String er typen
 V indikere void
 
 .code indikere initialition stak of scope
 stack 1 locals 2 fortæller hvilken stack og hvilket scope den er i
+
+klasse
+
+
 
 Almindelige variabler
   
 dconst_x smider konstanten x på nuværende stack
 dstore_x smider første double på nuværende stack ind i plads x i nuværende array
 
+
+Egne arrays
+
+
+laver et nyt array via newarray T_DOUBLE //floats er T_FLOAT, long er T_LONG etc
+
+eksempel lave array
+
+ldc //størrelse
+newarray T_DOUBLE
+astore x //x er hvor array referencen skal placeres
+
+loader via:
+  aload x 
+  ldc y 
+  daload
+
+Først loader den en array reference fra pladsen i lokale array x
+så sætter den en konstant y på stacken, som siger på hvilken plads den skal hente
+til sidst så tager daload y og x og sætter værdien x[y] på stakken
+
+Simple operationer
+
+//hvis har flere operationer, så bare lad vær med at store i de enkelte trin
+
+addition
+  dload_//variabel
+  dload_//variabel
+  dadd
+  dstore_//hvilken den skal gemme til
+
+subtraktion
+  dload_//variabel
+  dload_//variabel
+  dsub
+  dstore_//hvilken den skal gemme til
+
+multiplication
+  dload_//variabel
+  ..
+  dmul
+  dstore_//variablen
+
+division
+  ddiv
+
+modulo
+  drem
+
+negation
+  dneg
+  
+
 Sammenligninger
+
 dcmp<op>
   hvis lig med hinanden så smider den nul
   hvis den øverste værdi er større end den under, så smider den 1
@@ -35,6 +117,11 @@ retur typer
   V = void
   D = double //kvalificeret gæt
 
+
+kalder metoder via:
+  invokestatic klassenavn/metodenavn(variablerkankaldemed;)Returtype
+eksempel:
+  invokestatic main/main(Ljava/lang/String;)V
 
 if løkker
 
