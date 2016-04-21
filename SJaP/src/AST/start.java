@@ -8,8 +8,14 @@ public class start implements IASTNode {
 	
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String string;
+		
+		string = "Allahu AKbar";	//somthing somthing diffrent
+		string += startMetoder.CodeGenration();
+		string += startLinjer.CodeGenration();
+		string += slutMetoder.CodeGenration();
+		
+		return string;
 	}
 
 }
