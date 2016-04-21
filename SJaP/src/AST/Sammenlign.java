@@ -8,10 +8,43 @@ public Sammenlign node;
 		return null;
 	}
 	
+<<<<<<< Updated upstream
 	public class bigger extends Sammenlign{}
 	public class lesser extends Sammenlign{}
 	public class biggerequal extends Sammenlign{}
 	public class lesserequal extends Sammenlign{}
 	public class equal extends Sammenlign{}
 	public class notequal extends Sammenlign{}
+=======
+	class bigger extends Sammenlign{
+		public String CodeGenration(){
+			return "ifgt \n";
+		}
+	}
+	class lesser extends Sammenlign{
+		public String CodeGenration(){
+			return "iflt \n";
+		}
+	}
+	class biggerequal extends Sammenlign{
+		public String CodeGenration(){
+			return "ifge \n";
+		}
+	}
+	class lesserequal extends Sammenlign{
+		public String CodeGenration(){
+			return "ifle \n";
+		}
+	}
+	class equal extends Sammenlign{
+		public String CodeGenration(){
+			return "ifeq \n";
+		}
+	}
+	class notequal extends Sammenlign{
+		public String CodeGenration(){
+			return "ifne \n";
+		}
+	}
+>>>>>>> Stashed changes
 }
