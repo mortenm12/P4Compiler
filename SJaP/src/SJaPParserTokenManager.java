@@ -29,6 +29,31 @@ import AST.Vars.Meth;
 import AST.Variabel.Tekst;
 import AST.Variabel.Num;
 import AST.Variabel.Bool;
+import AST.Dcl_Var.Dcl;
+import AST.Dcl_Var.Ass;
+import AST.Dcl_Var.Dcl_Ass;
+import AST.Dcl_Var.List_Ass;
+import AST.Dcl_Var.List_Add;
+import AST.Dcl_Var.List_Del;
+import AST.Operation.Add;
+import AST.Operation.Sub;
+import AST.Term.Mul;
+import AST.Term.Div;
+import AST.Term.Mod;
+import AST.Term.paren;
+import AST.Term.vari;
+import AST.Stats.and;
+import AST.Stats.or;
+import AST.Stat.opsop;
+import AST.Stat.par;
+import AST.Stat.bool;
+import AST.Stat.not;
+import AST.Sammenlign.bigger;
+import AST.Sammenlign.lesser;
+import AST.Sammenlign.biggerequal;
+import AST.Sammenlign.lesserequal;
+import AST.Sammenlign.equal;
+import AST.Sammenlign.notequal;
 
 /** Token Manager. */
 public class SJaPParserTokenManager implements SJaPParserConstants

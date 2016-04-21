@@ -1,28 +1,28 @@
 package AST;
 
 public class Stat implements IASTNode {
-	
+	public Stat node;
 	@Override
 	public String CodeGenration() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	class opsop{
-		Operation op1;
-		Operation op2;
-		Sammenlign operator;
+	public class opsop extends Stat{
+		public Operation op1;
+		public Operation op2;
+		public Sammenlign operator;
 	}
 	
-	class par{
-		Stats stats;
+	public class par extends Stat{
+		public Stats stats;
 	}
 	
-	class bool{
-		boolean udsagn;
+	public class bool extends Stat{
+		public Vars udsagn;
 	}
 	
-	class not{
-		Stat stat;
+	public class not extends Stat{
+		public Stat stat;
 	}
 }

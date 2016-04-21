@@ -2,9 +2,9 @@ package AST;
 
 
 public class Operation implements IASTNode {
-	
-	Term term;
-	
+	public Operation node;
+	public Term term;
+	public Operation operation;
 	
 	@Override
 	public String CodeGenration() {
@@ -12,11 +12,11 @@ public class Operation implements IASTNode {
 		return null;
 	}
 	
-	class Add{
-		Operation operation;
+	public class Add extends Operation{
+		
 	}
 	
-	class Sub{
-		Operation operation;
+	public class Sub extends Operation{
+		
 	}
 }

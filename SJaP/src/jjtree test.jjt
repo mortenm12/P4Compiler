@@ -40,6 +40,37 @@ import AST.Variabel.Tekst;
 import AST.Variabel.Num;
 import AST.Variabel.Bool;
 
+import AST.Dcl_Var.Dcl;
+import AST.Dcl_Var.Ass;
+import AST.Dcl_Var.Dcl_Ass;
+import AST.Dcl_Var.List_Ass;
+import AST.Dcl_Var.List_Add;
+import AST.Dcl_Var.List_Del;
+
+import AST.Operation.Add;
+import AST.Operation.Sub;
+
+import AST.Term.Mul;
+import AST.Term.Div;
+import AST.Term.Mod;
+import AST.Term.paren;
+import AST.Term.vari;
+
+import AST.Stats.and;
+import AST.Stats.or;
+
+import AST.Stat.opsop;
+import AST.Stat.par;
+import AST.Stat.bool;
+import AST.Stat.not;
+
+import AST.Sammenlign.bigger;
+import AST.Sammenlign.lesser;
+import AST.Sammenlign.biggerequal;
+import AST.Sammenlign.lesserequal;
+import AST.Sammenlign.equal;
+import AST.Sammenlign.notequal;
+
 public class SJaPParser
 {
    
@@ -145,9 +176,9 @@ start start () : {start s= new start();}
     dcl_metoder() < START > "{" s.startLinjer=linjer()"}" dcl_metoder())
 }
 
-Linjer linjer ()  : {Linjer l = new Linjer();}
+Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
 {
-  ({ l.nyLinje.add(linje()); }";")+
+  ( li=linje()";" { l.nyLinje.add(li); })+
 }
 
 Linje linje() : {Linje l = new Linje();}
@@ -162,14 +193,14 @@ Linje linje() : {Linje l = new Linje();}
   )
 }
 
-Dcl_Var dcl_var() : {}
+Dcl_Var dcl_var() : {Token t; Dcl_Var d = new Dcl_Var();}
 {
-  ( LOOKAHEAD(< ID > <SOM > type() ";") < ID > <SOM > type()
-  | LOOKAHEAD(< ID > "=") < ID > "=" operation()
-  | LOOKAHEAD(< ID > <SOM > type() "=") < ID > <SOM > type() "=" operation()
-  | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
-  | LOOKAHEAD("tilføj") < TILFOJ > operation() < TIL > <ID >
-  | LOOKAHEAD("slet") < SLET > <ID > "[" operation() "]"
+  ( LOOKAHEAD(< ID > <SOM > type() ";"){Dcl dc = d.new Dcl();} t=< ID > <SOM > dc.Type=type() {dc.ID=t.image; d.node=dc;}
+  | LOOKAHEAD(< ID > "="){Ass a = d.new Ass();} t=< ID > "=" a.Value=operation() {a.ID=t.image; d.node=a;}
+  | LOOKAHEAD(< ID > <SOM > type() "=") {Dcl_Ass da=d.new Dcl_Ass();} t=< ID > <SOM > da.Type=type() "=" da.Value=operation() {da.ID=t.image; d.node=da;}
+  | LOOKAHEAD(< ID > "[") {List_Ass la = d.new List_Ass();} t=< ID > "[" la.Index=operation() "]" "=" la.Value=operation() {la.ID=t.image; d.node=la;}
+  | LOOKAHEAD("tilføj") {List_Add lad= d.new List_Add();}< TILFOJ > lad.Value=operation() < TIL > t=<ID > {lad.ID=t.image; d.node=lad;}
+  | LOOKAHEAD("slet") {List_Del ld=d.new List_Del();}< SLET > t=<ID > "[" ld.Index=operation() "]" {ld.ID=t.image; d.node=ld;}
   )
 
 }
@@ -189,19 +220,19 @@ Vars vars() : {Vars v = new Vars(); Token t;}
 Variabel variabel() : {Variabel v = new Variabel(); Token t;}
 {
   (
-    t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image);} 
-  | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image;}
-  | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image);}
+    t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); return v;} 
+  | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image; return v;}
+  | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); return v;}
   )
 }
 
 Type type() : {Type t= new Type(); Token s;}
 {
   (
-    s=< TAL > {t._Type=s.toString();}
-  | s=< TEKST > {t._Type=s.toString();}
-  | s=< UDSAGN > {t._Type=s.toString();}
-  | s=< LISTE > {t._Type=s.toString();} < AF > t.NestedType=type()
+    s=< TAL > {t._Type=s.image;}
+  | s=< TEKST > {t._Type=s.image;}
+  | s=< UDSAGN > {t._Type=s.image;}
+  | s=< LISTE > {t._Type=s.image;} < AF > t.NestedType=type()
   )
 }
 
@@ -212,29 +243,30 @@ Decl_Metoder dcl_metoder() : {Decl_Metoder d= new Decl_Metoder();}
 
 Dcl_Metode dcl_metode() : {Dcl_Metode d= new Dcl_Metode(); Token t;}
 {
-  (LOOKAHEAD("som")< FUNKTION > t=< ID > {d.ID=t.toString();} < SOM > d.ReturType=type()"("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}"
-| < FUNKTION > t=< ID > {d.ID=t.toString();} "("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}")
+  (LOOKAHEAD("som")< FUNKTION > t=< ID > {d.ID=t.image;} < SOM > d.ReturType=type()"("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}"
+| < FUNKTION > t=< ID > {d.ID=t.image;} "("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}")
 }
 
 Metode metode() : {Metode m = new Metode(); Token t;}
 {
-  (t=< ID > {m.ID=t.toString();} "(" m.ListVars=list_of_vars()")")
+  (t=< ID > {m.ID=t.image;} "(" m.ListVars=list_of_vars()")")
 }
 
-Operation operation() : {}
+Operation operation() : {Operation o = new Operation();}
 {
-  (LOOKAHEAD("+") term() "+" operation()
-| LOOKAHEAD("-") term() "-" operation()
+  (LOOKAHEAD("+") {Add a = o.new Add();} o.term=term() "+" o.operation=operation() {o.node = a;}
+| LOOKAHEAD("-") {Sub s = o.new Sub();} s.term=term() "-" s.operation=operation() {o.node = s;}
 | term()
   )
 }
 
-Term term() : {}
+Term term() : {Term t = new Term();}
 {
-  (LOOKAHEAD("*") vars() "*" term()
-| LOOKAHEAD("/")vars() "/" term()
-| "(" operation() ")"
-| vars()
+  (LOOKAHEAD("*") {Mul m = t.new Mul();} m.op=vars() "*" m.term=term() {t.node = m;}
+| LOOKAHEAD("/") {Div d = t.new Div();} d.op=vars() "/" d.term=term() {t.node = d;}
+| LOOKAHEAD("%") {Mod mo = t.new Mod();} mo.op=vars() "%" mo.term= term() {t.node = mo;}
+| "(" {paren pa = t.new paren();} pa.opera=operation() ")" {t.node = pa;}
+| {vari v = t.new vari();} v.op=vars() {t.node = v;} 
   )
 }
 
@@ -262,36 +294,36 @@ For_Lokke for_lokke() : {For_Lokke f = new For_Lokke();}
   )
 }
 
-Stats stats() : {}
+Stats stats() : {Stats s = new Stats();}
 {
-  (LOOKAHEAD(< OG >) stat() < OG > stat()
-| LOOKAHEAD(< ELLER >) stat() < ELLER > stat()
-| stat()
+  (LOOKAHEAD(< OG >){and a = s.new and();}  a.stat1=stat() < OG > a.stat2=stat() {s.node=a;}
+| LOOKAHEAD(< ELLER >) {or o = s.new or();} o.stat1=stat() < ELLER > o.stat2=stat() {s.node=o;}
+| s.stat1=stat()
   )
 }
 
-Stat stat() : {}
+Stat stat() : {Stat s = new Stat();}
 {
-  (LOOKAHEAD(operation()) operation() sammenlign() operation()
-| "(" stats() ")"
-| vars()
-| "!" stat()
+  (LOOKAHEAD(operation()) {opsop o = s.new opsop();} o.op1=operation() o.operator=sammenlign() o.op2=operation() {s.node=o;}
+| {par p = s.new par();}"(" p.stats=stats() ")" {s.node=p;}
+| {bool b = s.new bool();} b.udsagn=vars() {s.node=b;}
+| {not n=s.new not();} "!" n.stat=stat() {s.node=n;}
   )
 }
 
-Sammenlign sammenlign() : {}
+Sammenlign sammenlign() : {Sammenlign s = new Sammenlign();}
 {
-  (">" // større end
-| "<" // mindre end
-| ">=" // større end eller lig med
-| "<=" // mindre end eller lig med
-| "==" // lig med
-| "!=" // ikke lig med
+  (">" {s.node=s.new bigger(); return s;}
+| "<" {s.node=s.new lesser(); return s;} 
+| ">=" {s.node=s.new biggerequal(); return s;}
+| "<=" {s.node=s.new lesserequal(); return s;}
+| "==" {s.node=s.new equal(); return s;}
+| "!=" {s.node=s.new notequal(); return s;}
   )
 }
 
-ListOfVars list_of_vars() : {}
+ListOfVars list_of_vars() : {ListOfVars l = new ListOfVars(); Operation o;}
 {
-  (operation())*
+  (o= operation() { l.op.add(o);})*
 }
 

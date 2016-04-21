@@ -41,6 +41,37 @@ import AST.Variabel.Tekst;
 import AST.Variabel.Num;
 import AST.Variabel.Bool;
 
+import AST.Dcl_Var.Dcl;
+import AST.Dcl_Var.Ass;
+import AST.Dcl_Var.Dcl_Ass;
+import AST.Dcl_Var.List_Ass;
+import AST.Dcl_Var.List_Add;
+import AST.Dcl_Var.List_Del;
+
+import AST.Operation.Add;
+import AST.Operation.Sub;
+
+import AST.Term.Mul;
+import AST.Term.Div;
+import AST.Term.Mod;
+import AST.Term.paren;
+import AST.Term.vari;
+
+import AST.Stats.and;
+import AST.Stats.or;
+
+import AST.Stat.opsop;
+import AST.Stat.par;
+import AST.Stat.bool;
+import AST.Stat.not;
+
+import AST.Sammenlign.bigger;
+import AST.Sammenlign.lesser;
+import AST.Sammenlign.biggerequal;
+import AST.Sammenlign.lesserequal;
+import AST.Sammenlign.equal;
+import AST.Sammenlign.notequal;
+
 public class SJaPParser/*@bgen(jjtree)*/implements SJaPParserTreeConstants/*@egen*/
 {/*@bgen(jjtree)*/
   protected static JJTSJaPParserState jjtree = new JJTSJaPParserState();
@@ -179,11 +210,25 @@ Linjer linjer ()  : {/*@bgen(jjtree) linjer */
                      SimpleNode jjtn000 = new SimpleNode(JJTLINJER);
                      boolean jjtc000 = true;
                      jjtree.openNodeScope(jjtn000);
-/*@egen*/Linjer l = new Linjer();}
+/*@egen*/Linjer l = new Linjer(); Linje li;}
 {/*@bgen(jjtree) linjer */
   try {
 /*@egen*/
-  ({ l.nyLinje.add(linje()); }";")+/*@bgen(jjtree)*/
+  ( li=linje()";" { l.nyLinje.add(li); })+/*@bgen(jjtree)*/
+  } catch (Throwable jjte000) {
+    if (jjtc000) {
+      jjtree.clearNodeScope(jjtn000);
+      jjtc000 = false;
+    } else {
+      jjtree.popNode();
+    }
+    if (jjte000 instanceof RuntimeException) {
+      throw (RuntimeException)jjte000;
+    }
+    if (jjte000 instanceof ParseException) {
+      throw (ParseException)jjte000;
+    }
+    throw (Error)jjte000;
   } finally {
     if (jjtc000) {
       jjtree.closeNodeScope(jjtn000, true);
@@ -236,19 +281,49 @@ Linje linje() : {/*@bgen(jjtree) linje */
 }
 
 Dcl_Var dcl_var() : {/*@bgen(jjtree) dcl_var */
-  SimpleNode jjtn000 = new SimpleNode(JJTDCL_VAR);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                     SimpleNode jjtn000 = new SimpleNode(JJTDCL_VAR);
+                     boolean jjtc000 = true;
+                     jjtree.openNodeScope(jjtn000);
+/*@egen*/Token t; Dcl_Var d = new Dcl_Var();}
 {/*@bgen(jjtree) dcl_var */
   try {
 /*@egen*/
-  ( LOOKAHEAD(< ID > <SOM > type() ";") < ID > <SOM > type()
-  | LOOKAHEAD(< ID > "=") < ID > "=" operation()
-  | LOOKAHEAD(< ID > <SOM > type() "=") < ID > <SOM > type() "=" operation()
-  | LOOKAHEAD(< ID > "[") < ID > "[" operation() "]" "=" operation()
-  | LOOKAHEAD("tilf\u00f8j") < TILFOJ > operation() < TIL > <ID >
-  | LOOKAHEAD("slet") < SLET > <ID > "[" operation() "]"
+  ( LOOKAHEAD(< ID > <SOM > type() ";"){Dcl dc = d.new Dcl();} t=< ID > <SOM > dc.Type=type()/*@bgen(jjtree)*/
+                                                                                              {
+                                                                                                jjtree.closeNodeScope(jjtn000, true);
+                                                                                                jjtc000 = false;
+                                                                                              }
+/*@egen*/ {dc.ID=t.image; d.node=dc;}
+  | LOOKAHEAD(< ID > "="){Ass a = d.new Ass();} t=< ID > "=" a.Value=operation()/*@bgen(jjtree)*/
+                                                                                 {
+                                                                                   jjtree.closeNodeScope(jjtn000, true);
+                                                                                   jjtc000 = false;
+                                                                                 }
+/*@egen*/ {a.ID=t.image; d.node=a;}
+  | LOOKAHEAD(< ID > <SOM > type() "=") {Dcl_Ass da=d.new Dcl_Ass();} t=< ID > <SOM > da.Type=type() "=" da.Value=operation()/*@bgen(jjtree)*/
+                                                                                                                              {
+                                                                                                                                jjtree.closeNodeScope(jjtn000, true);
+                                                                                                                                jjtc000 = false;
+                                                                                                                              }
+/*@egen*/ {da.ID=t.image; d.node=da;}
+  | LOOKAHEAD(< ID > "[") {List_Ass la = d.new List_Ass();} t=< ID > "[" la.Index=operation() "]" "=" la.Value=operation()/*@bgen(jjtree)*/
+                                                                                                                           {
+                                                                                                                             jjtree.closeNodeScope(jjtn000, true);
+                                                                                                                             jjtc000 = false;
+                                                                                                                           }
+/*@egen*/ {la.ID=t.image; d.node=la;}
+  | LOOKAHEAD("tilf\u00f8j") {List_Add lad= d.new List_Add();}< TILFOJ > lad.Value=operation() < TIL > t=<ID >/*@bgen(jjtree)*/
+                                                                                                          {
+                                                                                                            jjtree.closeNodeScope(jjtn000, true);
+                                                                                                            jjtc000 = false;
+                                                                                                          }
+/*@egen*/ {lad.ID=t.image; d.node=lad;}
+  | LOOKAHEAD("slet") {List_Del ld=d.new List_Del();}< SLET > t=<ID > "[" ld.Index=operation() "]"/*@bgen(jjtree)*/
+                                                                                                   {
+                                                                                                     jjtree.closeNodeScope(jjtn000, true);
+                                                                                                     jjtc000 = false;
+                                                                                                   }
+/*@egen*/ {ld.ID=t.image; d.node=ld;}
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
@@ -345,19 +420,19 @@ Variabel variabel() : {/*@bgen(jjtree) variabel */
                 jjtree.closeNodeScope(jjtn000, true);
                 jjtc000 = false;
               }
-/*@egen*/ {Num n = v.new Num(); n.Value=Double.parseDouble(t.image);} 
+/*@egen*/ {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); return v;} 
   | t=< STRING >/*@bgen(jjtree)*/
                  {
                    jjtree.closeNodeScope(jjtn000, true);
                    jjtc000 = false;
                  }
-/*@egen*/ {Tekst s = v.new Tekst(); s.Value=t.image;}
+/*@egen*/ {Tekst s = v.new Tekst(); s.Value=t.image; return v;}
   | t=< BOOL >/*@bgen(jjtree)*/
                {
                  jjtree.closeNodeScope(jjtn000, true);
                  jjtc000 = false;
                }
-/*@egen*/ {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image);}
+/*@egen*/ {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); return v;}
   )/*@bgen(jjtree)*/
   } finally {
     if (jjtc000) {
@@ -381,20 +456,20 @@ Type type() : {/*@bgen(jjtree) type */
                 jjtree.closeNodeScope(jjtn000, true);
                 jjtc000 = false;
               }
-/*@egen*/ {t._Type=s.toString();}
+/*@egen*/ {t._Type=s.image;}
   | s=< TEKST >/*@bgen(jjtree)*/
                 {
                   jjtree.closeNodeScope(jjtn000, true);
                   jjtc000 = false;
                 }
-/*@egen*/ {t._Type=s.toString();}
+/*@egen*/ {t._Type=s.image;}
   | s=< UDSAGN >/*@bgen(jjtree)*/
                  {
                    jjtree.closeNodeScope(jjtn000, true);
                    jjtc000 = false;
                  }
-/*@egen*/ {t._Type=s.toString();}
-  | s=< LISTE > {t._Type=s.toString();} < AF > t.NestedType=type()
+/*@egen*/ {t._Type=s.image;}
+  | s=< LISTE > {t._Type=s.image;} < AF > t.NestedType=type()
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
@@ -457,8 +532,8 @@ Dcl_Metode dcl_metode() : {/*@bgen(jjtree) dcl_metode */
 {/*@bgen(jjtree) dcl_metode */
   try {
 /*@egen*/
-  (LOOKAHEAD("som")< FUNKTION > t=< ID > {d.ID=t.toString();} < SOM > d.ReturType=type()"("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}"
-| < FUNKTION > t=< ID > {d.ID=t.toString();} "("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}")/*@bgen(jjtree)*/
+  (LOOKAHEAD("som")< FUNKTION > t=< ID > {d.ID=t.image;} < SOM > d.ReturType=type()"("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}"
+| < FUNKTION > t=< ID > {d.ID=t.image;} "("d.ListVars=list_of_vars()")" "{"d.lines=linjer()"}")/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -489,7 +564,7 @@ Metode metode() : {/*@bgen(jjtree) metode */
 {/*@bgen(jjtree) metode */
   try {
 /*@egen*/
-  (t=< ID > {m.ID=t.toString();} "(" m.ListVars=list_of_vars()")")/*@bgen(jjtree)*/
+  (t=< ID > {m.ID=t.image;} "(" m.ListVars=list_of_vars()")")/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);
@@ -513,15 +588,25 @@ Metode metode() : {/*@bgen(jjtree) metode */
 }
 
 Operation operation() : {/*@bgen(jjtree) operation */
-  SimpleNode jjtn000 = new SimpleNode(JJTOPERATION);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                         SimpleNode jjtn000 = new SimpleNode(JJTOPERATION);
+                         boolean jjtc000 = true;
+                         jjtree.openNodeScope(jjtn000);
+/*@egen*/Operation o = new Operation();}
 {/*@bgen(jjtree) operation */
   try {
 /*@egen*/
-  (LOOKAHEAD("+") term() "+" operation()
-| LOOKAHEAD("-") term() "-" operation()
+  (LOOKAHEAD("+") {Add a = o.new Add();} o.term=term() "+" o.operation=operation()/*@bgen(jjtree)*/
+                                                                                   {
+                                                                                     jjtree.closeNodeScope(jjtn000, true);
+                                                                                     jjtc000 = false;
+                                                                                   }
+/*@egen*/ {o.node = a;}
+| LOOKAHEAD("-") {Sub s = o.new Sub();} s.term=term() "-" s.operation=operation()/*@bgen(jjtree)*/
+                                                                                  {
+                                                                                    jjtree.closeNodeScope(jjtn000, true);
+                                                                                    jjtc000 = false;
+                                                                                  }
+/*@egen*/ {o.node = s;}
 | term()
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
@@ -547,17 +632,43 @@ Operation operation() : {/*@bgen(jjtree) operation */
 }
 
 Term term() : {/*@bgen(jjtree) term */
-  SimpleNode jjtn000 = new SimpleNode(JJTTERM);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+               SimpleNode jjtn000 = new SimpleNode(JJTTERM);
+               boolean jjtc000 = true;
+               jjtree.openNodeScope(jjtn000);
+/*@egen*/Term t = new Term();}
 {/*@bgen(jjtree) term */
   try {
 /*@egen*/
-  (LOOKAHEAD("*") vars() "*" term()
-| LOOKAHEAD("/")vars() "/" term()
-| "(" operation() ")"
-| vars()
+  (LOOKAHEAD("*") {Mul m = t.new Mul();} m.op=vars() "*" m.term=term()/*@bgen(jjtree)*/
+                                                                       {
+                                                                         jjtree.closeNodeScope(jjtn000, true);
+                                                                         jjtc000 = false;
+                                                                       }
+/*@egen*/ {t.node = m;}
+| LOOKAHEAD("/") {Div d = t.new Div();} d.op=vars() "/" d.term=term()/*@bgen(jjtree)*/
+                                                                      {
+                                                                        jjtree.closeNodeScope(jjtn000, true);
+                                                                        jjtc000 = false;
+                                                                      }
+/*@egen*/ {t.node = d;}
+| LOOKAHEAD("%") {Mod mo = t.new Mod();} mo.op=vars() "%" mo.term= term()/*@bgen(jjtree)*/
+                                                                          {
+                                                                            jjtree.closeNodeScope(jjtn000, true);
+                                                                            jjtc000 = false;
+                                                                          }
+/*@egen*/ {t.node = mo;}
+| "(" {paren pa = t.new paren();} pa.opera=operation() ")"/*@bgen(jjtree)*/
+                                                           {
+                                                             jjtree.closeNodeScope(jjtn000, true);
+                                                             jjtc000 = false;
+                                                           }
+/*@egen*/ {t.node = pa;}
+| {vari v = t.new vari();} v.op=vars()/*@bgen(jjtree)*/
+                                       {
+                                         jjtree.closeNodeScope(jjtn000, true);
+                                         jjtc000 = false;
+                                       }
+/*@egen*/ {t.node = v;} 
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
@@ -710,16 +821,26 @@ For_Lokke for_lokke() : {/*@bgen(jjtree) for_lokke */
 }
 
 Stats stats() : {/*@bgen(jjtree) stats */
-  SimpleNode jjtn000 = new SimpleNode(JJTSTATS);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                 SimpleNode jjtn000 = new SimpleNode(JJTSTATS);
+                 boolean jjtc000 = true;
+                 jjtree.openNodeScope(jjtn000);
+/*@egen*/Stats s = new Stats();}
 {/*@bgen(jjtree) stats */
   try {
 /*@egen*/
-  (LOOKAHEAD(< OG >) stat() < OG > stat()
-| LOOKAHEAD(< ELLER >) stat() < ELLER > stat()
-| stat()
+  (LOOKAHEAD(< OG >){and a = s.new and();}  a.stat1=stat() < OG > a.stat2=stat()/*@bgen(jjtree)*/
+                                                                                 {
+                                                                                   jjtree.closeNodeScope(jjtn000, true);
+                                                                                   jjtc000 = false;
+                                                                                 }
+/*@egen*/ {s.node=a;}
+| LOOKAHEAD(< ELLER >) {or o = s.new or();} o.stat1=stat() < ELLER > o.stat2=stat()/*@bgen(jjtree)*/
+                                                                                    {
+                                                                                      jjtree.closeNodeScope(jjtn000, true);
+                                                                                      jjtc000 = false;
+                                                                                    }
+/*@egen*/ {s.node=o;}
+| s.stat1=stat()
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
@@ -744,17 +865,37 @@ Stats stats() : {/*@bgen(jjtree) stats */
 }
 
 Stat stat() : {/*@bgen(jjtree) stat */
-  SimpleNode jjtn000 = new SimpleNode(JJTSTAT);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+               SimpleNode jjtn000 = new SimpleNode(JJTSTAT);
+               boolean jjtc000 = true;
+               jjtree.openNodeScope(jjtn000);
+/*@egen*/Stat s = new Stat();}
 {/*@bgen(jjtree) stat */
   try {
 /*@egen*/
-  (LOOKAHEAD(operation()) operation() sammenlign() operation()
-| "(" stats() ")"
-| vars()
-| "!" stat()
+  (LOOKAHEAD(operation()) {opsop o = s.new opsop();} o.op1=operation() o.operator=sammenlign() o.op2=operation()/*@bgen(jjtree)*/
+                                                                                                                 {
+                                                                                                                   jjtree.closeNodeScope(jjtn000, true);
+                                                                                                                   jjtc000 = false;
+                                                                                                                 }
+/*@egen*/ {s.node=o;}
+| {par p = s.new par();}"(" p.stats=stats() ")"/*@bgen(jjtree)*/
+                                                {
+                                                  jjtree.closeNodeScope(jjtn000, true);
+                                                  jjtc000 = false;
+                                                }
+/*@egen*/ {s.node=p;}
+| {bool b = s.new bool();} b.udsagn=vars()/*@bgen(jjtree)*/
+                                           {
+                                             jjtree.closeNodeScope(jjtn000, true);
+                                             jjtc000 = false;
+                                           }
+/*@egen*/ {s.node=b;}
+| {not n=s.new not();} "!" n.stat=stat()/*@bgen(jjtree)*/
+                                         {
+                                           jjtree.closeNodeScope(jjtn000, true);
+                                           jjtc000 = false;
+                                         }
+/*@egen*/ {s.node=n;}
   )/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
@@ -779,19 +920,49 @@ Stat stat() : {/*@bgen(jjtree) stat */
 }
 
 Sammenlign sammenlign() : {/*@bgen(jjtree) sammenlign */
-  SimpleNode jjtn000 = new SimpleNode(JJTSAMMENLIGN);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                           SimpleNode jjtn000 = new SimpleNode(JJTSAMMENLIGN);
+                           boolean jjtc000 = true;
+                           jjtree.openNodeScope(jjtn000);
+/*@egen*/Sammenlign s = new Sammenlign();}
 {/*@bgen(jjtree) sammenlign */
   try {
 /*@egen*/
-  (">" // st\u00f8rre end
-| "<" // mindre end
-| ">=" // st\u00f8rre end eller lig med
-| "<=" // mindre end eller lig med
-| "==" // lig med
-| "!=" // ikke lig med
+  (">"/*@bgen(jjtree)*/
+       {
+         jjtree.closeNodeScope(jjtn000, true);
+         jjtc000 = false;
+       }
+/*@egen*/ {s.node=s.new bigger(); return s;}
+| "<"/*@bgen(jjtree)*/
+      {
+        jjtree.closeNodeScope(jjtn000, true);
+        jjtc000 = false;
+      }
+/*@egen*/ {s.node=s.new lesser(); return s;} 
+| ">="/*@bgen(jjtree)*/
+       {
+         jjtree.closeNodeScope(jjtn000, true);
+         jjtc000 = false;
+       }
+/*@egen*/ {s.node=s.new biggerequal(); return s;}
+| "<="/*@bgen(jjtree)*/
+       {
+         jjtree.closeNodeScope(jjtn000, true);
+         jjtc000 = false;
+       }
+/*@egen*/ {s.node=s.new lesserequal(); return s;}
+| "=="/*@bgen(jjtree)*/
+       {
+         jjtree.closeNodeScope(jjtn000, true);
+         jjtc000 = false;
+       }
+/*@egen*/ {s.node=s.new equal(); return s;}
+| "!="/*@bgen(jjtree)*/
+       {
+         jjtree.closeNodeScope(jjtn000, true);
+         jjtc000 = false;
+       }
+/*@egen*/ {s.node=s.new notequal(); return s;}
   )/*@bgen(jjtree)*/
   } finally {
     if (jjtc000) {
@@ -802,14 +973,14 @@ Sammenlign sammenlign() : {/*@bgen(jjtree) sammenlign */
 }
 
 ListOfVars list_of_vars() : {/*@bgen(jjtree) list_of_vars */
-  SimpleNode jjtn000 = new SimpleNode(JJTLIST_OF_VARS);
-  boolean jjtc000 = true;
-  jjtree.openNodeScope(jjtn000);
-/*@egen*/}
+                             SimpleNode jjtn000 = new SimpleNode(JJTLIST_OF_VARS);
+                             boolean jjtc000 = true;
+                             jjtree.openNodeScope(jjtn000);
+/*@egen*/ListOfVars l = new ListOfVars(); Operation o;}
 {/*@bgen(jjtree) list_of_vars */
   try {
 /*@egen*/
-  (operation())*/*@bgen(jjtree)*/
+  (o= operation() { l.op.add(o);})*/*@bgen(jjtree)*/
   } catch (Throwable jjte000) {
     if (jjtc000) {
       jjtree.clearNodeScope(jjtn000);

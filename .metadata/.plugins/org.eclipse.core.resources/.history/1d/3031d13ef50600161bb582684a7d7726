@@ -1,0 +1,29 @@
+package AST;
+
+public class Term implements IASTNode {
+	public Vars var;
+	public Term op;
+	
+	@Override
+	public String CodeGenration() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public class Mul extends Term{
+		public Term term;
+	}
+	
+	public class Div extends Term{
+		public Term term;
+	}
+	
+	public class Mod extends Term{
+		public Term term;
+	}
+	
+	public class paren extends Term{
+		public Operation opera;
+	}
+
+}

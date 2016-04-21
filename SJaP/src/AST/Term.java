@@ -1,8 +1,10 @@
 package AST;
 
+import AST.Term.paren;
+
 public class Term implements IASTNode {
-	Vars var;
-	Term op;
+	public Term node;
+	
 	
 	@Override
 	public String CodeGenration() {
@@ -10,20 +12,28 @@ public class Term implements IASTNode {
 		return null;
 	}
 	
-	class Mul{
-		Term term;
+	public class Mul extends Term{
+		public Term term;
+		public Vars op;
 	}
 	
-	class Div{
-		Term term;
+	public class Div extends Term{
+		public Term term;
+		public Vars op;
 	}
 	
-	class Mod{
-		Term term;
+	public class Mod extends Term{
+		public Term term;
+		public Vars op;
 	}
 	
-	class paren{
-		Operation opera;
+	public class paren extends Term{
+		public Operation opera;
 	}
+	
+	public class vari extends Term{
+		public Vars op;
+	}
+	
 
 }
