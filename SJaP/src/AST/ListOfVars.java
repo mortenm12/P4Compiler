@@ -7,8 +7,11 @@ public class ListOfVars implements IASTNode {
 	
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String s ="";
+		for(Operation o : op){
+			s+=o.CodeGenration();
+		}
+		return s;
 	}
 
 }

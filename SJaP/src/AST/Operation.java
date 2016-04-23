@@ -8,15 +8,25 @@ public class Operation implements IASTNode {
 	
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return node.CodeGenration();
 	}
 	
 	public class Add extends Operation{
-		
+		public String CodeGenration() {
+			String s;
+			s=term.CodeGenration();
+			s+= operation.CodeGenration();
+			return s;
+		}
 	}
 	
 	public class Sub extends Operation{
-		
+		public String CodeGenration() {
+			String s;
+			s=term.CodeGenration();
+			s+= operation.CodeGenration();
+			return s;
+		}
 	}
 }

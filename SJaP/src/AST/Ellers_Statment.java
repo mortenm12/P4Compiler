@@ -5,8 +5,14 @@ public class Ellers_Statment implements IASTNode {
 	public If_Statement if_stat;
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+
+		if(linjer==null)
+		{
+			return if_stat.CodeGenration();
+		}
+		else
+			return linjer.CodeGenration();
+
 	}
 
 }

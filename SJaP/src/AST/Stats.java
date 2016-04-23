@@ -7,15 +7,27 @@ public class Stats implements IASTNode {
 	
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return stat1.CodeGenration() + node.CodeGenration();
 	}
 	
 	public class and extends Stats{
 		public Stat stat2;
+		public String CodeGenration() {
+			String s;
+			s= stat2.CodeGenration();
+			s+="iand";
+			return s;
+		}
 	}
 	public class or extends Stats{
 		public Stat stat2;
+		public String CodeGenration() {
+			String s;
+			s= stat2.CodeGenration();
+			s+="ior";
+			return s;
+		}
 	}
 
 }

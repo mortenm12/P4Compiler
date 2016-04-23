@@ -5,8 +5,8 @@ public class Type implements IASTNode {
 	public Type NestedType;
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "";
 	}
 	
 

@@ -5,10 +5,29 @@ public class Dcl_Metode implements IASTNode {
 	public Type ReturType;
 	public ListOfVars ListVars;
 	public Linjer lines;
-	@Override
+
+	
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String s = ID;
+		s+=lines.CodeGenration();
+		if(ReturType == null){
+			s+="return \n";
+		}
+		else if(ReturType._Type=="udsagn")
+		{
+			s+="breturn \n";
+		}
+		else if(ReturType._Type=="tal")
+		{
+			s+="dreturn \n";
+		}
+		else
+		{
+			s+="areturn \n";
+		}
+		
+		return s;
+		
 	}
 
 }

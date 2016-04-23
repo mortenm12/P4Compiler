@@ -5,8 +5,8 @@ public class Vars implements IASTNode {
 	public Vars node;
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return node.CodeGenration();
 	}
 	
 	public Var GetVarFromScopetree (String ID, scopeTree tree) throws Exception{
@@ -20,10 +20,18 @@ public class Vars implements IASTNode {
 
 	public class var extends Vars{
 		public Variabel Value;
+		public String CodeGenration() {
+
+			return Value.CodeGenration();
+		}
 	}
 	
 	public class Get_By_Id extends Vars{
 		public String ID;
+		public String CodeGenration() {
+
+			return "";			//slå op i symbol tabellen over hvilken type det er.
+		}
 	}
 	
 	public class List_Index extends Vars{
@@ -43,6 +51,10 @@ public class Vars implements IASTNode {
 	
 	public class Meth extends Vars{
 		public Metode method;
+		public String CodeGenration() {
+
+			return method.CodeGenration();
+		}
 	}
 
 }

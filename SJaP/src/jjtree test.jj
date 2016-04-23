@@ -962,7 +962,7 @@ Sammenlign sammenlign() : {/*@bgen(jjtree) sammenlign */
          jjtree.closeNodeScope(jjtn000, true);
          jjtc000 = false;
        }
-/*@egen*/ {s.node=s.new notequal(); return s;}
+/*@egen*/ {s.node=s.new notequal(); return s;} 
   )/*@bgen(jjtree)*/
   } finally {
     if (jjtc000) {

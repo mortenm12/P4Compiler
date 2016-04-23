@@ -6,8 +6,11 @@ public class Metode implements IASTNode {
 	public ListOfVars ListVars;
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String s;
+		s= ListVars.CodeGenration();
+		s+="goto "+ ID;
+		
+		return s;
 	}
 
 }

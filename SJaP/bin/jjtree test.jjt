@@ -318,7 +318,7 @@ Sammenlign sammenlign() : {Sammenlign s = new Sammenlign();}
 | ">=" {s.node=s.new biggerequal(); return s;}
 | "<=" {s.node=s.new lesserequal(); return s;}
 | "==" {s.node=s.new equal(); return s;}
-| "!=" {s.node=s.new notequal(); return s;}
+| "!=" {s.node=s.new notequal(); return s;} 
   )
 }
 

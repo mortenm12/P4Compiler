@@ -5,18 +5,31 @@ public class Variabel implements IASTNode {
 	
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return node.CodeGenration();
 	}
 	
 	public class Num{
 		public double Value;
+		public String CodeGenration() {
+
+			return "dpush " + Value;
+		}
 	}
 	public class Tekst{
 		public String Value;
+		public String CodeGenration() {
+
+			return "aload "+ Value;
+		}
 	}
 	public class Bool{
 		public boolean Value;
+		
+		public String CodeGenration() {
+
+			return "ipush " + Value;
+		}
 	}
 
 }

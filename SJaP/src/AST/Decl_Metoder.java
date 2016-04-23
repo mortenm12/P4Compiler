@@ -7,8 +7,11 @@ public class Decl_Metoder implements IASTNode {
 
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String s="";
+		for(Dcl_Metode d: Metode){
+			s+=d.CodeGenration();
+		}
+		return s;
 	}
 
 }

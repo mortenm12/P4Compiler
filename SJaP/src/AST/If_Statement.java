@@ -6,8 +6,13 @@ public class If_Statement implements IASTNode {
 	public Ellers_Statment ellers;
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String s;
+		s = stats.CodeGenration();
+		s+= "ifne label1 \n";		//her er en label
+		s+= linjer.CodeGenration();
+		s+="label1 \n";				// her er en label
+		s+= ellers.CodeGenration();
+		return s;
 	}
 
 }

@@ -8,8 +8,11 @@ public class Linjer implements IASTNode {
 	
 	@Override
 	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+		String s ="";
+		for(Linje l: nyLinje){
+			s+=l.CodeGenration();
+		}
+		return s;
 	}
 
 }
