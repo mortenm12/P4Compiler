@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Term implements IASTNode {
 	public Term node;
 	
@@ -21,6 +25,12 @@ public class Term implements IASTNode {
 			s+= "dmul";
 			return s;
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			term.Semanticanalyse(s);
+			op.Semanticanalyse(s);
+		}
 	}
 	
 	public class Div extends Term{
@@ -32,6 +42,12 @@ public class Term implements IASTNode {
 			s+=term.CodeGenration();
 			s+= "ddiv";
 			return s;
+		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			term.Semanticanalyse(s);
+			op.Semanticanalyse(s);
 		}
 	}
 	
@@ -45,6 +61,12 @@ public class Term implements IASTNode {
 			s+= "drem";
 			return s;
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			term.Semanticanalyse(s);
+			op.Semanticanalyse(s);
+		}
 	}
 	
 	public class paren extends Term{
@@ -52,6 +74,11 @@ public class Term implements IASTNode {
 		public String CodeGenration() {
 
 			return opera.CodeGenration();
+		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			opera.Semanticanalyse(s);
 		}
 	}
 	
@@ -61,6 +88,18 @@ public class Term implements IASTNode {
 
 			return op.CodeGenration();
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			op.Semanticanalyse(s);
+		}
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		node.Semanticanalyse(s);
+		
 	}
 	
 

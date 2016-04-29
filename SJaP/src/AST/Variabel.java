@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Variabel implements IASTNode {
 	public Variabel node;
 	
@@ -30,6 +34,12 @@ public class Variabel implements IASTNode {
 
 			return "ipush " + Value;
 		}
+	}
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		//den skal ikke gøre noget
+		
 	}
 
 }

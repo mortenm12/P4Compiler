@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Sammenlign implements IASTNode {
 public Sammenlign node;
 	@Override
@@ -38,6 +42,12 @@ public Sammenlign node;
 		public String CodeGenration(){
 			return "ifne \n";
 		}
+	}
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		//skal bare være tom
+		
 	}
 
 }

@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Dcl_Var implements IASTNode {
 	public Dcl_Var node;
 	
@@ -16,31 +20,63 @@ public class Dcl_Var implements IASTNode {
 	}
 	
 	public class Dcl extends Dcl_Var{
-		
 		public Type Type;
+		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+			s.addVar(ID, Type._Type);
+			
+		}
 	}
 	
 	public class Ass extends Dcl_Var{
 		public Operation Value;
+		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+			s.searchVar(ID);
+			
+		}
 	}
 	
 	public class Dcl_Ass extends Dcl_Var{
 		public Type Type;
 		public Operation Value;
+		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+			s.addVar(ID, Type._Type);
+			Value.Semanticanalyse(s);
+			
+		}
 	}
 	
 	public class List_Ass extends Dcl_Var{
 		public Operation Index;
 		public Operation Value;
+		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+			s.searchVar(ID);
+			Value.Semanticanalyse(s);
+			Index.Semanticanalyse(s);
+			
+		}
 	}
 	
 	public class List_Add extends Dcl_Var{
 		public Operation Value;
-		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+			s.searchVar(ID);
+			Value.Semanticanalyse(s);
+			
+		}
 	}
 	
 	public class List_Del extends Dcl_Var{
 		public Operation Index;
+		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+			s.searchVar(ID);
+			Index.Semanticanalyse(s);			
+		}
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+		
+		node.Semanticanalyse(s);
 	}
 
 }

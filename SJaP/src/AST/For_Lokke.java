@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class For_Lokke implements IASTNode {
 	
 	public Operation from;
@@ -20,5 +24,15 @@ public class For_Lokke implements IASTNode {
 		
 		return streng;
 	}
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		from.Semanticanalyse(s);
+		to.Semanticanalyse(s);
+		scopeTree x = s.addScope("for"); //husk at tilføje et genereret tal
+		linjer.Semanticanalyse(x);
+		
+	}
+	
 
 }

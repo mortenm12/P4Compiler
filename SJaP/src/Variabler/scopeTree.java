@@ -2,6 +2,9 @@ package Variabler;
 
 import java.util.List;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+
 
 public class scopeTree {
 	public String ScopeName;
@@ -10,12 +13,20 @@ public class scopeTree {
 	public scopeTree parent;
 	
 	
-	public void addScope(String name){
+	public scopeTree addScope(String name){
 		scopeTree x = new scopeTree();
 		x.ScopeName = name;
 		x.parent=this;
 		
 		Nodes.add(x);
+		return x;
+	}
+	
+	public void addVar(String id, String type) throws existingVariableException{
+		Var x = new Var();
+		x.type=type;
+		x.typeId=id;
+		HashTable.add(x);
 	}
 	
 	public scopeTree searchScope(String name){
@@ -33,14 +44,14 @@ public class scopeTree {
 		}
 	}
 	
-	public Var searchVar(String name)
+	public Var searchVar(String name) throws noIdException
 	{
 		if(HashTable.check(name))
 			return HashTable.get(name);
 		else if(parent != null)
 			return parent.searchVar(name);
 		else 
-			return null;
+			throw new noIdException("Der findes ikke en variabel eller metode med id: " + name);
 			
 	}
 }

@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Stat implements IASTNode {
 	public Stat node;
 	@Override
@@ -20,6 +24,13 @@ public class Stat implements IASTNode {
 			s+= operator.CodeGenration();
 			return s;
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			op1.Semanticanalyse(s);
+			op2.Semanticanalyse(s);
+			operator.Semanticanalyse(s);
+		}
 	}
 	
 	public class par extends Stat{
@@ -29,6 +40,11 @@ public class Stat implements IASTNode {
 
 			return stats.CodeGenration();
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			stats.Semanticanalyse(s);
+		}
 	}
 	
 	public class bool extends Stat{
@@ -36,6 +52,11 @@ public class Stat implements IASTNode {
 		public String CodeGenration() {
 
 			return udsagn.CodeGenration();
+		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			udsagn.Semanticanalyse(s);
 		}
 	}
 	
@@ -47,5 +68,16 @@ public class Stat implements IASTNode {
 			s+="ineg";
 			return s;
 		}
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			stat.Semanticanalyse(s);
+		}
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		node.Semanticanalyse(s);
+		
 	}
 }

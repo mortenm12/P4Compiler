@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 
 public class Operation implements IASTNode {
 	public Operation node;
@@ -19,6 +23,11 @@ public class Operation implements IASTNode {
 			s+= operation.CodeGenration();
 			return s;
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			operation.Semanticanalyse(s);
+		}
 	}
 	
 	public class Sub extends Operation{
@@ -28,5 +37,19 @@ public class Operation implements IASTNode {
 			s+= operation.CodeGenration();
 			return s;
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			
+			operation.Semanticanalyse(s);
+		}
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		term.Semanticanalyse(s);
+		node.Semanticanalyse(s);
+		
 	}
 }

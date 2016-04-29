@@ -2,6 +2,10 @@ package AST;
 
 import java.util.List;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Decl_Metoder implements IASTNode {
 	public List<Dcl_Metode> Metode;
 
@@ -12,6 +16,16 @@ public class Decl_Metoder implements IASTNode {
 			s+=d.CodeGenration();
 		}
 		return s;
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		for(Dcl_Metode m:Metode)
+		{
+			m.Semanticanalyse(s);
+		}
+		
 	}
 
 }

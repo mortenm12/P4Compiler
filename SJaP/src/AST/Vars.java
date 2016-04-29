@@ -1,5 +1,7 @@
 package AST;
-import Variabler.Var;
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+//import Variabler.Var;
 import Variabler.scopeTree;
 public class Vars implements IASTNode {
 	public Vars node;
@@ -9,13 +11,7 @@ public class Vars implements IASTNode {
 		return node.CodeGenration();
 	}
 	
-	public Var GetVarFromScopetree (String ID, scopeTree tree) throws Exception{
-		Var x= tree.searchVar(ID);
-		if (x!=null)
-			return x;
-		else
-			throw new Exception("Id'et " + ID + "fandtes ikke, husk og deklerer en variable");
-	}
+	
 
 
 	public class var extends Vars{
@@ -23,6 +19,11 @@ public class Vars implements IASTNode {
 		public String CodeGenration() {
 
 			return Value.CodeGenration();
+		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			Value.Semanticanalyse(s);
 		}
 	}
 	
@@ -32,21 +33,43 @@ public class Vars implements IASTNode {
 
 			return "";			//slå op i symbol tabellen over hvilken type det er.
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			s.searchVar(ID);
+		}
 	}
 	
 	public class List_Index extends Vars{
 		public String ID;
 		public Operation Index;
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			s.searchVar(ID);
+			Index.Semanticanalyse(s);
+		}
 	}
 	
 	public class Lenght_of_List extends Vars{
 		public String ID;
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			s.searchVar(ID);
+		}
 	}
 	
 	public class Sub_List extends Vars{
 		public String ID;
 		public Operation From;
 		public Operation To;
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			s.searchVar(ID);
+			From.Semanticanalyse(s);
+			To.Semanticanalyse(s);
+		}
 	}
 	
 	public class Meth extends Vars{
@@ -55,6 +78,18 @@ public class Vars implements IASTNode {
 
 			return method.CodeGenration();
 		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException {
+			method.Semanticanalyse(s);
+		}
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		node.Semanticanalyse(s);
+		
 	}
 
 }

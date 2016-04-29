@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Ellers_Statment implements IASTNode {
 	public Linjer linjer;
 	public If_Statement if_stat;
@@ -13,6 +17,18 @@ public class Ellers_Statment implements IASTNode {
 		else
 			return linjer.CodeGenration();
 
+	}
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		if(linjer==null){
+			if_stat.Semanticanalyse(s);
+		}
+		else{
+			scopeTree x = s.addScope("ellers"); //husk et genereret tal
+			linjer.Semanticanalyse(x);
+		}
+		
 	}
 
 }

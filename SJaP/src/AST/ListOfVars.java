@@ -2,6 +2,10 @@ package AST;
 
 import java.util.List;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class ListOfVars implements IASTNode {
 	public List<Operation> op;
 	
@@ -12,6 +16,15 @@ public class ListOfVars implements IASTNode {
 			s+=o.CodeGenration();
 		}
 		return s;
+	}
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		for(Operation o: op){
+			o.Semanticanalyse(s);
+		}
+		
 	}
 
 }

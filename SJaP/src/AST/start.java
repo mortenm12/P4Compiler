@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class start implements IASTNode {
 	public Decl_Metoder startMetoder;
 	public Linjer startLinjer;
@@ -10,6 +14,17 @@ public class start implements IASTNode {
 	public String CodeGenration() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException,
+			noIdException {
+		startMetoder.Semanticanalyse(s);
+		scopeTree x = s.addScope("start");//husk genereret nummer
+		startLinjer.Semanticanalyse(x);
+		slutMetoder.Semanticanalyse(s);
+		
 	}
 
 }

@@ -1,5 +1,9 @@
 package AST;
 
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
 public class Dcl_Metode implements IASTNode {
 	public String ID;
 	public Type ReturType;
@@ -28,6 +32,14 @@ public class Dcl_Metode implements IASTNode {
 		
 		return s;
 		
+	}
+
+
+	@Override
+	public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
+		s.addVar(ID, ReturType._Type);
+		scopeTree x = s.addScope(ID);
+		lines.Semanticanalyse(x);
 	}
 
 }
