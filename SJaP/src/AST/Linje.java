@@ -1,5 +1,6 @@
 package AST;
 
+import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 import Variabler.scopeTree;
@@ -15,7 +16,7 @@ public class Linje implements IASTNode {
 
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
-			noIdException {
+			noIdException, TypeException {
 		linjeIndhold.Semanticanalyse(s);
 		
 	}

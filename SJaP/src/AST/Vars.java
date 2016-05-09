@@ -1,4 +1,5 @@
 package AST;
+import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 //import Variabler.Var;
@@ -11,19 +12,24 @@ public class Vars implements IASTNode {
 		return node.CodeGenration();
 	}
 	
+	public String GetType(scopeTree s) throws noIdException{
+		return node.GetType(s);
+	}
 	
-
-
 	public class var extends Vars{
 		public Variabel Value;
 		public String CodeGenration() {
 
 			return Value.CodeGenration();
 		}
-		
+				
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
 		noIdException {
 			Value.Semanticanalyse(s);
+		}
+		
+		public String GetType(scopeTree s){
+			return Value.GetType(s);
 		}
 	}
 	
@@ -38,16 +44,27 @@ public class Vars implements IASTNode {
 		noIdException {
 			s.searchVar(ID);
 		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return s.searchVar(ID).type;
+		}
 	}
 	
 	public class List_Index extends Vars{
 		public String ID;
-		public Operation Index;
+		public ListOfVars Index;
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			s.searchVar(ID);
 			Index.Semanticanalyse(s);
+			if(Index.GetType(s)!="tal"){
+				throw new TypeException("Der forventes en type tal");
+			}
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return s.searchVar(ID).type;
 		}
 	}
 	
@@ -57,6 +74,9 @@ public class Vars implements IASTNode {
 		noIdException {
 			s.searchVar(ID);
 		}
+		public String GetType(scopeTree s) throws noIdException{
+			return "tal";
+		}
 	}
 	
 	public class Sub_List extends Vars{
@@ -65,10 +85,14 @@ public class Vars implements IASTNode {
 		public Operation To;
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			s.searchVar(ID);
 			From.Semanticanalyse(s);
 			To.Semanticanalyse(s);
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return s.searchVar(ID).type;
 		}
 	}
 	
@@ -80,14 +104,18 @@ public class Vars implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			method.Semanticanalyse(s);
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return method.GetType(s);
 		}
 	}
 
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
-			noIdException {
+			noIdException, TypeException {
 		node.Semanticanalyse(s);
 		
 	}

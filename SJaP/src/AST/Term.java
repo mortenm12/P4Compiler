@@ -1,5 +1,6 @@
 package AST;
 
+import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 import Variabler.scopeTree;
@@ -12,6 +13,10 @@ public class Term implements IASTNode {
 	public String CodeGenration() {
 
 		return node.CodeGenration();
+	}
+	
+	public String GetType(scopeTree s) throws noIdException{
+		return node.GetType(s);
 	}
 	
 	public class Mul extends Term{
@@ -27,9 +32,19 @@ public class Term implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			term.Semanticanalyse(s);
 			op.Semanticanalyse(s);
+			if(term.GetType(s)!= "tal"){
+				throw new TypeException("Der skulle have været et tal");
+			}
+			else if (op.GetType(s)!="tal"){
+				throw new TypeException("Der skulle have været et tal");
+			}
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return term.GetType(s);
 		}
 	}
 	
@@ -45,9 +60,20 @@ public class Term implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			term.Semanticanalyse(s);
 			op.Semanticanalyse(s);
+			
+			if(term.GetType(s)!= "tal"){
+				throw new TypeException("Der skulle have været et tal");
+			}
+			else if (op.GetType(s)!="tal"){
+				throw new TypeException("Der skulle have været et tal");
+			}
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return term.GetType(s);
 		}
 	}
 	
@@ -63,9 +89,20 @@ public class Term implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			term.Semanticanalyse(s);
 			op.Semanticanalyse(s);
+			
+			if(term.GetType(s)!= "tal"){
+				throw new TypeException("Der skulle have været et tal");
+			}
+			else if (op.GetType(s)!="tal"){
+				throw new TypeException("Der skulle have været et tal");
+			}
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return term.GetType(s);
 		}
 	}
 	
@@ -77,8 +114,12 @@ public class Term implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			opera.Semanticanalyse(s);
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return opera.term.GetType(s);
 		}
 	}
 	
@@ -90,17 +131,22 @@ public class Term implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			op.Semanticanalyse(s);
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return op.GetType(s);
 		}
 	}
 
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
-			noIdException {
+			noIdException, TypeException {
 		node.Semanticanalyse(s);
 		
 	}
+
 	
 
 }

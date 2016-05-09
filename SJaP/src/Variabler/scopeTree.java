@@ -1,5 +1,6 @@
 package Variabler;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import Exceptions.existingVariableException;
@@ -11,7 +12,12 @@ public class scopeTree {
 	private List<scopeTree> Nodes;
 	public HashSet HashTable;
 	public scopeTree parent;
+	public List<String> TypeList;
 	
+	public scopeTree(){
+		Nodes = new LinkedList<scopeTree>();
+		TypeList = new LinkedList<String>();
+	}
 	
 	public scopeTree addScope(String name){
 		scopeTree x = new scopeTree();
@@ -33,13 +39,13 @@ public class scopeTree {
 		if(name == this.ScopeName){
 			return this;
 		}
-		else{
-			for(scopeTree n : Nodes){
-				scopeTree x = n.searchScope(name);
-				if(x!=null)
-					return x;
+		else if(parent != null)
+		{
+			return parent.searchScope(name);
 				
-			}
+		}
+		else
+		{
 			return null;
 		}
 	}

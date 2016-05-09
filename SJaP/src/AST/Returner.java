@@ -1,6 +1,7 @@
 package AST;
 import Variabler.scopeTree;
 import AST.Operation;
+import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 public class Returner implements IASTNode {
@@ -16,8 +17,10 @@ public class Returner implements IASTNode {
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
-			noIdException {
+			noIdException, TypeException {
 		op.Semanticanalyse(s);
+		
+		//if(op.term.GetType(s)!=typen fra metoden)
 		
 	}
 

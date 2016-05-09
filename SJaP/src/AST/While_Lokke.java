@@ -1,5 +1,6 @@
 package AST;
 
+import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 import Variabler.scopeTree;
@@ -14,9 +15,9 @@ public class While_Lokke implements IASTNode {
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
-			noIdException {
+			noIdException, TypeException {
 		stat.Semanticanalyse(s);
-		scopeTree x = s.addScope("while"); //husk genereret nummer
+		scopeTree x = s.addScope("while"+NumGen.getNum()); //husk genereret nummer
 		linjer.Semanticanalyse(x);
 		
 	}

@@ -1,5 +1,6 @@
 package AST;
 
+import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 import Variabler.scopeTree;
@@ -25,7 +26,7 @@ public class Stats implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			stat2.Semanticanalyse(s);
 		}
 	}
@@ -39,13 +40,13 @@ public class Stats implements IASTNode {
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
-		noIdException {
+		noIdException, TypeException {
 			stat2.Semanticanalyse(s);
 		}
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
-			noIdException {
+			noIdException, TypeException {
 		stat1.Semanticanalyse(s);
 		node.Semanticanalyse(s);
 		

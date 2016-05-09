@@ -13,11 +13,19 @@ public class Variabel implements IASTNode {
 		return node.CodeGenration();
 	}
 	
+	public String GetType(scopeTree s){
+		return node.GetType(s);
+	}
+	
 	public class Num{
 		public double Value;
 		public String CodeGenration() {
 
 			return "dpush " + Value;
+		}
+		
+		public String GetType(scopeTree s){
+			return "num";
 		}
 	}
 	public class Tekst{
@@ -26,6 +34,9 @@ public class Variabel implements IASTNode {
 
 			return "aload "+ Value;
 		}
+		public String GetType(scopeTree s){
+			return "tekst";
+		}
 	}
 	public class Bool{
 		public boolean Value;
@@ -33,6 +44,10 @@ public class Variabel implements IASTNode {
 		public String CodeGenration() {
 
 			return "ipush " + Value;
+		}
+		
+		public String GetType(scopeTree s){
+			return "udsagn";
 		}
 	}
 	@Override

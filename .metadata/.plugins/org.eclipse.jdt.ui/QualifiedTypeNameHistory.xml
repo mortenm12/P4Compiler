@@ -7,9 +7,12 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="AST.IASTNode"/>
 <fullyQualifiedTypeName name="AST.Dcl_Var"/>
-<fullyQualifiedTypeName name="Variabler.scopeTree"/>
 <fullyQualifiedTypeName name="AST.Operation"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="AST.Vars.var"/>
 <fullyQualifiedTypeName name="AST.Variabel.Tekst"/>
+<fullyQualifiedTypeName name="Variabler.scopeTree"/>
+<fullyQualifiedTypeName name="Exceptions.noIdException"/>
+<fullyQualifiedTypeName name="AST.IASTNode.NumGen"/>
+<fullyQualifiedTypeName name="AST.Vars.var"/>
+<fullyQualifiedTypeName name="Exceptions.TypeException"/>
+<fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>
