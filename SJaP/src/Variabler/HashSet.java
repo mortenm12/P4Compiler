@@ -1,4 +1,5 @@
 package Variabler;
+import java.util.HashMap;
 import java.util.Map;
 
 import Exceptions.existingVariableException;
@@ -8,7 +9,9 @@ import Exceptions.existingVariableException;
 public class HashSet {
 	private Map<String,Var> table;
 	
-	
+	public HashSet(){
+		table = new HashMap<String,Var>();
+	}
 	
 	public void add(Var var ) throws existingVariableException{
 		if(!check(var.typeId))

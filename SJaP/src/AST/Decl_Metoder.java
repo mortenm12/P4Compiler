@@ -16,10 +16,10 @@ public class Decl_Metoder implements IASTNode {
 	}
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		String s="";
 		for(Dcl_Metode d: Metode){
-			s+=d.CodeGenration();
+			s+=d.CodeGenration(st);
 		}
 		return s;
 	}

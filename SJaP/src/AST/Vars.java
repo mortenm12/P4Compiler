@@ -7,9 +7,9 @@ import Variabler.scopeTree;
 public class Vars implements IASTNode {
 	public Vars node;
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 
-		return node.CodeGenration();
+		return node.CodeGenration(st);
 	}
 	
 	public String GetType(scopeTree s) throws noIdException{
@@ -18,9 +18,9 @@ public class Vars implements IASTNode {
 	
 	public class var extends Vars{
 		public Variabel Value;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) {
 
-			return Value.CodeGenration();
+			return Value.CodeGenration(st);
 		}
 				
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
@@ -35,7 +35,7 @@ public class Vars implements IASTNode {
 	
 	public class Get_By_Id extends Vars{
 		public String ID;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) {
 
 			return "";			//slå op i symbol tabellen over hvilken type det er.
 		}
@@ -66,6 +66,24 @@ public class Vars implements IASTNode {
 		public String GetType(scopeTree s) throws noIdException{
 			return s.searchVar(ID).type;
 		}
+		
+		public String CodeGenration(scopeTree st) throws noIdException {
+			String s="";
+				switch (st.searchVar(ID).type){
+				case "tal":
+					s+= "dload "+ ID + "\n" ; break;
+				case "tekst":
+					s+= "aload "+ ID + "\n" ; break;
+				case "udsagn":
+					s+= "iload "+ ID + "\n" ; break;
+				case "liste" :
+					s+= "aload "+ ID + "\n" ; break;
+				default:
+					return "fejl";
+				}
+							
+			return s;
+		}
 	}
 	
 	public class Lenght_of_List extends Vars{
@@ -76,6 +94,11 @@ public class Vars implements IASTNode {
 		}
 		public String GetType(scopeTree s) throws noIdException{
 			return "tal";
+		}
+		
+		public String CodeGenration(scopeTree st) {
+			String s="";//jeg aner ikke hvordan jeg skal finde længden af listen.
+			return s;
 		}
 	}
 	
@@ -94,13 +117,18 @@ public class Vars implements IASTNode {
 		public String GetType(scopeTree s) throws noIdException{
 			return s.searchVar(ID).type;
 		}
+		
+		public String CodeGenration(scopeTree st) {
+
+			return ""; //jeg aner ikke hvordan vi laver sub lister
+		}
 	}
 	
 	public class Meth extends Vars{
 		public Metode method;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 
-			return method.CodeGenration();
+			return method.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,

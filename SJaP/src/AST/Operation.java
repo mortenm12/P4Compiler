@@ -12,16 +12,16 @@ public class Operation implements IASTNode {
 	public Operation operation;
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		
-		return node.CodeGenration();
+		return node.CodeGenration(st);
 	}
 	
 	public class Add extends Operation{
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s=term.CodeGenration();
-			s+= operation.CodeGenration();
+			s=term.CodeGenration(st);
+			s+= operation.CodeGenration(st);
 			return s;
 		}
 		
@@ -36,10 +36,10 @@ public class Operation implements IASTNode {
 	}
 	
 	public class Sub extends Operation{
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s=term.CodeGenration();
-			s+= operation.CodeGenration();
+			s=term.CodeGenration(st);
+			s+= operation.CodeGenration(st);
 			return s;
 		}
 		

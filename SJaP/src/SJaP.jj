@@ -92,8 +92,9 @@ public class SJaPParser
       {
         scopeTree tree = new scopeTree();
         start AST = start();
+        System.out.println("parser færdig");
         AST.Semanticanalyse(tree);
-        System.out.println(AST.CodeGenration());
+        System.out.println(AST.CodeGenration(tree));
       }
       catch (Exception e)
       {
@@ -179,18 +180,18 @@ TOKEN :
 start start () : {start s= new start();}
 {
   (
-    dcl_metoder() < START > "{" s.startLinjer=linjer()"}" dcl_metoder(){return s;})  
+    dcl_metoder() < START > "{" s.startLinjer=linjer()"}"{return s;})  
 }
 
 Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
 {
-  ( li=linje()";" { l.nyLinje.add(li); }{return l;})+  
+  ( li=linje()";" { l.nyLinje.add(li); })+ {return l;}  
 }
 
 Linje linje() : {Linje l = new Linje();}
 {
  (LOOKAHEAD(dcl_var()) l.linjeIndhold=dcl_var()  
-| LOOKAHEAD(vars()) l.linjeIndhold=vars()  
+| LOOKAHEAD(operation()) l.linjeIndhold=operation()  
 | l.linjeIndhold=if_statment() 
 | l.linjeIndhold=while_lokke() 
 | l.linjeIndhold=for_lokke()  

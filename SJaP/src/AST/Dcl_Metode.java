@@ -12,9 +12,9 @@ public class Dcl_Metode implements IASTNode {
 	public Linjer lines;
 
 	
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		String s = ID;
-		s+=lines.CodeGenration();
+		s+=lines.CodeGenration(st);
 		if(ReturType == null){
 			s+="return \n";
 		}

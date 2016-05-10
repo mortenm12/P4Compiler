@@ -10,14 +10,14 @@ public class If_Statement implements IASTNode {
 	public Linjer linjer;
 	public Ellers_Statment ellers;
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		String s;
 		int lab1=NumGen.getNum();
-		s = stats.CodeGenration();
+		s = stats.CodeGenration(st);
 		s+= "ifne label"+lab1+" \n";		//her er en label
-		s+= linjer.CodeGenration();
+		s+= linjer.CodeGenration(st);
 		s+="label"+lab1+" \n";				// her er en label
-		s+= ellers.CodeGenration();
+		s+= ellers.CodeGenration(st);
 		return s;
 	}
 	@Override

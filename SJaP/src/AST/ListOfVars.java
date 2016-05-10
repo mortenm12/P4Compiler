@@ -16,10 +16,10 @@ public class ListOfVars implements IASTNode {
 	}
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		String s ="";
 		for(Operation o : op){
-			s+=o.CodeGenration();
+			s+=o.CodeGenration(st);
 		}
 		return s;
 	}

@@ -8,9 +8,9 @@ public class Variabel implements IASTNode {
 	public Variabel node;
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) {
 
-		return node.CodeGenration();
+		return node.CodeGenration(st);
 	}
 	
 	public String GetType(scopeTree s){
@@ -19,7 +19,7 @@ public class Variabel implements IASTNode {
 	
 	public class Num{
 		public double Value;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) {
 
 			return "dpush " + Value;
 		}
@@ -30,7 +30,7 @@ public class Variabel implements IASTNode {
 	}
 	public class Tekst{
 		public String Value;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) {
 
 			return "aload "+ Value;
 		}
@@ -41,7 +41,7 @@ public class Variabel implements IASTNode {
 	public class Bool{
 		public boolean Value;
 		
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) {
 
 			return "ipush " + Value;
 		}

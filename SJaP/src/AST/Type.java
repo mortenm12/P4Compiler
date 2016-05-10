@@ -8,7 +8,7 @@ public class Type implements IASTNode {
 	public String _Type;
 	public Type NestedType;
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) {
 
 		return "";
 	}

@@ -11,17 +11,17 @@ public class For_Lokke implements IASTNode {
 	public Operation to;
 	public Linjer linjer;
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		String streng;
 		int lab1=NumGen.getNum();
 		int lab2=NumGen.getNum();
 		
 		streng = "new label"+lab1+" \n";			//nyt label magler
-		streng += to.CodeGenration();
-		streng += from.CodeGenration();
+		streng += to.CodeGenration(st);
+		streng += from.CodeGenration(st);
 		streng += "dcmpl \n "
 				+ "iflt  lable"+lab2+" \n";		//label ref magler
-		streng += linjer.CodeGenration();
+		streng += linjer.CodeGenration(st);
 		streng += "goto lable"+lab1+" \n"; 		//label ref magler
 		streng += "new label"+lab2+" \n";			//nyt label magler
 		

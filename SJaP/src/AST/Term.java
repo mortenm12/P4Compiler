@@ -10,9 +10,9 @@ public class Term implements IASTNode {
 	
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 
-		return node.CodeGenration();
+		return node.CodeGenration(st);
 	}
 	
 	public String GetType(scopeTree s) throws noIdException{
@@ -23,10 +23,10 @@ public class Term implements IASTNode {
 		public Term term;
 		public Vars op;
 		
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s=op.CodeGenration();
-			s+=term.CodeGenration();
+			s=op.CodeGenration(st);
+			s+=term.CodeGenration(st);
 			s+= "dmul";
 			return s;
 		}
@@ -51,10 +51,10 @@ public class Term implements IASTNode {
 	public class Div extends Term{
 		public Term term;
 		public Vars op;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s=op.CodeGenration();
-			s+=term.CodeGenration();
+			s=op.CodeGenration(st);
+			s+=term.CodeGenration(st);
 			s+= "ddiv";
 			return s;
 		}
@@ -80,10 +80,10 @@ public class Term implements IASTNode {
 	public class Mod extends Term{
 		public Term term;
 		public Vars op;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s=op.CodeGenration();
-			s+=term.CodeGenration();
+			s=op.CodeGenration(st);
+			s+=term.CodeGenration(st);
 			s+= "drem";
 			return s;
 		}
@@ -108,9 +108,9 @@ public class Term implements IASTNode {
 	
 	public class paren extends Term{
 		public Operation opera;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 
-			return opera.CodeGenration();
+			return opera.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
@@ -125,9 +125,9 @@ public class Term implements IASTNode {
 	
 	public class vari extends Term{
 		public Vars op;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 
-			return op.CodeGenration();
+			return op.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,

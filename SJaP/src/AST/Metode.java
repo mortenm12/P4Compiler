@@ -10,9 +10,9 @@ public class Metode implements IASTNode {
 	public String ID;
 	public ListOfVars ListVars;
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		String s;
-		s= ListVars.CodeGenration();
+		s= ListVars.CodeGenration(st);
 		s+="goto "+ ID;
 		
 		return s;

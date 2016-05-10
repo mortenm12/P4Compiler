@@ -17,6 +17,7 @@ public class scopeTree {
 	public scopeTree(){
 		Nodes = new LinkedList<scopeTree>();
 		TypeList = new LinkedList<String>();
+		HashTable = new HashSet();
 	}
 	
 	public scopeTree addScope(String name){

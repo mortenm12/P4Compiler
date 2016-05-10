@@ -11,16 +11,16 @@ public class Stats implements IASTNode {
 	
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) throws noIdException {
 		
-		return stat1.CodeGenration() + node.CodeGenration();
+		return stat1.CodeGenration(st) + node.CodeGenration(st);
 	}
 	
 	public class and extends Stats{
 		public Stat stat2;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s= stat2.CodeGenration();
+			s= stat2.CodeGenration(st);
 			s+="iand \n";
 			return s;
 		}
@@ -32,9 +32,9 @@ public class Stats implements IASTNode {
 	}
 	public class or extends Stats{
 		public Stat stat2;
-		public String CodeGenration() {
+		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
-			s= stat2.CodeGenration();
+			s= stat2.CodeGenration(st);
 			s+="ior \n";
 			return s;
 		}

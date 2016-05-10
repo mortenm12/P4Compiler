@@ -17,7 +17,7 @@ public class ListOfDecl implements IASTNode{
 	}
 	
 	@Override
-	public String CodeGenration() {
+	public String CodeGenration(scopeTree st) {
 		// TODO Auto-generated method stub
 		return null;
 	}

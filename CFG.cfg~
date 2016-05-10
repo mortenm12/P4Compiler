@@ -54,6 +54,8 @@ Decl_Metoder	:Decl_Metode <EOL> Decl_Metoder
 
 Decl_Metode	:"funktion " <ID> "som " Type "(" ListOfDecl ")" "{"Linjer "}"
 		|"funktion " <ID> "(" ListOfDecl ")" "{"Linjer "}"
+		|"funktion " <ID> "som " Type "(" ")" "{"Linjer "}"
+		|"funktion " <ID> "(" ")" "{"Linjer "}"
 
 Metode		:<ID> "(" ListOfVars ")"
 

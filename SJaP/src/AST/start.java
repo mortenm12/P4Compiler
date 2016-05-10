@@ -12,19 +12,26 @@ public class start implements IASTNode {
 	
 	
 	@Override
-	public String CodeGenration() {
-		// TODO Auto-generated method stub
-		return null;
+	public String CodeGenration(scopeTree st) throws noIdException {
+		String s ="start::";
+		if(startMetoder != null)
+				s+=startMetoder.CodeGenration(st);
+		s+=startLinjer.CodeGenration(st);
+		if(slutMetoder != null)
+			s+=slutMetoder.CodeGenration(st);
+		return s;
 	}
 
 
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
 			noIdException, TypeException {
-		startMetoder.Semanticanalyse(s);
+		if(startMetoder != null)
+			startMetoder.Semanticanalyse(s);
 		scopeTree x = s.addScope("start" +NumGen.getNum());//husk genereret nummer
 		startLinjer.Semanticanalyse(x);
-		slutMetoder.Semanticanalyse(s);
+		if(slutMetoder != null)
+			slutMetoder.Semanticanalyse(s);
 		
 	}
 

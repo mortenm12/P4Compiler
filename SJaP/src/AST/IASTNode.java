@@ -13,7 +13,7 @@ public interface IASTNode {
 			return num;
 		}
 	}
-	public String CodeGenration();
+	public String CodeGenration(scopeTree st) throws noIdException;
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,TypeException, noIdException;
 	//public void TypeCheck() throws TypeException;
 }
