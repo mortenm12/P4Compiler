@@ -15,5 +15,5 @@ public interface IASTNode {
 	}
 	public String CodeGenration(scopeTree st) throws noIdException;
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,TypeException, noIdException;
-	//public void TypeCheck() throws TypeException;
+	
 }

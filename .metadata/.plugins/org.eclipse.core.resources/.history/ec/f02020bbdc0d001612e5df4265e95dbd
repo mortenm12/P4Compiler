@@ -1,9 +1,0 @@
-package AST;
-
-import Variabler.scopeTree;
-
-public interface IASTNode {
-	public String CodeGenration();
-	public void Semanticanalyse(scopeTree s);
-
-}

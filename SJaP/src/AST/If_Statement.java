@@ -14,9 +14,9 @@ public class If_Statement implements IASTNode {
 		String s;
 		int lab1=NumGen.getNum();
 		s = stats.CodeGenration(st);
-		s+= "ifne label"+lab1+" \n";		//her er en label
+		s+= "ifne label"+lab1+" \n";		
 		s+= linjer.CodeGenration(st);
-		s+="label"+lab1+" \n";				// her er en label
+		s+="label"+lab1+" \n";				
 		s+= ellers.CodeGenration(st);
 		return s;
 	}

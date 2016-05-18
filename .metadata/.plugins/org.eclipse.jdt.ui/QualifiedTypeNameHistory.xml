@@ -15,4 +15,6 @@
 <fullyQualifiedTypeName name="AST.Vars.var"/>
 <fullyQualifiedTypeName name="Exceptions.TypeException"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
 </qualifiedTypeNameHistroy>

@@ -104,13 +104,13 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public start start() throws ParseException {
                   start s= new start();
-    dcl_metoder();
     jj_consume_token(START);
     jj_consume_token(48);
     s.startLinjer = linjer();
     jj_consume_token(49);
-
-	return s;
+    s.slutMetoder = dcl_metoder();
+                                                                            {if (true) return s;}
+    throw new Error("Missing return statement in function");
   }
 
   static final public Linjer linjer() throws ParseException {
@@ -178,11 +178,11 @@ public class SJaPParser implements SJaPParserConstants {
   static final public Dcl_Var dcl_var() throws ParseException {
                      Token t; Dcl_Var d = new Dcl_Var();
     if (jj_2_3(2147483647)) {
-      Dcl dc = d.new Dcl();
+                                        Dcl dc = d.new Dcl();
       t = jj_consume_token(ID);
       jj_consume_token(SOM);
       dc.Type = type();
-      dc.ID=t.image; d.node=dc;
+                                                                                               dc.ID=t.image; d.node=dc;
     } else if (jj_2_4(2147483647)) {
                           Ass a = d.new Ass();
       t = jj_consume_token(ID);
