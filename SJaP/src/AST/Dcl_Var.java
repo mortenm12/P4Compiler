@@ -1,5 +1,6 @@
 package AST;
 
+import AST.IASTNode.NumGen;
 import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
@@ -10,6 +11,7 @@ public class Dcl_Var implements IASTNode {
 	public Dcl_Var node;
 	
 	public String ID;
+	public short intId;
 
 	
 	
@@ -25,7 +27,9 @@ public class Dcl_Var implements IASTNode {
 	public class Dcl extends Dcl_Var{
 		public Type Type;
 		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
-			s.addVar(ID, Type._Type);
+			intId=NumGen.getNum();
+			s.addVar(ID, Type._Type, intId);
+			
 			
 		}
 		
@@ -37,11 +41,11 @@ public class Dcl_Var implements IASTNode {
 		public String CodeGenration(scopeTree st) {
 			switch (Type._Type){
 			case "tal":
-				return "dstore 0 " + ID + "\n" ;
+				return "dstore 0 " + intId + "\n" ;
 			case "tekst":
-				return "dstore 0 " + ID + "\n" ;
+				return "dstore 0 " + intId + "\n" ;
 			case "udsagn":
-				return "istore 0 " + ID + "\n" ;
+				return "istore 0 " + intId + "\n" ;
 			default:
 				return null;
 			}
@@ -67,11 +71,11 @@ public class Dcl_Var implements IASTNode {
 			String s=Value.CodeGenration(st);
 			switch (st.searchVar(ID).type){
 			case "tal":
-				s+= "dstore "+ ID + "\n" ; break;
+				s+= "dstore "+ intId + "\n" ; break;
 			case "tekst":
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			case "udsagn":
-				s+= "istore "+ ID + "\n" ; break;
+				s+= "istore "+ intId + "\n" ; break;
 			default:
 				return "fejl";
 			}
@@ -84,7 +88,7 @@ public class Dcl_Var implements IASTNode {
 		public Type Type;
 		public Operation Value;
 		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException, TypeException {
-			s.addVar(ID, Type._Type);
+			s.addVar(ID, Type._Type,NumGen.getNum());
 			Value.Semanticanalyse(s);
 			if(Type._Type != Value.term.GetType(s)){
 				throw new TypeException("Typerne er ikke ens det skulle have været en " + Type._Type +"men det var en " + Value.term.GetType(s));
@@ -98,11 +102,11 @@ public class Dcl_Var implements IASTNode {
 			String s=Value.CodeGenration(st);
 			switch (st.searchVar(ID).type){
 			case "tal":
-				s+= "dstore "+ ID + "\n" ; break;
+				s+= "dstore "+ intId + "\n" ; break;
 			case "tekst":
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			case "udsagn":
-				s+= "istore "+ ID + "\n" ; break;
+				s+= "istore "+ intId + "\n" ; break;
 			default:
 				return "fejl";
 			}
@@ -134,13 +138,13 @@ public class Dcl_Var implements IASTNode {
 			String s=Value.CodeGenration(st);
 			switch (st.searchVar(ID).type){
 			case "tal":
-				s+= "dstore "+ ID + "\n" ; break;
+				s+= "dstore "+ intId + "\n" ; break;
 			case "tekst":
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			case "udsagn":
-				s+= "istore "+ ID + "\n" ; break;
+				s+= "istore "+ intId + "\n" ; break;
 			case "liste" :
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			default:
 				return "fejl";
 			}
@@ -167,13 +171,13 @@ public class Dcl_Var implements IASTNode {
 			String s=Value.CodeGenration(st);
 			switch (st.searchVar(ID).type){
 			case "tal":
-				s+= "dstore "+ ID + "\n" ; break;
+				s+= "dstore "+ intId + "\n" ; break;
 			case "tekst":
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			case "udsagn":
-				s+= "istore "+ ID + "\n" ; break;
+				s+= "istore "+ intId + "\n" ; break;
 			case "liste" :
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			default:
 				return "fejl";
 			}
@@ -202,13 +206,13 @@ public class Dcl_Var implements IASTNode {
 			String s="null";
 			switch (st.searchVar(ID).type){
 			case "tal":
-				s+= "dstore "+ ID + "\n" ; break;
+				s+= "dstore "+ intId + "\n" ; break;
 			case "tekst":
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			case "udsagn":
-				s+= "istore "+ ID + "\n" ; break;
+				s+= "istore "+ intId + "\n" ; break;
 			case "liste" :
-				s+= "astore "+ ID + "\n" ; break;
+				s+= "astore "+ intId + "\n" ; break;
 			default:
 				return "fejl";
 			}

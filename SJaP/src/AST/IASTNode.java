@@ -7,8 +7,8 @@ import Variabler.scopeTree;
 
 public interface IASTNode {
 	public static class NumGen {
-		private static int num=0;
-		public static int getNum(){
+		private static short num=0;
+		public static short getNum(){
 			num +=1;
 			return num;
 		}

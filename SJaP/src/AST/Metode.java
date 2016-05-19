@@ -13,7 +13,7 @@ public class Metode implements IASTNode {
 	public String CodeGenration(scopeTree st) throws noIdException {
 		String s;
 		s= ListVars.CodeGenration(st);
-		s+="goto "+ ID;
+		s+="goto "+ st.searchVar(ID).intId;
 		
 		return s;
 	}

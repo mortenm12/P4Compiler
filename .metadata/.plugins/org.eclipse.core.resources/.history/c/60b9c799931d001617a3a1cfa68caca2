@@ -1,0 +1,8 @@
+package Variabler;
+
+public class Var {
+	public String typeId;
+	public int intId;
+	public String type;
+	
+}

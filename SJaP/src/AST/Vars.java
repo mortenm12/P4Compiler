@@ -35,9 +35,21 @@ public class Vars implements IASTNode {
 	
 	public class Get_By_Id extends Vars{
 		public String ID;
-		public String CodeGenration(scopeTree st) {
-
-			return "";			//slå op i symbol tabellen over hvilken type det er.
+		public String CodeGenration(scopeTree st) throws noIdException {
+			switch(st.searchVar(ID).type){
+			case "tal":
+				return "dload "+ st.searchVar(ID).intId;
+			
+			case"tekst":
+				return "aload "+ st.searchVar(ID).intId;
+			
+			case"udsagn":
+				return "iload "+ st.searchVar(ID).intId;
+			
+			default:
+				throw new noIdException("du burde ikek kunne være her.");
+			}
+						
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,

@@ -29,10 +29,11 @@ public class scopeTree {
 		return x;
 	}
 	
-	public void addVar(String id, String type) throws existingVariableException{
+	public void addVar(String id, String type, short intId) throws existingVariableException{
 		Var x = new Var();
 		x.type=type;
 		x.typeId=id;
+		x.intId=intId;
 		HashTable.add(x);
 	}
 	

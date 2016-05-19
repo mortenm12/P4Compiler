@@ -1,5 +1,6 @@
 package AST;
 
+import AST.IASTNode.NumGen;
 import Exceptions.TypeException;
 import Exceptions.existingVariableException;
 import Exceptions.noIdException;
@@ -10,10 +11,11 @@ public class Dcl_Metode implements IASTNode {
 	public Type ReturType;
 	public ListOfDecl ListDcl;
 	public Linjer lines;
+	public short intId;
 
 	
 	public String CodeGenration(scopeTree st) throws noIdException {
-		String s = ID;
+		String s = intId+"";
 		s+=lines.CodeGenration(st);
 		if(ReturType == null){
 			s+="return \n";
@@ -38,10 +40,10 @@ public class Dcl_Metode implements IASTNode {
 
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException, TypeException {
-		s.addVar(ID, ReturType._Type);
+		s.addVar(ID, ReturType._Type,NumGen.getNum());
 		scopeTree x = s.addScope(ID);
 		for(Dcl_Var o: ListDcl.Dcl_list){
-			x.addVar(o.ID, o.GetType(s) );
+			x.addVar(o.ID, o.GetType(s) ,NumGen.getNum());
 		}
 		lines.Semanticanalyse(x);
 	}
