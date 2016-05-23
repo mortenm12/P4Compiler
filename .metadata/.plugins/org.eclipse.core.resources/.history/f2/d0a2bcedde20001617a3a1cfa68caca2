@@ -1,0 +1,12 @@
+package AST;
+
+import Exceptions.TypeException;
+import Exceptions.existingVariableException;
+import Exceptions.noIdException;
+import Variabler.scopeTree;
+
+public class Input implements IASTNode {
+
+	
+
+}

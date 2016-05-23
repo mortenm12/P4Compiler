@@ -23,6 +23,7 @@ import AST.Type;
 import AST.Variabel;
 import AST.Vars;
 import AST.While_Lokke;
+import AST.Print;
 
 import AST.Vars.var;
 import AST.Vars.Get_By_Id;
@@ -30,10 +31,12 @@ import AST.Vars.List_Index;
 import AST.Vars.Lenght_of_List;
 import AST.Vars.Sub_List;
 import AST.Vars.Meth;
+import AST.Vars.konv;
 
 import AST.Variabel.Tekst;
 import AST.Variabel.Num;
 import AST.Variabel.Bool;
+import AST.Variabel.Input;
 
 import AST.Dcl_Var.Dcl;
 import AST.Dcl_Var.Ass;
@@ -124,6 +127,8 @@ public class SJaPParser implements SJaPParserConstants {
       case HVIS:
       case SALANGE:
       case GENTAG:
+      case PRINT:
+      case INPUT:
       case RETURNER:
       case TILFOJ:
       case LENGDEN:
@@ -164,6 +169,9 @@ public class SJaPParser implements SJaPParserConstants {
       case RETURNER:
         jj_consume_token(RETURNER);
                l.linjeIndhold= new Returner(operation());
+        break;
+      case PRINT:
+        l.linjeIndhold = print();
         break;
       default:
         jj_la1[1] = jj_gen;
@@ -232,6 +240,7 @@ public class SJaPParser implements SJaPParserConstants {
   static final public Vars vars() throws ParseException {
                Vars v = new Vars(); Token t;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INPUT:
     case NUM:
     case STRING:
     case BOOL:
@@ -269,6 +278,11 @@ public class SJaPParser implements SJaPParserConstants {
             jj_consume_token(TIL);
             s.To = operation();
                                                                                                                              s.ID=t.image; v.node=s;
+          } else if (jj_2_12(2147483647)) {
+            t = jj_consume_token(ID);
+            jj_consume_token(TIL);
+            jj_consume_token(TAL);
+                                          konv k = v.new konv(); k.ID=t.image;
           } else {
             switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
             case ID:
@@ -293,22 +307,27 @@ public class SJaPParser implements SJaPParserConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case NUM:
       t = jj_consume_token(NUM);
-               Num n = v.new Num(); n.Value=Double.parseDouble(t.image); {if (true) return v;}
+               Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; {if (true) return v;}
       break;
     case STRING:
       t = jj_consume_token(STRING);
-                  Tekst s = v.new Tekst(); s.Value=t.image; {if (true) return v;}
+                  Tekst s = v.new Tekst(); s.Value=t.image; v.node=s; {if (true) return v;}
       break;
     case BOOL:
       t = jj_consume_token(BOOL);
-                Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); {if (true) return v;}
+                Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); v.node=b; {if (true) return v;}
+      break;
+    case INPUT:
+      jj_consume_token(INPUT);
+      jj_consume_token(54);
+      jj_consume_token(55);
+                     Input i = v.new Input(); v.node=i; {if (true) return v;}
       break;
     default:
       jj_la1[5] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
-     {if (true) return v;}
     throw new Error("Missing return statement in function");
   }
 
@@ -362,7 +381,7 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public Dcl_Metode dcl_metode() throws ParseException {
                            Dcl_Metode d= new Dcl_Metode(); Token t;
-    if (jj_2_12(2147483647)) {
+    if (jj_2_13(2147483647)) {
       jj_consume_token(FUNKTION);
       t = jj_consume_token(ID);
                                           d.ID=t.image;
@@ -410,13 +429,13 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public Operation operation() throws ParseException {
                          Operation o = new Operation();
-    if (jj_2_13(2147483647)) {
+    if (jj_2_14(2147483647)) {
                    Add a = o.new Add();
       o.term = term();
       jj_consume_token(PLUS);
       o.operation = operation();
                                                                                     o.node = a;
-    } else if (jj_2_14(2147483647)) {
+    } else if (jj_2_15(2147483647)) {
                   Sub s = o.new Sub();
       s.term = term();
       jj_consume_token(MINUS);
@@ -424,6 +443,7 @@ public class SJaPParser implements SJaPParserConstants {
                                                                                    o.node = s;
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case INPUT:
       case LENGDEN:
       case NUM:
       case STRING:
@@ -444,19 +464,19 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public Term term() throws ParseException {
                Term t = new Term();
-    if (jj_2_15(2147483647)) {
+    if (jj_2_16(2147483647)) {
                    Mul m = t.new Mul();
       m.op = vars();
       jj_consume_token(MULTIPLY);
       m.term = term();
                                                                         t.node = m;
-    } else if (jj_2_16(2147483647)) {
+    } else if (jj_2_17(2147483647)) {
                   Div d = t.new Div();
       d.op = vars();
       jj_consume_token(DIVIDE);
       d.term = term();
                                                                        t.node = d;
-    } else if (jj_2_17(2147483647)) {
+    } else if (jj_2_18(2147483647)) {
                   Mod mo = t.new Mod();
       mo.op = vars();
       jj_consume_token(MODULO);
@@ -471,6 +491,7 @@ public class SJaPParser implements SJaPParserConstants {
         jj_consume_token(55);
                                                             t.node = pa;
         break;
+      case INPUT:
       case LENGDEN:
       case NUM:
       case STRING:
@@ -504,7 +525,7 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public Ellers_Statment ellers_statment() throws ParseException {
                                      Ellers_Statment e = new Ellers_Statment();
-    if (jj_2_18(2147483647)) {
+    if (jj_2_19(2147483647)) {
       jj_consume_token(ELLERS);
       jj_consume_token(48);
       e.linjer = linjer();
@@ -552,13 +573,13 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public Stats stats() throws ParseException {
                  Stats s = new Stats();
-    if (jj_2_19(2147483647)) {
+    if (jj_2_20(2147483647)) {
                      and a = s.new and();
       a.stat1 = stat();
       jj_consume_token(OG);
       a.stat2 = stat();
                                                                                   s.node=a;
-    } else if (jj_2_20(2147483647)) {
+    } else if (jj_2_21(2147483647)) {
                         or o = s.new or();
       o.stat1 = stat();
       jj_consume_token(ELLER);
@@ -566,6 +587,7 @@ public class SJaPParser implements SJaPParserConstants {
                                                                                      s.node=o;
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case INPUT:
       case LENGDEN:
       case NUM:
       case STRING:
@@ -587,7 +609,7 @@ public class SJaPParser implements SJaPParserConstants {
 
   static final public Stat stat() throws ParseException {
                Stat s = new Stat();
-    if (jj_2_21(2147483647)) {
+    if (jj_2_22(2147483647)) {
                            opsop o = s.new opsop();
       o.op1 = operation();
       o.operator = sammenlign();
@@ -602,6 +624,7 @@ public class SJaPParser implements SJaPParserConstants {
         jj_consume_token(55);
                                                  s.node=p;
         break;
+      case INPUT:
       case LENGDEN:
       case NUM:
       case STRING:
@@ -668,6 +691,7 @@ public class SJaPParser implements SJaPParserConstants {
     label_3:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case INPUT:
       case LENGDEN:
       case NUM:
       case STRING:
@@ -705,6 +729,16 @@ public class SJaPParser implements SJaPParserConstants {
                                         dc.ID=t.image; d.Dcl_list.add(dc);
     }
                                                                                {if (true) return d;}
+    throw new Error("Missing return statement in function");
+  }
+
+  static final public Print print() throws ParseException {
+                 Print p = new Print();
+    jj_consume_token(PRINT);
+    jj_consume_token(54);
+    p.op = operation();
+    jj_consume_token(55);
+                                           {if (true) return p;}
     throw new Error("Missing return statement in function");
   }
 
@@ -855,66 +889,11 @@ public class SJaPParser implements SJaPParserConstants {
     finally { jj_save(20, xla); }
   }
 
-  static private boolean jj_3R_28() {
-    if (jj_3R_29()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_27() {
-    if (jj_scan_token(54)) return true;
-    if (jj_3R_6()) return true;
-    if (jj_scan_token(55)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_14() {
-    if (jj_scan_token(MINUS)) return true;
-    return false;
-  }
-
-  static private boolean jj_3_13() {
-    if (jj_scan_token(PLUS)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_26() {
-    if (jj_3R_29()) return true;
-    if (jj_scan_token(MODULO)) return true;
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_25() {
-    if (jj_3R_29()) return true;
-    if (jj_scan_token(DIVIDE)) return true;
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_24() {
-    if (jj_3R_29()) return true;
-    if (jj_scan_token(MULTIPLY)) return true;
-    if (jj_3R_22()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_22() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_24()) {
-    jj_scanpos = xsp;
-    if (jj_3R_25()) {
-    jj_scanpos = xsp;
-    if (jj_3R_26()) {
-    jj_scanpos = xsp;
-    if (jj_3R_27()) {
-    jj_scanpos = xsp;
-    if (jj_3R_28()) return true;
-    }
-    }
-    }
-    }
-    return false;
+  static private boolean jj_2_22(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_22(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(21, xla); }
   }
 
   static private boolean jj_3R_16() {
@@ -936,7 +915,7 @@ public class SJaPParser implements SJaPParserConstants {
     return false;
   }
 
-  static private boolean jj_3_12() {
+  static private boolean jj_3_13() {
     if (jj_scan_token(SOM)) return true;
     return false;
   }
@@ -954,7 +933,7 @@ public class SJaPParser implements SJaPParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_37() {
+  static private boolean jj_3R_38() {
     if (jj_scan_token(ID)) return true;
     if (jj_scan_token(54)) return true;
     if (jj_3R_21()) return true;
@@ -1014,18 +993,51 @@ public class SJaPParser implements SJaPParserConstants {
     return false;
   }
 
-  static private boolean jj_3R_40() {
+  static private boolean jj_3R_42() {
+    if (jj_scan_token(INPUT)) return true;
+    if (jj_scan_token(54)) return true;
+    if (jj_scan_token(55)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_41() {
     if (jj_scan_token(BOOL)) return true;
     return false;
   }
 
-  static private boolean jj_3R_39() {
+  static private boolean jj_3R_40() {
     if (jj_scan_token(STRING)) return true;
     return false;
   }
 
-  static private boolean jj_3R_38() {
+  static private boolean jj_3R_39() {
     if (jj_scan_token(NUM)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_12() {
+    if (jj_scan_token(TIL)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_22() {
+    if (jj_3R_6()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_37() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_39()) {
+    jj_scanpos = xsp;
+    if (jj_3R_40()) {
+    jj_scanpos = xsp;
+    if (jj_3R_41()) {
+    jj_scanpos = xsp;
+    if (jj_3R_42()) return true;
+    }
+    }
+    }
     return false;
   }
 
@@ -1041,41 +1053,30 @@ public class SJaPParser implements SJaPParserConstants {
     return false;
   }
 
-  static private boolean jj_3_21() {
-    if (jj_3R_6()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_36() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_38()) {
-    jj_scanpos = xsp;
-    if (jj_3R_39()) {
-    jj_scanpos = xsp;
-    if (jj_3R_40()) return true;
-    }
-    }
-    return false;
-  }
-
   static private boolean jj_3_9() {
     if (jj_scan_token(ID)) return true;
     return false;
   }
 
-  static private boolean jj_3R_35() {
-    if (jj_3R_37()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_19() {
+  static private boolean jj_3_20() {
     if (jj_scan_token(OG)) return true;
     return false;
   }
 
-  static private boolean jj_3_20() {
+  static private boolean jj_3_21() {
     if (jj_scan_token(ELLER)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_36() {
+    if (jj_3R_38()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_35() {
+    if (jj_scan_token(ID)) return true;
+    if (jj_scan_token(TIL)) return true;
+    if (jj_scan_token(TAL)) return true;
     return false;
   }
 
@@ -1131,7 +1132,7 @@ public class SJaPParser implements SJaPParserConstants {
   }
 
   static private boolean jj_3R_30() {
-    if (jj_3R_36()) return true;
+    if (jj_3R_37()) return true;
     return false;
   }
 
@@ -1154,7 +1155,10 @@ public class SJaPParser implements SJaPParserConstants {
     jj_scanpos = xsp;
     if (jj_3R_34()) {
     jj_scanpos = xsp;
-    if (jj_3R_35()) return true;
+    if (jj_3R_35()) {
+    jj_scanpos = xsp;
+    if (jj_3R_36()) return true;
+    }
     }
     }
     }
@@ -1207,6 +1211,11 @@ public class SJaPParser implements SJaPParserConstants {
     return false;
   }
 
+  static private boolean jj_3_19() {
+    if (jj_scan_token(48)) return true;
+    return false;
+  }
+
   static private boolean jj_3R_9() {
     if (jj_scan_token(ID)) return true;
     if (jj_scan_token(51)) return true;
@@ -1218,11 +1227,6 @@ public class SJaPParser implements SJaPParserConstants {
     if (jj_scan_token(ID)) return true;
     if (jj_scan_token(SOM)) return true;
     if (jj_3R_7()) return true;
-    return false;
-  }
-
-  static private boolean jj_3_18() {
-    if (jj_scan_token(48)) return true;
     return false;
   }
 
@@ -1258,18 +1262,80 @@ public class SJaPParser implements SJaPParserConstants {
     return false;
   }
 
-  static private boolean jj_3_17() {
+  static private boolean jj_3_18() {
     if (jj_scan_token(MODULO)) return true;
     return false;
   }
 
-  static private boolean jj_3_16() {
+  static private boolean jj_3_17() {
     if (jj_scan_token(DIVIDE)) return true;
     return false;
   }
 
-  static private boolean jj_3_15() {
+  static private boolean jj_3_16() {
     if (jj_scan_token(MULTIPLY)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_28() {
+    if (jj_3R_29()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_27() {
+    if (jj_scan_token(54)) return true;
+    if (jj_3R_6()) return true;
+    if (jj_scan_token(55)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_15() {
+    if (jj_scan_token(MINUS)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_14() {
+    if (jj_scan_token(PLUS)) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_26() {
+    if (jj_3R_29()) return true;
+    if (jj_scan_token(MODULO)) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_25() {
+    if (jj_3R_29()) return true;
+    if (jj_scan_token(DIVIDE)) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_24() {
+    if (jj_3R_29()) return true;
+    if (jj_scan_token(MULTIPLY)) return true;
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_22() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_24()) {
+    jj_scanpos = xsp;
+    if (jj_3R_25()) {
+    jj_scanpos = xsp;
+    if (jj_3R_26()) {
+    jj_scanpos = xsp;
+    if (jj_3R_27()) {
+    jj_scanpos = xsp;
+    if (jj_3R_28()) return true;
+    }
+    }
+    }
+    }
     return false;
   }
 
@@ -1293,12 +1359,12 @@ public class SJaPParser implements SJaPParserConstants {
       jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x80c04000,0x80c04000,0x0,0x0,0x0,0x0,0x380000,0x40000,0x40000,0x0,0x0,0x8000,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x8cc04000,0x84c04000,0x8000000,0x0,0x0,0x8000000,0x380000,0x40000,0x40000,0x8000000,0x8000000,0x8000,0x8000000,0x8000000,0x0,0x8000000,0x0,};
    }
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {0x4007ac,0x0,0x580,0x8,0x200,0x580,0x10,0x0,0x0,0x400788,0x400788,0x0,0x1400788,0x1400788,0x7e000000,0x400788,0x200,};
    }
-  static final private JJCalls[] jj_2_rtns = new JJCalls[21];
+  static final private JJCalls[] jj_2_rtns = new JJCalls[22];
   static private boolean jj_rescan = false;
   static private int jj_gc = 0;
 
@@ -1547,7 +1613,7 @@ public class SJaPParser implements SJaPParserConstants {
 
   static private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 21; i++) {
+    for (int i = 0; i < 22; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -1575,6 +1641,7 @@ public class SJaPParser implements SJaPParserConstants {
             case 18: jj_3_19(); break;
             case 19: jj_3_20(); break;
             case 20: jj_3_21(); break;
+            case 21: jj_3_22(); break;
           }
         }
         p = p.next;

@@ -18,7 +18,7 @@ public class Vars implements IASTNode {
 	
 	public class var extends Vars{
 		public Variabel Value;
-		public String CodeGenration(scopeTree st) {
+		public String CodeGenration(scopeTree st) throws noIdException {
 
 			return Value.CodeGenration(st);
 		}
@@ -124,6 +124,24 @@ public class Vars implements IASTNode {
 		
 		public String GetType(scopeTree s) throws noIdException{
 			return method.GetType(s);
+		}
+	}
+	
+	public class konv extends Vars{
+		public String ID;
+		
+		public String CodeGenration(scopeTree st) throws noIdException {
+
+			return "Double.parseDouble("+ID+")";
+		}
+		
+		public void Semanticanalyse(scopeTree s) throws existingVariableException,
+		noIdException, TypeException {
+			
+		}
+		
+		public String GetType(scopeTree s) throws noIdException{
+			return "tal";
 		}
 	}
 

@@ -31,6 +31,7 @@ import AST.Type;
 import AST.Variabel;
 import AST.Vars;
 import AST.While_Lokke;
+import AST.Print;
 
 import AST.Vars.var;
 import AST.Vars.Get_By_Id;
@@ -38,10 +39,12 @@ import AST.Vars.List_Index;
 import AST.Vars.Lenght_of_List;
 import AST.Vars.Sub_List;
 import AST.Vars.Meth;
+import AST.Vars.konv;
 
 import AST.Variabel.Tekst;
 import AST.Variabel.Num;
 import AST.Variabel.Bool;
+import AST.Variabel.Input;
 
 import AST.Dcl_Var.Dcl;
 import AST.Dcl_Var.Ass;
@@ -195,7 +198,10 @@ Linje linje() : {Linje l = new Linje();}
 | l.linjeIndhold=if_statment() 
 | l.linjeIndhold=while_lokke() 
 | l.linjeIndhold=for_lokke()  
-|< RETURNER > {l.linjeIndhold= new Returner(operation());} 
+|< RETURNER > {l.linjeIndhold= new Returner(operation());}
+| l.linjeIndhold=print()
+
+
 
   ){return l;} 
   
@@ -220,7 +226,9 @@ Vars vars() : {Vars v = new Vars(); Token t;}
   | LOOKAHEAD(< ID > "[") {List_Index li = v.new List_Index();} t=< ID > li.Index=list_of_vars() {li.ID=t.image; v.node=li;}
   |{Lenght_of_List l = v.new Lenght_of_List();} < LENGDEN > < AF > t=< ID > {l.ID=t.image; v.node=l;}
   |LOOKAHEAD(< ID > < FRA >) {Sub_List s = v.new Sub_List();}  t=< ID > < FRA > s.From=operation() < TIL > s.To=operation() {s.ID=t.image; v.node=s;}
+  | LOOKAHEAD("til")t=< ID > "til" "tal" {konv k = v.new konv(); k.ID=t.image;}
   |{Meth m = v.new Meth();} m.method=metode()
+  
   ) {return v;} 
 	
   //søg og find i symbol tabelen
@@ -229,10 +237,11 @@ Vars vars() : {Vars v = new Vars(); Token t;}
 Variabel variabel() : {Variabel v = new Variabel(); Token t;}
 {
   (
-    t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); return v;} 
-  | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image; return v;}
-  | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); return v;}
-  ) {return v;} 
+    t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; return v;} 
+  | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image; v.node=s; return v;}
+  | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); v.node=b; return v;}
+  | "input" "(" ")" {Input i = v.new Input(); v.node=i; return v;}
+  ) 
 }
 
 Type type() : {Type t= new Type(); Token s;}
@@ -339,5 +348,9 @@ ListOfVars list_of_vars() : {ListOfVars l = new ListOfVars(); Operation o;}
 ListOfDecl list_of_dcl() :{ListOfDecl d = new ListOfDecl();  Token t; Dcl_Var v = new Dcl_Var(); Dcl dc = v.new Dcl();}
 {
 	(t=< ID > "som" dc.Type=type(){ dc.ID=t.image; d.Dcl_list.add(dc);})* {return d;} 
+}
+
+Print print() : {Print p = new Print();}
+{	( "print" "(" p.op=operation() ")"{return p;})
 }
 

@@ -1,0 +1,358 @@
+
+options
+{
+  static = true;
+  VISITOR = true;
+}
+
+PARSER_BEGIN(SJaPParser)
+
+import Variabler.scopeTree;
+
+import AST.start;
+import AST.Linjer;
+import AST.Linje;
+import AST.Dcl_Var;
+import AST.Dcl_Metode;
+import AST.Decl_Metoder;
+import AST.Ellers_Statment;
+import AST.For_Lokke;
+import AST.If_Statement;
+import AST.ListOfVars;
+import AST.ListOfDecl;
+import AST.Metode;
+import AST.Operation;
+import AST.Returner;
+import AST.Sammenlign;
+import AST.Stat;
+import AST.Stats;
+import AST.Term;
+import AST.Type;
+import AST.Variabel;
+import AST.Vars;
+import AST.While_Lokke;
+
+import AST.Vars.var;
+import AST.Vars.Get_By_Id;
+import AST.Vars.List_Index;
+import AST.Vars.Lenght_of_List;
+import AST.Vars.Sub_List;
+import AST.Vars.Meth;
+
+import AST.Variabel.Tekst;
+import AST.Variabel.Num;
+import AST.Variabel.Bool;
+
+import AST.Dcl_Var.Dcl;
+import AST.Dcl_Var.Ass;
+import AST.Dcl_Var.Dcl_Ass;
+import AST.Dcl_Var.List_Ass;
+import AST.Dcl_Var.List_Add;
+import AST.Dcl_Var.List_Del;
+
+import AST.Operation.Add;
+import AST.Operation.Sub;
+
+import AST.Term.Mul;
+import AST.Term.Div;
+import AST.Term.Mod;
+import AST.Term.paren;
+import AST.Term.vari;
+
+import AST.Stats.and;
+import AST.Stats.or;
+
+import AST.Stat.opsop;
+import AST.Stat.par;
+import AST.Stat.bool;
+import AST.Stat.not;
+
+import AST.Sammenlign.bigger;
+import AST.Sammenlign.lesser;
+import AST.Sammenlign.biggerequal;
+import AST.Sammenlign.lesserequal;
+import AST.Sammenlign.equal;
+import AST.Sammenlign.notequal;
+
+public class SJaPParser
+{
+   
+   
+  public static void main(String args []) throws ParseException
+  {
+    
+    SJaPParser parser = new SJaPParser(System.in);
+    
+    while (true)
+    {
+      System.out.println("Reading from standard input...");
+      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+      
+      try
+      {
+        scopeTree tree = new scopeTree();
+        start AST = start();
+        System.out.println("parser færdig");
+        AST.Semanticanalyse(tree);
+        System.out.println(AST.CodeGenration(tree));
+      }
+      catch (Exception e)
+      {
+        System.out.println("NOK.");
+        System.out.println(e.getMessage());
+        SJaPParser.ReInit(System.in);
+      }
+      catch (Error e)
+      {
+        System.out.println("Oops.");
+        System.out.println(e.getMessage());
+        break;
+      }
+    }
+  }
+}
+
+PARSER_END(SJaPParser)
+
+SKIP :
+{
+  " "
+| "\r"
+| "\t"
+| "\n"
+|  <"//" (~["\n","\r"])* ("\n" | "\r" | "\r\n")>
+|  <"/*" (~["*"])* "*" ("*" | ~["*","/"] (~["*"])* "*")* "/">
+}
+
+TOKEN : /* OPERATORS */
+{
+  < PLUS : "+" >
+| < MINUS : "-" >
+| < MULTIPLY : "*" >
+| < DIVIDE : "/" >
+| < MODULO : "%" >
+| < TIL : "til">
+| < FRA: "fra">
+| < HVIS : "hvis">
+| < ELLERS : "ellers">
+| < SOM : "som">
+| < AF : "af">
+| < FUNKTION : "funktion">
+| < TAL : "tal">
+| < TEKST : "tekst">
+| < UDSAGN : "udsag">
+| < SALANGE : "sålænge">
+| < GENTAG : "gentag">
+| < OG : "og">
+| < ELLER : "eller">
+| < PRINT : "print">
+| < INPUT : "input">
+| < OPENFILE : "åbenfil">
+| < CLOSEFILE : "lukfil">
+| < START : "start">
+| < RETURNER : "returner">
+| < SANDT : "sandt">
+| < FALSK : "falsk">
+| < TILFOJ : "tilføj" >
+| < LENGDEN : "længden" >
+| < LISTE : "liste" >
+| < SLET : "slet" >
+}
+
+TOKEN :
+{
+  < CONSTANT : (< DIGIT >)+ >
+| < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
+| < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
+| < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
+| < BOOL : ("sandt"| "falsk")>
+| < #DIGIT : [ "0"-"9" ] >
+| < #DIGIT1: [ "1"-"9"] >
+| < #LETTER : [ "a"-"z","A"-"Z","æ","ø","å","Æ","Ø","Å"]>
+| < #CHAR : [ "!","@","#","£","¤","$","%","&","\\","/","=","?","+","`","|","^","~","*",",",".","_",":",";","<",">","½","-","¨","§","¾","´"]>
+
+| < EOL: (["\n","\t","\r"])>
+
+}
+
+
+
+start start () : {start s= new start();}
+{
+  (
+     < START > "{" s.startLinjer=linjer()"}" s.slutMetoder = dcl_metoder() {return s;})  
+}
+
+Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
+{
+  ( li=linje()";" { l.nyLinje.add(li); })+ {return l;}  
+}
+
+Linje linje() : {Linje l = new Linje();}
+{
+ (LOOKAHEAD(dcl_var()) l.linjeIndhold=dcl_var()  
+| LOOKAHEAD(operation()) l.linjeIndhold=operation()  
+| l.linjeIndhold=if_statment() 
+| l.linjeIndhold=while_lokke() 
+| l.linjeIndhold=for_lokke()  
+|< RETURNER > {l.linjeIndhold= new Returner(operation());}
+ | print()
+
+
+
+  ){return l;} 
+  
+}
+
+Dcl_Var dcl_var() : {Token t; Dcl_Var d = new Dcl_Var();}
+{
+  ( LOOKAHEAD(< ID > <SOM > type() ";"){Dcl dc = d.new Dcl();} t=< ID > <SOM > dc.Type=type() {dc.ID=t.image; d.node=dc;}
+  | LOOKAHEAD(< ID > "="){Ass a = d.new Ass();} t=< ID > "=" a.Value=operation() {a.ID=t.image; d.node=a;}
+  | LOOKAHEAD(< ID > <SOM > type() "=") {Dcl_Ass da=d.new Dcl_Ass();} t=< ID > <SOM > da.Type=type() "=" da.Value=operation() {da.ID=t.image; d.node=da;}
+  | LOOKAHEAD(< ID > "[") {List_Ass la = d.new List_Ass();} t=< ID > "[" la.Index=list_of_vars() "]" "=" la.Value=operation() {la.ID=t.image; d.node=la;}
+  | LOOKAHEAD("tilføj") {List_Add lad= d.new List_Add();}< TILFOJ > lad.Value=operation() < TIL > t=<ID > {lad.ID=t.image; d.node=lad;}
+  | LOOKAHEAD("slet") {List_Del ld=d.new List_Del();}< SLET > t=<ID > "[" ld.Index=list_of_vars() "]" {ld.ID=t.image; d.node=ld;}
+  ) {return d;} 
+
+}
+
+Vars vars() : {Vars v = new Vars(); Token t;}
+{
+  ({var w= v.new var();} w.Value=variabel()  {v.node=w;}
+  |LOOKAHEAD(< ID >) {Get_By_Id g = v.new Get_By_Id();}  t= < ID > {g.ID=t.image; v.node=g;}
+  | LOOKAHEAD(< ID > "[") {List_Index li = v.new List_Index();} t=< ID > li.Index=list_of_vars() {li.ID=t.image; v.node=li;}
+  |{Lenght_of_List l = v.new Lenght_of_List();} < LENGDEN > < AF > t=< ID > {l.ID=t.image; v.node=l;}
+  |LOOKAHEAD(< ID > < FRA >) {Sub_List s = v.new Sub_List();}  t=< ID > < FRA > s.From=operation() < TIL > s.To=operation() {s.ID=t.image; v.node=s;}
+  |{Meth m = v.new Meth();} m.method=metode()
+  ) {return v;} 
+	
+  //søg og find i symbol tabelen
+}
+
+Variabel variabel() : {Variabel v = new Variabel(); Token t;}
+{
+  (
+    t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); return v;} 
+  | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image; return v;}
+  | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); return v;}
+  | input()
+  ) {return v;} 
+}
+
+Type type() : {Type t= new Type(); Token s;}
+{
+  (
+    s=< TAL > {t._Type=s.image;}
+  | s=< TEKST > {t._Type=s.image;}
+  | s=< UDSAGN > {t._Type=s.image;}
+  | s=< LISTE > {t._Type=s.image;} < AF > t.NestedType=type()
+  ) {return t;} 
+}
+
+Decl_Metoder dcl_metoder() : {Decl_Metoder d= new Decl_Metoder();}
+{
+  (dcl_metode())* {return d;} 
+}
+
+Dcl_Metode dcl_metode() : {Dcl_Metode d= new Dcl_Metode(); Token t;}
+{
+  (LOOKAHEAD("som")< FUNKTION > t=< ID > {d.ID=t.image;} < SOM > d.ReturType=type()"("d.ListDcl=list_of_dcl()")" "{"d.lines=linjer()"}"
+| < FUNKTION > t=< ID > {d.ID=t.image;} "("d.ListDcl=list_of_dcl()")" "{"d.lines=linjer()"}") {return d;} 
+}
+
+Metode metode() : {Metode m = new Metode(); Token t;}
+{
+  (t=< ID > {m.ID=t.image;} "(" m.ListVars=list_of_vars()")") {return m;} 
+}
+
+Operation operation() : {Operation o = new Operation();}
+{
+  (LOOKAHEAD("+") {Add a = o.new Add();} o.term=term() "+" o.operation=operation() {o.node = a;}
+| LOOKAHEAD("-") {Sub s = o.new Sub();} s.term=term() "-" s.operation=operation() {o.node = s;}
+| term()
+  ){return o;} 
+}
+
+Term term() : {Term t = new Term();}
+{
+  (LOOKAHEAD("*") {Mul m = t.new Mul();} m.op=vars() "*" m.term=term() {t.node = m;}
+| LOOKAHEAD("/") {Div d = t.new Div();} d.op=vars() "/" d.term=term() {t.node = d;}
+| LOOKAHEAD("%") {Mod mo = t.new Mod();} mo.op=vars() "%" mo.term= term() {t.node = mo;}
+| "(" {paren pa = t.new paren();} pa.opera=operation() ")" {t.node = pa;}
+| {vari v = t.new vari();} v.op=vars() {t.node = v;} 
+  ) {return t;} 
+}
+
+If_Statement if_statment() : {If_Statement i = new If_Statement();}
+{
+  (< HVIS > i.stats=stats() "{" i.linjer=linjer() "}" i.ellers=ellers_statment()
+  ) {return i;} 
+}
+
+Ellers_Statment ellers_statment() : {Ellers_Statment e = new Ellers_Statment();}
+{
+  ( LOOKAHEAD("{")< ELLERS > "{" e.linjer=linjer() "}"
+| < ELLERS > e.if_stat=if_statment()
+  ) {return e;} 
+}
+
+While_Lokke while_lokke() : {While_Lokke w = new While_Lokke();}
+{
+  (< SALANGE > w.stat=stats() < GENTAG > "{" w.linjer=linjer() "}"
+  ) {return w;} 
+}
+For_Lokke for_lokke() : {For_Lokke f = new For_Lokke();}
+{
+  (< GENTAG > f.from=operation() < TIL > f.to=operation() "{" f.linjer=linjer() "}"
+  ) {return f;} 
+}
+
+Stats stats() : {Stats s = new Stats();}
+{
+  (LOOKAHEAD(< OG >){and a = s.new and();}  a.stat1=stat() < OG > a.stat2=stat() {s.node=a;}
+| LOOKAHEAD(< ELLER >) {or o = s.new or();} o.stat1=stat() < ELLER > o.stat2=stat() {s.node=o;}
+| s.stat1=stat()
+  ) {return s;} 
+}
+
+Stat stat() : {Stat s = new Stat();}
+{
+  (LOOKAHEAD(operation()) {opsop o = s.new opsop();} o.op1=operation() o.operator=sammenlign() o.op2=operation() {s.node=o;}
+| {par p = s.new par();}"(" p.stats=stats() ")" {s.node=p;}
+| {bool b = s.new bool();} b.udsagn=vars() {s.node=b;}
+| {not n=s.new not();} "!" n.stat=stat() {s.node=n;}
+  ) {return s;} 
+}
+
+Sammenlign sammenlign() : {Sammenlign s = new Sammenlign();}
+{
+  (">" {s.node=s.new bigger(); return s;}
+| "<" {s.node=s.new lesser(); return s;} 
+| ">=" {s.node=s.new biggerequal(); return s;}
+| "<=" {s.node=s.new lesserequal(); return s;}
+| "==" {s.node=s.new equal(); return s;}
+| "!=" {s.node=s.new notequal(); return s;} 
+  ) {return s;} 
+}
+
+ListOfVars list_of_vars() : {ListOfVars l = new ListOfVars(); Operation o;}
+{
+  (o= operation() { l.op.add(o);})* {return l;} 
+}
+
+ListOfDecl list_of_dcl() :{ListOfDecl d = new ListOfDecl();  Token t; Dcl_Var v = new Dcl_Var(); Dcl dc = v.new Dcl();}
+{
+	(t=< ID > "som" dc.Type=type(){ dc.ID=t.image; d.Dcl_list.add(dc);})* {return d;} 
+}
+
+Print print() : {Print p = new Print();}
+{	( "print" "(" p.op=operation() ")"{return p;})
+}
+
+Input input() : {Input i = new Input(); Return i;}
+{
+	( "input" "(" ")")
+}
+
+
+
