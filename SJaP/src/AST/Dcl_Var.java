@@ -41,11 +41,11 @@ public class Dcl_Var implements IASTNode {
 		public String CodeGenration(scopeTree st) {
 			switch (Type._Type){
 			case "tal":
-				return "dstore 0 " + intId + "\n" ;
+				return "double " + ID +";" ;
 			case "tekst":
-				return "dstore 0 " + intId + "\n" ;
+				return "String " + ID +";" ;
 			case "udsagn":
-				return "istore 0 " + intId + "\n" ;
+				return "boolean " + ID +";" ;
 			default:
 				return null;
 			}
@@ -68,18 +68,8 @@ public class Dcl_Var implements IASTNode {
 		}
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s=Value.CodeGenration(st);
-			switch (st.searchVar(ID).type){
-			case "tal":
-				s+= "dstore "+ intId + "\n" ; break;
-			case "tekst":
-				s+= "astore "+ intId + "\n" ; break;
-			case "udsagn":
-				s+= "istore "+ intId + "\n" ; break;
-			default:
-				return "fejl";
-			}
-			return s;
+			
+			return ID + " = " + Value.CodeGenration(st) + ";\n" ;
 			
 		}
 	}
@@ -99,18 +89,18 @@ public class Dcl_Var implements IASTNode {
 		}
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s=Value.CodeGenration(st);
+
 			switch (st.searchVar(ID).type){
 			case "tal":
-				s+= "dstore "+ intId + "\n" ; break;
+				return "double "+ ID + " = " + Value.CodeGenration(st) + ";\n" ;
 			case "tekst":
-				s+= "astore "+ intId + "\n" ; break;
+				return "String "+ ID + " = " + Value.CodeGenration(st) + ";\n" ;
 			case "udsagn":
-				s+= "istore "+ intId + "\n" ; break;
+				return "boolean "+ ID + " = " + Value.CodeGenration(st) + ";\n" ;
 			default:
 				return "fejl";
 			}
-			return s;
+
 			
 		}
 	}
@@ -135,20 +125,7 @@ public class Dcl_Var implements IASTNode {
 		}
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s=Value.CodeGenration(st);
-			switch (st.searchVar(ID).type){
-			case "tal":
-				s+= "dstore "+ intId + "\n" ; break;
-			case "tekst":
-				s+= "astore "+ intId + "\n" ; break;
-			case "udsagn":
-				s+= "istore "+ intId + "\n" ; break;
-			case "liste" :
-				s+= "astore "+ intId + "\n" ; break;
-			default:
-				return "fejl";
-			}
-			return s;	//indsætter ikke på index
+			return ID + ".add("+Index.CodeGenration(st) +", " + Value.CodeGenration(st)+ ");\n" ;
 			
 		}
 	}
@@ -168,20 +145,8 @@ public class Dcl_Var implements IASTNode {
 			return s.searchVar(ID).type;
 		}
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s=Value.CodeGenration(st);
-			switch (st.searchVar(ID).type){
-			case "tal":
-				s+= "dstore "+ intId + "\n" ; break;
-			case "tekst":
-				s+= "astore "+ intId + "\n" ; break;
-			case "udsagn":
-				s+= "istore "+ intId + "\n" ; break;
-			case "liste" :
-				s+= "astore "+ intId + "\n" ; break;
-			default:
-				return "fejl";
-			}
-			return s;
+			
+			return ID + ".add("+Value.CodeGenration(st)+");\n";
 			
 		}
 	}
@@ -203,20 +168,8 @@ public class Dcl_Var implements IASTNode {
 		}
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s="null";
-			switch (st.searchVar(ID).type){
-			case "tal":
-				s+= "dstore "+ intId + "\n" ; break;
-			case "tekst":
-				s+= "astore "+ intId + "\n" ; break;
-			case "udsagn":
-				s+= "istore "+ intId + "\n" ; break;
-			case "liste" :
-				s+= "astore "+ intId + "\n" ; break;
-			default:
-				return "fejl";
-			}
-			return s; //sletter ikke variablen men sætter den til NULL
+			
+			return ID+".remove("+Index.CodeGenration(st)+");\n";
 			
 		}
 	}

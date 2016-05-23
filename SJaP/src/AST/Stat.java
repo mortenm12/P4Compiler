@@ -21,8 +21,8 @@ public class Stat implements IASTNode {
 		public String CodeGenration(scopeTree st) throws noIdException {
 			String s;
 			s=op1.CodeGenration(st);
-			s+=op2.CodeGenration(st);
 			s+= operator.CodeGenration(st);
+			s+=op2.CodeGenration(st);
 			return s;
 		}
 		
@@ -39,7 +39,7 @@ public class Stat implements IASTNode {
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
 
-			return stats.CodeGenration(st);
+			return "("+stats.CodeGenration(st)+")";
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
@@ -64,10 +64,7 @@ public class Stat implements IASTNode {
 	public class not extends Stat{
 		public Stat stat;
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s;
-			s= stat.CodeGenration(st);
-			s+="ineg";
-			return s;
+			return "!" + stat.CodeGenration(st);
 		}
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
 		noIdException, TypeException {

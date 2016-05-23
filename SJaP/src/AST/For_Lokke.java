@@ -12,20 +12,11 @@ public class For_Lokke implements IASTNode {
 	public Linjer linjer;
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
-		String streng;
-		int lab1=NumGen.getNum();
-		int lab2=NumGen.getNum();
 		
-		streng = "new label"+lab1+" \n";			//nyt label magler
-		streng += to.CodeGenration(st);
-		streng += from.CodeGenration(st);
-		streng += "dcmpl \n "
-				+ "iflt  lable"+lab2+" \n";		//label ref magler
-		streng += linjer.CodeGenration(st);
-		streng += "goto lable"+lab1+" \n"; 		//label ref magler
-		streng += "new label"+lab2+" \n";			//nyt label magler
 		
-		return streng;
+		return "for(int i = " + from.CodeGenration(st) + "; i < "
+				+ to.CodeGenration(st) + "; i++)\n{\n" 
+				+ linjer.CodeGenration(st)+"}\n";
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,

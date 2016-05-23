@@ -15,32 +15,32 @@ public Sammenlign node;
 
 	public class bigger extends Sammenlign{
 		public String CodeGenration(scopeTree st){
-			return "ifgt \n";
+			return "<";
 		}
 	}
 	public class lesser extends Sammenlign{
 		public String CodeGenration(scopeTree st){
-			return "iflt \n";
+			return ">";
 		}
 	}
 	public class biggerequal extends Sammenlign{
 		public String CodeGenration(scopeTree st){
-			return "ifge \n";
+			return "<=";
 		}
 	}
 	public class lesserequal extends Sammenlign{
 		public String CodeGenration(scopeTree st){
-			return "ifle \n";
+			return ">=";
 		}
 	}
 	public class equal extends Sammenlign{
 		public String CodeGenration(scopeTree st){
-			return "ifeq \n";
+			return "==";
 		}
 	}
 	public class notequal extends Sammenlign{
 		public String CodeGenration(scopeTree st){
-			return "ifne \n";
+			return "!=";
 		}
 	}
 	@Override

@@ -19,8 +19,9 @@ public class ListOfVars implements IASTNode {
 	public String CodeGenration(scopeTree st) throws noIdException {
 		String s ="";
 		for(Operation o : op){
-			s+=o.CodeGenration(st);
+			s+=o.CodeGenration(st)+", ";
 		}
+		s=s.substring(0, s.length()-2);
 		return s;
 	}
 

@@ -16,7 +16,7 @@ public class Ellers_Statment implements IASTNode {
 			return if_stat.CodeGenration(st);
 		}
 		else
-			return linjer.CodeGenration(st);
+			return "else \n{\n" + linjer.CodeGenration(st) + "}\n";
 
 	}
 	@Override

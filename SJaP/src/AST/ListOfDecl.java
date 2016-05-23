@@ -17,9 +17,14 @@ public class ListOfDecl implements IASTNode{
 	}
 	
 	@Override
-	public String CodeGenration(scopeTree st) {
-		// TODO Auto-generated method stub
-		return null;
+	public String CodeGenration(scopeTree st) throws noIdException {
+		String s="";
+		for(Dcl_Var d: Dcl_list)
+		{
+			s+=st.searchVar(d.ID).type + " " + d.ID +", ";
+		}
+		s=s.substring(0, s.length()-2);
+		return s;
 	}
 
 	@Override

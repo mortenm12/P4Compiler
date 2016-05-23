@@ -13,7 +13,7 @@ public class Returner implements IASTNode {
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
 
-		return op.CodeGenration(st);		//der mangler en ret
+		return "return" + op.CodeGenration(st);
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,

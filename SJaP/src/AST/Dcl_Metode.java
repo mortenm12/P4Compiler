@@ -15,24 +15,31 @@ public class Dcl_Metode implements IASTNode {
 
 	
 	public String CodeGenration(scopeTree st) throws noIdException {
-		String s = intId+"";
-		s+=lines.CodeGenration(st);
+		String s = "public ";
+		
+		
 		if(ReturType == null){
-			s+="return \n";
+			s+="void ";
 		}
 		else if(ReturType._Type=="udsagn")
 		{
-			s+="breturn \n";
+			s+="boolian ";
 		}
 		else if(ReturType._Type=="tal")
 		{
-			s+="dreturn \n";
+			s+="double  ";
 		}
-		else
+		else if(ReturType._Type=="tekst")
 		{
-			s+="areturn \n";
+			s+="String ";
 		}
-		
+		else if(ReturType._Type=="liste af")
+		{
+			s+="List<> ";	//der vil ske en fejl på <>
+		}		
+		s+=ID +"(" + ListDcl +")\n {";		
+		s+=lines.CodeGenration(st);
+		s+="}";
 		return s;
 		
 	}

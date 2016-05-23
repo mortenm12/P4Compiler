@@ -12,10 +12,13 @@ public class start implements IASTNode {
 	
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
-		String s ="";
+		String s ="public class start \n{\n public static void main(String args []) \n{\n";
 		s+=startLinjer.CodeGenration(st);
+		s+="}";
 		if(slutMetoder != null)
 			s+=slutMetoder.CodeGenration(st);
+		
+		s+="}";
 		return s;
 	}
 

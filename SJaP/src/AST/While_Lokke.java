@@ -9,9 +9,9 @@ public class While_Lokke implements IASTNode {
 	public Stats stat;
 	public Linjer linjer;
 	@Override
-	public String CodeGenration(scopeTree st) {
-		// TODO Auto-generated method stub
-		return null;
+	public String CodeGenration(scopeTree st) throws noIdException {
+		return "while(" + stat.CodeGenration(st) + ") \n{\n" + linjer.CodeGenration(st) + "}";
+
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,

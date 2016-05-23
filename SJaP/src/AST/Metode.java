@@ -11,9 +11,8 @@ public class Metode implements IASTNode {
 	public ListOfVars ListVars;
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
-		String s;
-		s= ListVars.CodeGenration(st);
-		s+="goto "+ st.searchVar(ID).intId;
+		String s=ID+"("+ListVars.CodeGenration(st)+");\n";
+		
 		
 		return s;
 	}

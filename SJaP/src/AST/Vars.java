@@ -36,19 +36,7 @@ public class Vars implements IASTNode {
 	public class Get_By_Id extends Vars{
 		public String ID;
 		public String CodeGenration(scopeTree st) throws noIdException {
-			switch(st.searchVar(ID).type){
-			case "tal":
-				return "dload "+ st.searchVar(ID).intId;
-			
-			case"tekst":
-				return "aload "+ st.searchVar(ID).intId;
-			
-			case"udsagn":
-				return "iload "+ st.searchVar(ID).intId;
-			
-			default:
-				throw new noIdException("du burde ikek kunne være her.");
-			}
+			return ID;
 						
 		}
 		
@@ -80,21 +68,8 @@ public class Vars implements IASTNode {
 		}
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s="";
-				switch (st.searchVar(ID).type){
-				case "tal":
-					s+= "dload "+ ID + "\n" ; break;
-				case "tekst":
-					s+= "aload "+ ID + "\n" ; break;
-				case "udsagn":
-					s+= "iload "+ ID + "\n" ; break;
-				case "liste" :
-					s+= "aload "+ ID + "\n" ; break;
-				default:
-					return "fejl";
-				}
-							
-			return s;
+										
+			return ID +".get("+Index.CodeGenration(st)+")";
 		}
 	}
 	
@@ -109,8 +84,7 @@ public class Vars implements IASTNode {
 		}
 		
 		public String CodeGenration(scopeTree st) {
-			String s="";//jeg aner ikke hvordan jeg skal finde længden af listen.
-			return s;
+			return ID + ".size()";
 		}
 	}
 	
@@ -130,9 +104,9 @@ public class Vars implements IASTNode {
 			return s.searchVar(ID).type;
 		}
 		
-		public String CodeGenration(scopeTree st) {
+		public String CodeGenration(scopeTree st) throws noIdException {
 
-			return ""; //jeg aner ikke hvordan vi laver sub lister
+			return ID + ".subList(" +From.CodeGenration(st) + ", "+ To.CodeGenration(st)+")";
 		}
 	}
 	

@@ -21,7 +21,7 @@ public class Variabel implements IASTNode {
 		public double Value;
 		public String CodeGenration(scopeTree st) {
 
-			return "dpush " + Value;
+			return ""+Value;
 		}
 		
 		public String GetType(scopeTree s){
@@ -32,7 +32,7 @@ public class Variabel implements IASTNode {
 		public String Value;
 		public String CodeGenration(scopeTree st) {
 
-			return "aload "+ Value;
+			return Value;
 		}
 		public String GetType(scopeTree s){
 			return "tekst";
@@ -43,7 +43,7 @@ public class Variabel implements IASTNode {
 		
 		public String CodeGenration(scopeTree st) {
 
-			return "ipush " + Value;
+			return "" + Value;
 		}
 		
 		public String GetType(scopeTree s){

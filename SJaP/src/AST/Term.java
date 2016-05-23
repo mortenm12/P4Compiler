@@ -24,11 +24,8 @@ public class Term implements IASTNode {
 		public Vars op;
 		
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s;
-			s=op.CodeGenration(st);
-			s+=term.CodeGenration(st);
-			s+= "dmul";
-			return s;
+
+			return term.CodeGenration(st) + " * " + op.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
@@ -52,11 +49,7 @@ public class Term implements IASTNode {
 		public Term term;
 		public Vars op;
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s;
-			s=op.CodeGenration(st);
-			s+=term.CodeGenration(st);
-			s+= "ddiv";
-			return s;
+			return term.CodeGenration(st) + " / " + op.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
@@ -81,11 +74,7 @@ public class Term implements IASTNode {
 		public Term term;
 		public Vars op;
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s;
-			s=op.CodeGenration(st);
-			s+=term.CodeGenration(st);
-			s+= "drem";
-			return s;
+			return term.CodeGenration(st) + " % " + op.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
@@ -109,8 +98,7 @@ public class Term implements IASTNode {
 	public class paren extends Term{
 		public Operation opera;
 		public String CodeGenration(scopeTree st) throws noIdException {
-
-			return opera.CodeGenration(st);
+			return"("+ opera.CodeGenration(st) +")";
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,

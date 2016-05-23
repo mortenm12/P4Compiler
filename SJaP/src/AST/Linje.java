@@ -11,7 +11,7 @@ public class Linje implements IASTNode {
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
 
-		return "linje"+linjeIndhold.CodeGenration(st);
+		return linjeIndhold.CodeGenration(st);
 	}
 
 	@Override
