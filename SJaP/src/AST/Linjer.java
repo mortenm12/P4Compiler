@@ -17,7 +17,7 @@ public class Linjer implements IASTNode {
 	
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
-		String s ="linjer";
+		String s ="";
 		for(Linje l: nyLinje){
 			s+=l.CodeGenration(st);
 		}

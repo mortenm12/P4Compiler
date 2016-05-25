@@ -274,7 +274,7 @@ Operation operation() : {Operation o = new Operation();}
 {
   (LOOKAHEAD("+") {Add a = o.new Add();} o.term=term() "+" o.operation=operation() {o.node = a;}
 | LOOKAHEAD("-") {Sub s = o.new Sub();} s.term=term() "-" s.operation=operation() {o.node = s;}
-| term()
+| o.node=term()
   ){return o;} 
 }
 

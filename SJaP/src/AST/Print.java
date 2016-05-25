@@ -10,7 +10,7 @@ public class Print implements IASTNode {
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
 
-		return "System.Out.Println(\""+op.CodeGenration(st)+"\")";
+		return "System.Out.Println("+op.CodeGenration(st)+")";
 	}
 
 	@Override

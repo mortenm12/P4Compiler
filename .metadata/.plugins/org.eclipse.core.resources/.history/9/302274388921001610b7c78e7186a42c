@@ -19,15 +19,13 @@ public class Operation implements IASTNode {
 	
 	public class Add extends Operation{
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s;
-			s=term.CodeGenration(st);
-			s+= operation.CodeGenration(st);
-			return s;
+			return term.CodeGenration(st)+" + "+operation.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
 		noIdException, TypeException {
 			operation.Semanticanalyse(s);
+			term.Semanticanalyse(s);
 			
 			if(term.GetType(s)=="udsagn" && operation.term.GetType(s)=="udsagn"){
 				throw new TypeException("Man kan ikke ligge to udsagn sammen");
@@ -37,15 +35,12 @@ public class Operation implements IASTNode {
 	
 	public class Sub extends Operation{
 		public String CodeGenration(scopeTree st) throws noIdException {
-			String s;
-			s=term.CodeGenration(st);
-			s+= operation.CodeGenration(st);
-			return s;
+			return term.CodeGenration(st) + " - " + operation.CodeGenration(st);
 		}
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
 		noIdException, TypeException {
-			
+			term.Semanticanalyse(s);
 			operation.Semanticanalyse(s);
 			
 			if(term.GetType(s)!= "tal"){

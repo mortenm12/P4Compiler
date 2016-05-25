@@ -12,9 +12,8 @@ public class For_Lokke implements IASTNode {
 	public Linjer linjer;
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
-		
-		
-		return "for(int i = " + from.CodeGenration(st) + "; i < "
+			
+		return "for(double i = " + from.CodeGenration(st) + "; i < "
 				+ to.CodeGenration(st) + "; i++)\n{\n" 
 				+ linjer.CodeGenration(st)+"}\n";
 	}

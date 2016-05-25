@@ -55,6 +55,7 @@ public class Operation implements IASTNode {
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
 			noIdException, TypeException {
+		term.Semanticanalyse(s);
 		node.Semanticanalyse(s);
 		
 	}

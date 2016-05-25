@@ -450,7 +450,7 @@ public class SJaPParser implements SJaPParserConstants {
       case ID:
       case BOOL:
       case 54:
-        term();
+        o.node = term();
         break;
       default:
         jj_la1[9] = jj_gen;

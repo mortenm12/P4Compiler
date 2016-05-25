@@ -5,20 +5,28 @@ import Exceptions.existingVariableException;
 import Exceptions.noIdException;
 import Variabler.scopeTree;
 
-public class While_Lokke implements IASTNode {
-	public Stats stat;
+public class For_Lokke implements IASTNode {
+	
+	public Operation from;
+	public Operation to;
 	public Linjer linjer;
 	@Override
 	public String CodeGenration(scopeTree st) throws noIdException {
-		return "while(" + stat.CodeGenration(st) + ") \n{\n" + linjer.CodeGenration(st) + "}";
+		
+		
+		return "for(int i = " + from.CodeGenration(st) + "; i < "
+				+ to.CodeGenration(st) + "; i++)\n{\n" 
+				+ linjer.CodeGenration(st)+"}\n";
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
 			noIdException, TypeException {
-		stat.Semanticanalyse(s);
-		scopeTree x = s.addScope("while"+NumGen.getNum()); //husk genereret nummer
+		from.Semanticanalyse(s);
+		to.Semanticanalyse(s);
+		scopeTree x = s.addScope("for"+NumGen.getNum()); //husk at tilføje et genereret tal
 		linjer.Semanticanalyse(x);
 		
 	}
+	
 
 }

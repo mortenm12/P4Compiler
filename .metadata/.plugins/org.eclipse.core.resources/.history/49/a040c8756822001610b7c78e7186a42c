@@ -238,7 +238,7 @@ Variabel variabel() : {Variabel v = new Variabel(); Token t;}
 {
   (
     t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; return v;} 
-  | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image; v.node=s; return v;}
+  | "t=< STRING >" {Tekst s = v.new Tekst(); s.Value=t.image; v.node=s; return v;}
   | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); v.node=b; return v;}
   | "input" "(" ")" {Input i = v.new Input(); v.node=i; return v;}
   ) 
