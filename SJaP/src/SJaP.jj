@@ -165,7 +165,7 @@ TOKEN : /* OPERATORS */
 TOKEN :
 {
   < CONSTANT : (< DIGIT >)+ >
-| < NUM : ("-")? (< DIGIT1>)(< DIGIT>)*(","(< DIGIT>)*(< DIGIT1>))?>
+| < NUM : ("-")? (<DIGIT1>)(<DIGIT>)*(","(<DIGIT>)*(<DIGIT1>))?>
 | < STRING :"\"" (< LETTER >|< CHAR >|< DIGIT >)* "\"">
 | < ID : (< LETTER>|"_")(< LETTER>|< DIGIT>|"_")*>
 | < BOOL : ("sandt"| "falsk")>
@@ -188,7 +188,7 @@ start start () : {start s= new start();}
 
 Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
 {
-  ( li=linje()";" { l.nyLinje.add(li); })+ {return l;}  
+  ( li=linje()";" { l.nyLinje.add(li); })* {return l;}  
 }
 
 Linje linje() : {Linje l = new Linje();}
@@ -237,7 +237,7 @@ Vars vars() : {Vars v = new Vars(); Token t;}
 Variabel variabel() : {Variabel v = new Variabel(); Token t;}
 {
   (
-    t=< NUM > {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; return v;} 
+    t=<CONSTANT> {Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; return v;} 
   | t=< STRING > {Tekst s = v.new Tekst(); s.Value=t.image; v.node=s; return v;}
   | t=< BOOL > {Bool b = v.new Bool(); b.Value=Boolean.parseBoolean(t.image); v.node=b; return v;}
   | "input" "(" ")" {Input i = v.new Input(); v.node=i; return v;}
@@ -308,7 +308,7 @@ While_Lokke while_lokke() : {While_Lokke w = new While_Lokke();}
 }
 For_Lokke for_lokke() : {For_Lokke f = new For_Lokke();}
 {
-  (< GENTAG > f.from=operation() < TIL > f.to=operation() "{" f.linjer=linjer() "}"
+  (< GENTAG > "fra " f.from=operation() < TIL > f.to=operation() "{" f.linjer=linjer() "}"
   ) {return f;} 
 }
 

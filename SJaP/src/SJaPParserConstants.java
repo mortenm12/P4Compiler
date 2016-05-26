@@ -152,6 +152,7 @@ public interface SJaPParserConstants {
     "\"]\"",
     "\"(\"",
     "\")\"",
+    "\"fra \"",
     "\"!\"",
     "\">\"",
     "\"<\"",

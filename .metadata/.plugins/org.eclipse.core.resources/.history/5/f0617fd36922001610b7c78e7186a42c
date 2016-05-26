@@ -188,7 +188,7 @@ start start () : {start s= new start();}
 
 Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
 {
-  ( li=linje()";" { l.nyLinje.add(li); })* {return l;}  
+  ( li=linje() { l.nyLinje.add(li); })+ {return l;}  
 }
 
 Linje linje() : {Linje l = new Linje();}
@@ -308,7 +308,7 @@ While_Lokke while_lokke() : {While_Lokke w = new While_Lokke();}
 }
 For_Lokke for_lokke() : {For_Lokke f = new For_Lokke();}
 {
-  (< GENTAG > "fra " f.from=operation() < TIL > f.to=operation() "{" f.linjer=linjer() "}"
+  (< GENTAG > "fra "f.from=operation() < TIL > f.to=operation() "{" f.linjer=linjer() "}"
   ) {return f;} 
 }
 

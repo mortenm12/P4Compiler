@@ -120,9 +120,6 @@ public class SJaPParser implements SJaPParserConstants {
                      Linjer l = new Linjer(); Linje li;
     label_1:
     while (true) {
-      li = linje();
-      jj_consume_token(50);
-                    l.nyLinje.add(li);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case HVIS:
       case SALANGE:
@@ -133,7 +130,7 @@ public class SJaPParser implements SJaPParserConstants {
       case TILFOJ:
       case LENGDEN:
       case SLET:
-      case NUM:
+      case CONSTANT:
       case STRING:
       case ID:
       case BOOL:
@@ -144,6 +141,9 @@ public class SJaPParser implements SJaPParserConstants {
         jj_la1[0] = jj_gen;
         break label_1;
       }
+      li = linje();
+      jj_consume_token(50);
+                    l.nyLinje.add(li);
     }
                                             {if (true) return l;}
     throw new Error("Missing return statement in function");
@@ -241,7 +241,7 @@ public class SJaPParser implements SJaPParserConstants {
                Vars v = new Vars(); Token t;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case INPUT:
-    case NUM:
+    case CONSTANT:
     case STRING:
     case BOOL:
     var w= v.new var();
@@ -305,9 +305,9 @@ public class SJaPParser implements SJaPParserConstants {
   static final public Variabel variabel() throws ParseException {
                        Variabel v = new Variabel(); Token t;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case NUM:
-      t = jj_consume_token(NUM);
-               Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; {if (true) return v;}
+    case CONSTANT:
+      t = jj_consume_token(CONSTANT);
+                  Num n = v.new Num(); n.Value=Double.parseDouble(t.image); v.node=n; {if (true) return v;}
       break;
     case STRING:
       t = jj_consume_token(STRING);
@@ -445,7 +445,7 @@ public class SJaPParser implements SJaPParserConstants {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case INPUT:
       case LENGDEN:
-      case NUM:
+      case CONSTANT:
       case STRING:
       case ID:
       case BOOL:
@@ -493,7 +493,7 @@ public class SJaPParser implements SJaPParserConstants {
         break;
       case INPUT:
       case LENGDEN:
-      case NUM:
+      case CONSTANT:
       case STRING:
       case ID:
       case BOOL:
@@ -561,6 +561,7 @@ public class SJaPParser implements SJaPParserConstants {
   static final public For_Lokke for_lokke() throws ParseException {
                          For_Lokke f = new For_Lokke();
     jj_consume_token(GENTAG);
+    jj_consume_token(56);
     f.from = operation();
     jj_consume_token(TIL);
     f.to = operation();
@@ -589,12 +590,12 @@ public class SJaPParser implements SJaPParserConstants {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case INPUT:
       case LENGDEN:
-      case NUM:
+      case CONSTANT:
       case STRING:
       case ID:
       case BOOL:
       case 54:
-      case 56:
+      case 57:
         s.stat1 = stat();
         break;
       default:
@@ -626,7 +627,7 @@ public class SJaPParser implements SJaPParserConstants {
         break;
       case INPUT:
       case LENGDEN:
-      case NUM:
+      case CONSTANT:
       case STRING:
       case ID:
       case BOOL:
@@ -634,9 +635,9 @@ public class SJaPParser implements SJaPParserConstants {
         b.udsagn = vars();
                                             s.node=b;
         break;
-      case 56:
+      case 57:
    not n=s.new not();
-        jj_consume_token(56);
+        jj_consume_token(57);
         n.stat = stat();
                                           s.node=n;
         break;
@@ -653,28 +654,28 @@ public class SJaPParser implements SJaPParserConstants {
   static final public Sammenlign sammenlign() throws ParseException {
                            Sammenlign s = new Sammenlign();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 57:
-      jj_consume_token(57);
-        s.node=s.new bigger(); {if (true) return s;}
-      break;
     case 58:
       jj_consume_token(58);
-       s.node=s.new lesser(); {if (true) return s;}
+        s.node=s.new bigger(); {if (true) return s;}
       break;
     case 59:
       jj_consume_token(59);
-        s.node=s.new biggerequal(); {if (true) return s;}
+       s.node=s.new lesser(); {if (true) return s;}
       break;
     case 60:
       jj_consume_token(60);
-        s.node=s.new lesserequal(); {if (true) return s;}
+        s.node=s.new biggerequal(); {if (true) return s;}
       break;
     case 61:
       jj_consume_token(61);
-        s.node=s.new equal(); {if (true) return s;}
+        s.node=s.new lesserequal(); {if (true) return s;}
       break;
     case 62:
       jj_consume_token(62);
+        s.node=s.new equal(); {if (true) return s;}
+      break;
+    case 63:
+      jj_consume_token(63);
         s.node=s.new notequal(); {if (true) return s;}
       break;
     default:
@@ -693,7 +694,7 @@ public class SJaPParser implements SJaPParserConstants {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case INPUT:
       case LENGDEN:
-      case NUM:
+      case CONSTANT:
       case STRING:
       case ID:
       case BOOL:
@@ -1011,7 +1012,7 @@ public class SJaPParser implements SJaPParserConstants {
   }
 
   static private boolean jj_3R_39() {
-    if (jj_scan_token(NUM)) return true;
+    if (jj_scan_token(CONSTANT)) return true;
     return false;
   }
 
@@ -1362,7 +1363,7 @@ public class SJaPParser implements SJaPParserConstants {
       jj_la1_0 = new int[] {0x8cc04000,0x84c04000,0x8000000,0x0,0x0,0x8000000,0x380000,0x40000,0x40000,0x8000000,0x8000000,0x8000,0x8000000,0x8000000,0x0,0x8000000,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x4007ac,0x0,0x580,0x8,0x200,0x580,0x10,0x0,0x0,0x400788,0x400788,0x0,0x1400788,0x1400788,0x7e000000,0x400788,0x200,};
+      jj_la1_1 = new int[] {0x40076c,0x0,0x540,0x8,0x200,0x540,0x10,0x0,0x0,0x400748,0x400748,0x0,0x2400748,0x2400748,0xfc000000,0x400748,0x200,};
    }
   static final private JJCalls[] jj_2_rtns = new JJCalls[22];
   static private boolean jj_rescan = false;
@@ -1569,7 +1570,7 @@ public class SJaPParser implements SJaPParserConstants {
   /** Generate ParseException. */
   static public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[63];
+    boolean[] la1tokens = new boolean[64];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -1586,7 +1587,7 @@ public class SJaPParser implements SJaPParserConstants {
         }
       }
     }
-    for (int i = 0; i < 63; i++) {
+    for (int i = 0; i < 64; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

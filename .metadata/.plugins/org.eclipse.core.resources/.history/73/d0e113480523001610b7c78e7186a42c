@@ -188,7 +188,7 @@ start start () : {start s= new start();}
 
 Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
 {
-  ( li=linje()";" { l.nyLinje.add(li); })* {return l;}  
+  ( li=linje()";" { l.nyLinje.add(li); })+ {return l;}  
 }
 
 Linje linje() : {Linje l = new Linje();}
