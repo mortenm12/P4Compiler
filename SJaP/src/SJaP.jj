@@ -2,7 +2,7 @@
 options
 {
   static = true;
-  VISITOR = true;
+  VISITOR = false;
 }
 
 PARSER_BEGIN(SJaPParser)
@@ -88,8 +88,7 @@ public class SJaPParser
     
     while (true)
     {
-      System.out.println("Reading from standard input...");
-      System.out.print("Enter an expression like \"1+(2+3)*4;\" :");
+      System.out.print("Skriv din kode her:");
       
       try
       {
@@ -183,7 +182,8 @@ TOKEN :
 start start () : {start s= new start();}
 {
   (
-     < START > "{" s.startLinjer=linjer()"}" s.slutMetoder = dcl_metoder() {return s;})  
+     LOOKAHEAD(dcl_metoder())< START > "{" s.startLinjer=linjer()"}" s.slutMetoder = dcl_metoder() {return s;}
+   | < START > "{" s.startLinjer=linjer()"}" {return s;})  
 }
 
 Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
@@ -256,7 +256,7 @@ Type type() : {Type t= new Type(); Token s;}
 
 Decl_Metoder dcl_metoder() : {Decl_Metoder d= new Decl_Metoder();}
 {
-  (dcl_metode())* {return d;} 
+  (LOOKAHEAD(dcl_metode())dcl_metode())* {return d;} 
 }
 
 Dcl_Metode dcl_metode() : {Dcl_Metode d= new Dcl_Metode(); Token t;}

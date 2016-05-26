@@ -182,8 +182,7 @@ TOKEN :
 start start () : {start s= new start();}
 {
   (
-     LOOKAHEAD(dcl_metoder())< START > "{" s.startLinjer=linjer()"}" s.slutMetoder = dcl_metoder() {return s;}
-   | < START > "{" s.startLinjer=linjer()"}" {return s;})  
+     < START > "{" s.startLinjer=linjer()"}" s.slutMetoder = dcl_metoder() {return s;})  
 }
 
 Linjer linjer ()  : {Linjer l = new Linjer(); Linje li;}
