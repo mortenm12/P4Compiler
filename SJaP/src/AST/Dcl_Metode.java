@@ -47,10 +47,10 @@ public class Dcl_Metode implements IASTNode {
 
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException, TypeException {
-		s.addVar(ID, ReturType._Type,NumGen.getNum());
+		s.addVar(ID, ReturType._Type);
 		scopeTree x = s.addScope(ID);
 		for(Dcl_Var o: ListDcl.Dcl_list){
-			x.addVar(o.ID, o.GetType(s) ,NumGen.getNum());
+			x.addVar(o.ID, o.GetType(s));
 		}
 		lines.Semanticanalyse(x);
 	}

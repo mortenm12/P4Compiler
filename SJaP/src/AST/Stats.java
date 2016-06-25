@@ -24,6 +24,7 @@ public class Stats implements IASTNode {
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
 		noIdException, TypeException {
+			stat1.Semanticanalyse(s);
 			stat2.Semanticanalyse(s);
 		}
 	}
@@ -35,13 +36,15 @@ public class Stats implements IASTNode {
 		
 		public void Semanticanalyse(scopeTree s) throws existingVariableException,
 		noIdException, TypeException {
+			stat1.Semanticanalyse(s);
 			stat2.Semanticanalyse(s);
 		}
 	}
 	@Override
 	public void Semanticanalyse(scopeTree s) throws existingVariableException,
 			noIdException, TypeException {
-		stat1.Semanticanalyse(s);
+		if(stat1 != null)
+			stat1.Semanticanalyse(s);
 		node.Semanticanalyse(s);
 		
 	}

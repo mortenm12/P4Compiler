@@ -11,7 +11,7 @@ public class Dcl_Var implements IASTNode {
 	public Dcl_Var node;
 	
 	public String ID;
-	public short intId;
+	
 
 	
 	
@@ -27,8 +27,8 @@ public class Dcl_Var implements IASTNode {
 	public class Dcl extends Dcl_Var{
 		public Type Type;
 		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException {
-			intId=NumGen.getNum();
-			s.addVar(ID, Type._Type, intId);
+			
+			s.addVar(ID, Type._Type);
 			
 			
 		}
@@ -78,7 +78,7 @@ public class Dcl_Var implements IASTNode {
 		public Type Type;
 		public Operation Value;
 		public void Semanticanalyse(scopeTree s) throws existingVariableException, noIdException, TypeException {
-			s.addVar(ID, Type._Type,NumGen.getNum());
+			s.addVar(ID, Type._Type);
 			Value.Semanticanalyse(s);
 			if(Type._Type != Value.term.GetType(s)){
 				throw new TypeException("Typerne er ikke ens det skulle have været en " + Type._Type +"men det var en " + Value.term.GetType(s));

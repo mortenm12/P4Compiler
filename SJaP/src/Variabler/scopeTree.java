@@ -29,11 +29,11 @@ public class scopeTree {
 		return x;
 	}
 	
-	public void addVar(String id, String type, short intId) throws existingVariableException{
+	public void addVar(String id, String type) throws existingVariableException{
 		Var x = new Var();
 		x.type=type;
 		x.typeId=id;
-		x.intId=intId;
+		
 		HashTable.add(x);
 	}
 	
@@ -41,15 +41,23 @@ public class scopeTree {
 		if(name == this.ScopeName){
 			return this;
 		}
-		else if(parent != null)
+		
+		if(parent != null)
 		{
-			return parent.searchScope(name);
+			scopeTree s= parent.searchScope(name);
+			if(s!= null)
+				return s;
 				
 		}
-		else
-		{
-			return null;
+		
+		for(scopeTree s:Nodes){
+			scopeTree st = s.searchScope(name);
+			if(st!= null)
+				return st;
+			
 		}
+		return null;
+
 	}
 	
 	public Var searchVar(String name) throws noIdException

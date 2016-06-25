@@ -322,7 +322,7 @@ Stats stats() : {Stats s = new Stats();}
 
 Stat stat() : {Stat s = new Stat();}
 {
-  (LOOKAHEAD(operation()) {opsop o = s.new opsop();} o.op1=operation() o.operator=sammenlign() o.op2=operation() {s.node=o;}
+  (LOOKAHEAD(operation() ) {opsop o = s.new opsop();} o.op1=operation() o.operator=sammenlign() o.op2=operation() {s.node=o;}
 | {par p = s.new par();}"(" p.stats=stats() ")" {s.node=p;}
 | {bool b = s.new bool();} b.udsagn=vars() {s.node=b;}
 | {not n=s.new not();} "!" n.stat=stat() {s.node=n;}
